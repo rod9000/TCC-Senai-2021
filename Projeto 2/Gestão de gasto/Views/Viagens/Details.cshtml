@@ -1,0 +1,66 @@
+﻿@model Gestão_de_gasto.Models.Viagens
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Viagens</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dataDeSaida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dataDeSaida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dataDeReTorno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dataDeReTorno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Destino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Destino)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.valorGasto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.valorGasto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.motivoViagem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.motivoViagem)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.realizada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.realizada)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

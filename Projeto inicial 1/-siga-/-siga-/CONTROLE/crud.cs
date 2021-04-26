@@ -17,7 +17,7 @@ namespace _SIGA_.CONTROLE
     {
         SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\vichc\source\repos\-SIGA-\-SIGA-\App_Data\dbssiga.mdf;Integrated Security=True");
 
- 
+  
         public void insirirusuario(string login, string senha, string nome, string funcao)
         {
             SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\vichc\source\repos\-SIGA-\-SIGA-\App_Data\dbssiga.mdf;Integrated Security=True");

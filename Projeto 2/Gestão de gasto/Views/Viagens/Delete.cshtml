@@ -1,0 +1,72 @@
+﻿@model Gestão_de_gasto.Models.Viagens
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Viagens</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dataDeSaida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dataDeSaida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dataDeReTorno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dataDeReTorno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Destino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Destino)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.valorGasto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.valorGasto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.motivoViagem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.motivoViagem)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.realizada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.realizada)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
