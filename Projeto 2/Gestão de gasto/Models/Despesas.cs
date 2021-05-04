@@ -15,12 +15,14 @@ namespace Gestão_de_gasto.Models
         public string servico { get; set; }
 
         [Display(Name = "Valor")]
+        [DataType(DataType.Currency)]
         public double valor { get; set; }
 
-        [Display(Name = "Local")]
+        [Display(Name = "Local")]   
         public string local { get; set; }
 
         [Display(Name = "Data")]
+        [DataType(DataType.Date)]
         public DateTime data { get; set; }
 
         [Display(Name = "Forma de Pagamento")]
@@ -28,7 +30,6 @@ namespace Gestão_de_gasto.Models
 
         [Display(Name = "Viagem")]
         public string viagem { get; set; }
-
 
     }
 }
