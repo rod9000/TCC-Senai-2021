@@ -127,24 +127,32 @@
           <input id="viagens_id" name="viagens_id" hidden>
 
           <div class="form-group">
-            <label class="col-lg-2 control-label">Local</label>
+            <label class="col-lg-2 control-label">Destino</label>
             <div class="col-lg-10">
-              <input id="cl_local" name="cl_local" class="form-control" maxlength="100">
+              <input id="vg_destino" name="vg_destino" class="form-control" maxlength="100">
               <span class="help-block"></span>
             </div>
           </div>
 
           <div class="form-group">
-            <label class="col-lg-2 control-label">Data</label>
+            <label class="col-lg-2 control-label">Data de saida</label>
             <div class="col-lg-10">
-              <input type="date" id="pd_data" name="pd_data" class="form-control" maxlength="100">
+              <input type="date" id="vg_dsaida" name="vg_dsaida" class="form-control" maxlength="100">
+              <span class="help-block"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-2 control-label">Data de retorno</label>
+            <div class="col-lg-10">
+              <input type="date" id="vg_dtretorno" name="vg_dtretorno" class="form-control" maxlength="100">
               <span class="help-block"></span>
             </div>
           </div>
           <div class="form-group">
             <label class="col-lg-2 control-label">Serviço</label>
             <div class="col-lg-10">
-              <input type="text" step="0.1" id="cl_servico" name="cl_servico" class="form-control">
+              <input type="text" step="0.1" id="vg_servico" name="vg_servico" class="form-control">
               <span class="help-block"></span>
             </div>
           </div>
@@ -153,18 +161,35 @@
       <div class="form-group">
         <label class="col-lg-2 control-label">Funcionário</label>
         <div class="col-lg-10">
-          <input type="text" step="0.1" id="cl_funcionario" name="cl_funcionario" class="form-control">
-          <span class="help-block"></span>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-lg-2 control-label">Valor para despesas</label>
-        <div class="col-lg-10">
-          <input id="pd_valor" name="pd_valor" class="form-control" maxlength="100">
+          <input type="text" step="0.1" id="vg_funcionario" name="vg_funcionario" class="form-control">
           <span class="help-block"></span>
         </div>
       </div>
 
+      <div class="form-group">
+        <label class="col-lg-2 control-label">Valor inicial</label>
+        <div class="col-lg-10">
+          <input id="vg_valorIn" name="vg_valorIn" class="form-control" maxlength="100">
+          <span class="help-block"></span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-lg-2 control-label">Realizada</label>
+        <div class="col-lg-10">
+          <input id="vg_realizada" name="vg_realizada" class="form-control" maxlength="100">
+          <span class="help-block"></span>
+        </div>
+      </div>     
+
+      <div class="form-group">
+        <label class="col-lg-2 control-label">Motivo da Viagem</label>
+        <div class="col-lg-10">
+          <input id="vg_motivo" name="vg_motivo" class="form-control" maxlength="100">
+          <span class="help-block"></span>
+        </div>
+      </div>
+ 
       <div class="form-group text-center">
         <button type="submit" id="btn_save_viagens" class="btn btn-primary">
           <i class="fa fa-save"></i>&nbsp;&nbsp;Salvar
@@ -181,20 +206,20 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
 
-      <div class="modal-header">
+    <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">x</button>
         <h4 class="modal-title">despesas</h4>
       </div>
 
-      <div class="modal-body modal-xl">
+      <div class="modal-body">
         <form id="form_despesas">
 
-          <input id="despesas_id" name="despesas_id" hidden>
+      <input id="despesas_id" name="despesas_id" hidden>
 
           <div class="form-group">
             <label class="col-lg-2 control-label">Serviço</label>
             <div class="col-lg-10">
-              <input id="pd_servico" name="pd_servico" class="form-control" maxlength="100">
+              <input id="dp_servico" name="dp_servico" class="form-control" maxlength="100">
               <span class="help-block"></span>
             </div>
           </div>
@@ -202,7 +227,7 @@
           <div class="form-group">
             <label class="col-lg-2 control-label">Valor</label>
             <div class="col-lg-10">
-              <input id="pd_valor" name="pd_valor" class="form-control" maxlength="100">
+              <input id="dp_valor" name="dp_valor" class="form-control" maxlength="100">
               <span class="help-block"></span>
             </div>
           </div>
@@ -210,7 +235,7 @@
           <div class="form-group">
             <label class="col-lg-2 control-label">Local</label>
             <div class="col-lg-10">
-              <input id="pd_local" name="pd_local" class="form-control"></input>
+              <input id="dp_local" name="dp_local" class="form-control"></input>
               <span class="help-block"></span>
             </div>
           </div>
@@ -218,15 +243,7 @@
           <div class="form-group">
             <label class="col-lg-2 control-label">Data da Viagem</label>
             <div class="col-lg-10">
-              <input type="date" id="pd_datadaviagem" name="pd_datadaviagem" class="form-control" maxlength="100">
-              <span class="help-block"></span>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="col-lg-2 control-label">Forma de Pagemnto</label>
-            <div class="col-lg-10">
-              <input id="pd_formadepamento" name="pd_formadepamento" class="form-control" maxlength="100">
+              <input type="date" id="dp_data" name="dp_data" class="form-control" maxlength="100">
               <span class="help-block"></span>
             </div>
           </div>
@@ -234,21 +251,32 @@
           <div class="form-group">
             <label class="col-lg-2 control-label">Viagem</label>
             <div class="col-lg-10">
-              <input id="pd_viagem" name="pd_viagem" class="form-control"></input>
+              <input id="dp_viagem" name="dp_viagem" class="form-control"  maxlength="100">
               <span class="help-block"></span>
             </div>
           </div>
+
+          <div class="form-group">
+            <label class="col-lg-2 control-label">Forma de Pagamento</label>
+            <div class="col-lg-10">
+              <input id="dp_formDePgm" name="dp_formDePgm" class="form-control" maxlength="100">
+              <span class="help-block"></span>
+            </div>
+          </div>
+
           <div class="form-group text-center">
-            <button type="submit" id="btn_save_despesas" class="btn btn-primary">
+            <button type="submit" id="btn_save_user" class="btn btn-primary">
               <i class="fa fa-save"></i>&nbsp;&nbsp;Salvar
             </button>
             <span class="help-block"></span>
           </div>
+
         </form>
       </div>
     </div>
   </div>
 </div>
+
 <div id="modal_user" class="modal fade">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">

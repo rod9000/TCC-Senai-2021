@@ -123,6 +123,7 @@ $(function() {
 
 		return false;
 	});
+
 	$("#btn_your_user").click(function() //Js para obter dados dos usuarios e colocar no form do usuário logado
 	{
 
@@ -160,6 +161,7 @@ $(function() {
 			active_btn_clientes();
 		}
 	});
+
 	function active_btn_clientes() { //Js do botão edita e exlui da data table
 		
 		$(".btn-edit-clt").click(function(){
