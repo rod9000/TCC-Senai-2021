@@ -1,5 +1,5 @@
 <section style="min-height: calc(100vh - 83px)" class="light-bg">
-  
+
   <div class="container">
     <div class="row">
       <div class="col-lg-offset-3 col-lg-6 text-center">
@@ -11,7 +11,7 @@
     <div class="row">
       <div class="col-lg-offset-5 col-lg-3 text-center">
         <div class="form-group">
-          <a id="btn_your_user" class="btn btn-link" user_id="<?=$user_id?>"><i class="fa fa-user"> Usuário</i></a>
+          <a id="btn_your_user" class="btn btn-link" user_id="<?= $user_id ?>"><i class="fa fa-user"> Usuário</i></a>
           <a class="btn btn-link" href="restrict/logoff"><i class="fa fa-sign-out"> Sair</i></a>
         </div>
       </div>
@@ -19,7 +19,7 @@
   </div>
 
   <div class="container">
-  <!-- Abas de Navegação -->
+    <!-- Abas de Navegação -->
     <ul class="nav nav-tabs">
       <li class="active"><a href="#tab_viagens" role="tab" data-toggle="tab">Viagens</a></li>
       <li><a href="#tab_despesas" role="tab" data-toggle="tab">Despesas</a></li>
@@ -29,7 +29,7 @@
     <!-- Tabelas de dados -->
     <div class="tab-content">
       <div id="tab_viagens" class="tab-pane active">
-         <div class="container-fluid">
+        <div class="container-fluid">
           <h2 class="text-center"><strong>Gerenciar Viagens</strong></h2>
           <a id="btn_add_viagens" class="btn btn-primary"><i class="fa fa-plus">&nbsp;&nbsp;Adicionar viagens</i></a>
           <table id="dt_viagens" class="table table-striped table-bordered">
@@ -46,7 +46,7 @@
             <tbody>
             </tbody>
           </table>
-         </div>
+        </div>
       </div>
 
       <div id="tab_despesas" class="tab-pane">
@@ -68,7 +68,7 @@
             <tbody>
             </tbody>
           </table>
-         </div>
+        </div>
       </div>
 
       <div id="tab_relatorio" class="tab-pane">
@@ -88,7 +88,7 @@
             <tbody>
             </tbody>
           </table>
-         </div>
+        </div>
       </div>
       <div id="tab_user" class="tab-pane">
         <div class="container-fluid">
@@ -106,7 +106,7 @@
             <tbody>
             </tbody>
           </table>
-         </div>
+        </div>
       </div>
     </div>
   </div>
@@ -137,7 +137,7 @@
           <div class="form-group">
             <label class="col-lg-2 control-label">Data</label>
             <div class="col-lg-10">
-            <input type="date" id="pd_data" name="pd_data" class="form-control" maxlength="100">
+              <input type="date" id="pd_data" name="pd_data" class="form-control" maxlength="100">
               <span class="help-block"></span>
             </div>
           </div>
@@ -149,33 +149,33 @@
             </div>
           </div>
 
-          </div>
-          <div class="form-group">
-            <label class="col-lg-2 control-label">Funcionário</label>
-            <div class="col-lg-10">
-              <input type="text" step="0.1" id="cl_funcionario" name="cl_funcionario" class="form-control">
-              <span class="help-block"></span>
-            </div>
-          </div>
-           <div class="form-group">
-            <label class="col-lg-2 control-label">Valor para despesas</label>
-            <div class="col-lg-10">
-            <input id="pd_valor" name="pd_valor" class="form-control" maxlength="100">
-              <span class="help-block"></span>
-            </div>
-          </div>
-
-          <div class="form-group text-center">
-            <button type="submit" id="btn_save_viagens" class="btn btn-primary">
-              <i class="fa fa-save"></i>&nbsp;&nbsp;Salvar
-            </button>
-            <span class="help-block"></span>
-          </div>
-
-        </form>
       </div>
+      <div class="form-group">
+        <label class="col-lg-2 control-label">Funcionário</label>
+        <div class="col-lg-10">
+          <input type="text" step="0.1" id="cl_funcionario" name="cl_funcionario" class="form-control">
+          <span class="help-block"></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-2 control-label">Valor para despesas</label>
+        <div class="col-lg-10">
+          <input id="pd_valor" name="pd_valor" class="form-control" maxlength="100">
+          <span class="help-block"></span>
+        </div>
+      </div>
+
+      <div class="form-group text-center">
+        <button type="submit" id="btn_save_viagens" class="btn btn-primary">
+          <i class="fa fa-save"></i>&nbsp;&nbsp;Salvar
+        </button>
+        <span class="help-block"></span>
+      </div>
+
+      </form>
     </div>
   </div>
+</div>
 </div>
 
 <div id="modal_despesas" class="modal fade">
@@ -187,7 +187,7 @@
         <h4 class="modal-title">despesas</h4>
       </div>
 
-      <div class="modal-body">
+      <div class="modal-body modal-xl">
         <form id="form_despesas">
 
           <input id="despesas_id" name="despesas_id" hidden>
@@ -199,7 +199,7 @@
               <span class="help-block"></span>
             </div>
           </div>
-          
+
           <div class="form-group">
             <label class="col-lg-2 control-label">Valor</label>
             <div class="col-lg-10">
@@ -211,11 +211,11 @@
           <div class="form-group">
             <label class="col-lg-2 control-label">Local</label>
             <div class="col-lg-10">
-              <textarea id="pd_local" name="pd_local" class="form-control"></textarea>
+              <input id="pd_local" name="pd_local" class="form-control"></input>
               <span class="help-block"></span>
             </div>
           </div>
-          
+
           <div class="form-group">
             <label class="col-lg-2 control-label">Data da Viagem</label>
             <div class="col-lg-10">
@@ -223,7 +223,7 @@
               <span class="help-block"></span>
             </div>
           </div>
-          
+
           <div class="form-group">
             <label class="col-lg-2 control-label">Forma de Pagemnto</label>
             <div class="col-lg-10">
@@ -232,155 +232,152 @@
             </div>
           </div>
 
-          
           <div class="form-group">
             <label class="col-lg-2 control-label">Viagem</label>
             <div class="col-lg-10">
-              <textarea id="pd_viagem" name="pd_viagem" class="form-control"></textarea>
+              <input id="pd_viagem" name="pd_viagem" class="form-control"></input>
               <span class="help-block"></span>
             </div>
-
+          </div>
           <div class="form-group text-center">
             <button type="submit" id="btn_save_despesas" class="btn btn-primary">
               <i class="fa fa-save"></i>&nbsp;&nbsp;Salvar
             </button>
             <span class="help-block"></span>
           </div>
-
         </form>
       </div>
     </div>
   </div>
-</div>
 
-<div id="modal_relatorio" class="modal fade">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
+  <div id="modal_relatorio" class="modal fade">
+    <div class="modal-dialog modal-css">
+      <div class="modal-content">
 
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">x</button>
-        <h4 class="modal-title">relatorio</h4>
-      </div>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">x</button>
+          <h4 class="modal-title">relatorio</h4>
+        </div>
 
-      <div class="modal-body">
-        <form id="form_relatorio">
+        <div class="modal-body">
+          <form id="form_relatorio">
 
-          <input id="relatorio_id" name="relatorio_id" hidden>
+            <input id="relatorio_id" name="relatorio_id" hidden>
 
-          <div class="form-group">
-            <label class="col-lg-2 control-label">Nome do usuário</label>
-            <div class="col-lg-10">
-              <input id="pdd_nome" name="pdd_nome" class="form-control" maxlength="100">
-              <span class="help-block"></span>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="col-lg-2 control-label">Viagem</label>
-            <div class="col-lg-10">
-              <textarea id="pd_viagem" name="pd_viagem" class="form-control"></textarea>
-              <span class="help-block"></span>
+            <div class="form-group">
+              <label class="col-lg-2 control-label">Nome do usuário</label>
+              <div class="col-lg-10">
+                <input id="pdd_nome" name="pdd_nome" class="form-control" maxlength="100">
+                <span class="help-block"></span>
+              </div>
             </div>
 
             <div class="form-group">
-            <label class="col-lg-2 control-label">Total</label>
-            <div class="col-lg-10">
-              <input id="pdd_total" name="pdd_total" class="form-control" vaule=""maxlength="100">
-              <span class="help-block"></span>
-            </div>
-          </div>
- 
-          <div class="form-group">
-            <label class="col-lg-2 control-label">Despesas</label>
-            <div class="col-lg-10">
-              <input id="pdd_despesas" name="pdd_despesas" class="form-control" maxlength="100">
-              <span class="help-block"></span>
-            </div>
-          </div>
-          
-          <div class="form-group text-center">
-            <button type="submit" id="btn_save_relatorio" class="btn btn-primary">
-              <i class="fa fa-save"></i>&nbsp;&nbsp;Salvar
-            </button>
-            <span class="help-block"></span>
-          </div>
+              <label class="col-lg-2 control-label">Viagem</label>
+              <div class="col-lg-10">
+                <textarea id="pd_viagem" name="pd_viagem" class="form-control"></textarea>
+                <span class="help-block"></span>
+              </div>
 
-        </form>
+              <div class="form-group">
+                <label class="col-lg-2 control-label">Total</label>
+                <div class="col-lg-10">
+                  <input id="pdd_total" name="pdd_total" class="form-control" vaule="" maxlength="100">
+                  <span class="help-block"></span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-lg-2 control-label">Despesas</label>
+                <div class="col-lg-10">
+                  <input id="pdd_despesas" name="pdd_despesas" class="form-control" maxlength="100">
+                  <span class="help-block"></span>
+                </div>
+              </div>
+
+              <div class="form-group text-center">
+                <button type="submit" id="btn_save_relatorio" class="btn btn-primary">
+                  <i class="fa fa-save"></i>&nbsp;&nbsp;Salvar
+                </button>
+                <span class="help-block"></span>
+              </div>
+
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div id="modal_user" class="modal fade">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
+  <div id="modal_user" class="modal fade">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
 
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">x</button>
-        <h4 class="modal-title">Usuário</h4>
-      </div>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">x</button>
+          <h4 class="modal-title">Usuário</h4>
+        </div>
 
-      <div class="modal-body">
-        <form id="form_user">
+        <div class="modal-body">
+          <form id="form_user">
 
-          <input id="user_id" name="user_id" hidden>
+            <input id="user_id" name="user_id" hidden>
 
-          <div class="form-group">
-            <label class="col-lg-2 control-label">Login</label>
-            <div class="col-lg-10">
-              <input id="user_login" name="user_login" class="form-control" maxlength="30">
+            <div class="form-group">
+              <label class="col-lg-2 control-label">Login</label>
+              <div class="col-lg-10">
+                <input id="user_login" name="user_login" class="form-control" maxlength="30">
+                <span class="help-block"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-lg-2 control-label">Nome Completo</label>
+              <div class="col-lg-10">
+                <input id="user_full_name" name="user_full_name" class="form-control" maxlength="100">
+                <span class="help-block"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-lg-2 control-label">E-mail</label>
+              <div class="col-lg-10">
+                <input id="user_email" name="user_email" class="form-control" maxlength="100">
+                <span class="help-block"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-lg-2 control-label">Confirmar E-mail</label>
+              <div class="col-lg-10">
+                <input id="user_email_confirm" name="user_email_confirm" class="form-control" maxlength="100">
+                <span class="help-block"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-lg-2 control-label">Senha</label>
+              <div class="col-lg-10">
+                <input type="password" id="user_password" name="user_password" class="form-control">
+                <span class="help-block"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-lg-2 control-label">Confirmar Senha</label>
+              <div class="col-lg-10">
+                <input type="password" id="user_password_confirm" name="user_password_confirm" class="form-control">
+                <span class="help-block"></span>
+              </div>
+            </div>
+
+            <div class="form-group text-center">
+              <button type="submit" id="btn_save_user" class="btn btn-primary">
+                <i class="fa fa-save"></i>&nbsp;&nbsp;Salvar</button>
               <span class="help-block"></span>
             </div>
-          </div>
 
-          <div class="form-group">
-            <label class="col-lg-2 control-label">Nome Completo</label>
-            <div class="col-lg-10">
-              <input id="user_full_name" name="user_full_name" class="form-control" maxlength="100">
-              <span class="help-block"></span>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="col-lg-2 control-label">E-mail</label>
-            <div class="col-lg-10">
-              <input id="user_email" name="user_email" class="form-control" maxlength="100">
-              <span class="help-block"></span>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="col-lg-2 control-label">Confirmar E-mail</label>
-            <div class="col-lg-10">
-              <input id="user_email_confirm" name="user_email_confirm" class="form-control" maxlength="100">
-              <span class="help-block"></span>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="col-lg-2 control-label">Senha</label>
-            <div class="col-lg-10">
-              <input type="password" id="user_password" name="user_password" class="form-control">
-              <span class="help-block"></span>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="col-lg-2 control-label">Confirmar Senha</label>
-            <div class="col-lg-10">
-              <input type="password" id="user_password_confirm" name="user_password_confirm" class="form-control">
-              <span class="help-block"></span>
-            </div>
-          </div>
-
-          <div class="form-group text-center">
-            <button type="submit" id="btn_save_user" class="btn btn-primary">
-              <i class="fa fa-save"></i>&nbsp;&nbsp;Salvar</button>
-            <span class="help-block"></span>
-          </div>
-
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>

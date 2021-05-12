@@ -57,9 +57,6 @@
 							<a class="page-scroll" href="<?php echo base_url(); ?>#home">Home</a>
 						</li>
 						<li>
-							<a class="page-scroll" href="<?php echo base_url(); ?>pedidos">Criar Pedido</a>
-						</li>
-						<li>
 							<a class="page-scroll" href="<?php echo base_url(); ?>restrict">Login</a>
 						</li>
 					</ul>

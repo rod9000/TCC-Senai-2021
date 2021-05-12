@@ -630,12 +630,15 @@ footer p a span {
 /*--------------------
 6. Modal
 --------------------*/
-
+.modal-css{
+    min-width: 200%;
+    margin-left: 2000px;
+}
 .modal-content {
 	border-radius: 0;	
 }
 .modal-header .close {
-	font-size: 30px;	
+	font-size: 50px;	
 }
 .modal-title {    
 	text-transform: uppercase;
