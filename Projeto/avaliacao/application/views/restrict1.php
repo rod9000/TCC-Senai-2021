@@ -246,13 +246,11 @@
             </button>
             <span class="help-block"></span>
           </div>
-
         </form>
       </div>
     </div>
   </div>
 </div>
-
 <div id="modal_user" class="modal fade">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">

@@ -176,7 +176,6 @@
     </div>
   </div>
 </div>
-</div>
 
 <div id="modal_despesas" class="modal fade">
   <div class="modal-dialog modal-lg">
@@ -249,135 +248,78 @@
       </div>
     </div>
   </div>
+</div>
+<div id="modal_user" class="modal fade">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
 
-  <div id="modal_relatorio" class="modal fade">
-    <div class="modal-dialog modal-css">
-      <div class="modal-content">
-
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">x</button>
-          <h4 class="modal-title">relatorio</h4>
-        </div>
-
-        <div class="modal-body">
-          <form id="form_relatorio">
-
-            <input id="relatorio_id" name="relatorio_id" hidden>
-
-            <div class="form-group">
-              <label class="col-lg-2 control-label">Nome do usuário</label>
-              <div class="col-lg-10">
-                <input id="pdd_nome" name="pdd_nome" class="form-control" maxlength="100">
-                <span class="help-block"></span>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-lg-2 control-label">Viagem</label>
-              <div class="col-lg-10">
-                <textarea id="pd_viagem" name="pd_viagem" class="form-control"></textarea>
-                <span class="help-block"></span>
-              </div>
-
-              <div class="form-group">
-                <label class="col-lg-2 control-label">Total</label>
-                <div class="col-lg-10">
-                  <input id="pdd_total" name="pdd_total" class="form-control" vaule="" maxlength="100">
-                  <span class="help-block"></span>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="col-lg-2 control-label">Despesas</label>
-                <div class="col-lg-10">
-                  <input id="pdd_despesas" name="pdd_despesas" class="form-control" maxlength="100">
-                  <span class="help-block"></span>
-                </div>
-              </div>
-
-              <div class="form-group text-center">
-                <button type="submit" id="btn_save_relatorio" class="btn btn-primary">
-                  <i class="fa fa-save"></i>&nbsp;&nbsp;Salvar
-                </button>
-                <span class="help-block"></span>
-              </div>
-
-          </form>
-        </div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">x</button>
+        <h4 class="modal-title">Usuário</h4>
       </div>
-    </div>
-  </div>
 
-  <div id="modal_user" class="modal fade">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
+      <div class="modal-body">
+        <form id="form_user">
 
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">x</button>
-          <h4 class="modal-title">Usuário</h4>
-        </div>
+          <input id="user_id" name="user_id" hidden>
 
-        <div class="modal-body">
-          <form id="form_user">
-
-            <input id="user_id" name="user_id" hidden>
-
-            <div class="form-group">
-              <label class="col-lg-2 control-label">Login</label>
-              <div class="col-lg-10">
-                <input id="user_login" name="user_login" class="form-control" maxlength="30">
-                <span class="help-block"></span>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-lg-2 control-label">Nome Completo</label>
-              <div class="col-lg-10">
-                <input id="user_full_name" name="user_full_name" class="form-control" maxlength="100">
-                <span class="help-block"></span>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-lg-2 control-label">E-mail</label>
-              <div class="col-lg-10">
-                <input id="user_email" name="user_email" class="form-control" maxlength="100">
-                <span class="help-block"></span>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-lg-2 control-label">Confirmar E-mail</label>
-              <div class="col-lg-10">
-                <input id="user_email_confirm" name="user_email_confirm" class="form-control" maxlength="100">
-                <span class="help-block"></span>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-lg-2 control-label">Senha</label>
-              <div class="col-lg-10">
-                <input type="password" id="user_password" name="user_password" class="form-control">
-                <span class="help-block"></span>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-lg-2 control-label">Confirmar Senha</label>
-              <div class="col-lg-10">
-                <input type="password" id="user_password_confirm" name="user_password_confirm" class="form-control">
-                <span class="help-block"></span>
-              </div>
-            </div>
-
-            <div class="form-group text-center">
-              <button type="submit" id="btn_save_user" class="btn btn-primary">
-                <i class="fa fa-save"></i>&nbsp;&nbsp;Salvar</button>
+          <div class="form-group">
+            <label class="col-lg-2 control-label">Login</label>
+            <div class="col-lg-10">
+              <input id="user_login" name="user_login" class="form-control" maxlength="30">
               <span class="help-block"></span>
             </div>
+          </div>
 
-          </form>
-        </div>
+          <div class="form-group">
+            <label class="col-lg-2 control-label">Nome Completo</label>
+            <div class="col-lg-10">
+              <input id="user_full_name" name="user_full_name" class="form-control" maxlength="100">
+              <span class="help-block"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-2 control-label">E-mail</label>
+            <div class="col-lg-10">
+              <input id="user_email" name="user_email" class="form-control" maxlength="100">
+              <span class="help-block"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-2 control-label">Confirmar E-mail</label>
+            <div class="col-lg-10">
+              <input id="user_email_confirm" name="user_email_confirm" class="form-control" maxlength="100">
+              <span class="help-block"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-2 control-label">Senha</label>
+            <div class="col-lg-10">
+              <input type="password" id="user_password" name="user_password" class="form-control">
+              <span class="help-block"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-2 control-label">Confirmar Senha</label>
+            <div class="col-lg-10">
+              <input type="password" id="user_password_confirm" name="user_password_confirm" class="form-control">
+              <span class="help-block"></span>
+            </div>
+          </div>
+
+          <div class="form-group text-center">
+            <button type="submit" id="btn_save_user" class="btn btn-primary">
+              <i class="fa fa-save"></i>&nbsp;&nbsp;Salvar
+            </button>
+            <span class="help-block"></span>
+          </div>
+
+        </form>
       </div>
     </div>
   </div>
+</div>
