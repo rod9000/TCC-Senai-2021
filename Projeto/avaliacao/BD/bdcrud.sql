@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 13-Maio-2021 às 13:41
+-- Tempo de geração: 13-Maio-2021 às 22:11
 -- Versão do servidor: 10.4.18-MariaDB
 -- versão do PHP: 7.3.28
 
@@ -29,12 +29,12 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `despesas` (
   `id_despesas` int(11) NOT NULL,
-  `servico` varchar(100) NOT NULL,
-  `valor` decimal(10,0) NOT NULL,
-  `local` varchar(100) NOT NULL,
-  `data` date NOT NULL,
-  `viagem` varchar(50) NOT NULL,
-  `form_pagamento` varchar(10) NOT NULL
+  `dp_servico` varchar(100) NOT NULL,
+  `dp_valor` decimal(10,0) NOT NULL,
+  `dp_local` varchar(100) NOT NULL,
+  `dp_data` date NOT NULL,
+  `dp_viagem` varchar(50) NOT NULL,
+  `dp_form_pagamento` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -56,7 +56,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_login`, `password_hash`, `user_full_name`, `user_email`) VALUES
-(1, 'admin', '$2y$10$mjs0xu0h6aeh7ynUVyBryOjwS/pRYrr72xNKPD3/PXkJfGKHQ0r62', 'Udemy', 'admin@domain.com'),
+(1, 'admin', '$2y$10$9qEYBLlOSnhyuPqPeks.demJxLHU/mCq6szSIYbBQPu9.sNFiBxIC', 'admin', 'admin@domain.com'),
 (3, 'admin1', '$2y$10$kPAGwPg049lGkP1ctLnUBuAjDA8oPDEsS6QkARMb20dauuaDRGN.K', 'admin1', 'admin1');
 
 -- --------------------------------------------------------

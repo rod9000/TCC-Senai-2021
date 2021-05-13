@@ -89,33 +89,34 @@ class Restrict extends CI_Controller
 	}
 
 
-	public function ajax_list_clientes() //Função  para Data table e botões Exclui e editar
+	public function ajax_list_despesas() //Função  para Data table e botões Exclui e editar
 	{
 
 		if (!$this->input->is_ajax_request()) {
 			exit("Nenhum acesso de script direto permitido!");
 		}
 
-		$this->load->model("clientes_model");
-		$clientes = $this->clientes_model->get_datatable();
+		$this->load->model("Despesas_model");
+		$despesas = $this->despesas_model->get_datatable();
 
 		$data = array();
-		foreach ($clientes as $cliente) {
+		foreach ($despesas as $despesa) {
 
 			$row = array();
-			$row[] = $cliente->cl_nome;
-			$row[] = $cliente->cl_cpf;
-			$row[] = $cliente->cl_endereco;
-			$row[] = $cliente->cl_email;
-			$row[] = $cliente->cl_datadenascimento;
+			$row[] = $despesa->dp_servico;
+			$row[] = $despesa->dp_valor;
+			$row[] = $despesa->dp_local;
+			$row[] = $despesa->dp_data;
+			$row[] = $despesa->dp_viagem;
+			$row[] = $despesa->dp_form_pagamento;
 
 			$row[] = '<div style="display: inline-block;">
 						<button class="btn btn-primary btn-edit-clt" 
-						clientes_id	="' . $cliente->clientes_id . '">
+						id_despesas	="' . $despesa->id_despesas . '">
 							<i class="fa fa-edit"></i>
 						</button>
 						<button class="btn btn-danger btn-del-clt" 
-						clientes_id="' . $cliente->clientes_id . '">
+						id_despesas ="' . $despesa->id_despesas . '">
 							<i class="fa fa-times"></i>
 						</button>
 					</div>';
@@ -125,14 +126,14 @@ class Restrict extends CI_Controller
 
 		$json = array(
 			"draw" => $this->input->post("draw"),
-			"recordsTotal" => $this->clientes_model->records_total(),
-			"recordsFiltered" => $this->clientes_model->records_filtered(),
+			"recordsTotal" => $this->despesas_model->records_total(),
+			"recordsFiltered" => $this->despesas_model->records_filtered(),
 			"data" => $data,
 		);
 
 		echo json_encode($json);
 	}
-	public function ajax_delete_clientes_data() // Função  Para exclusão de clientes
+	public function ajax_delete_despesas_data() // Função  Para exclusão de clientes
 	{
 
 		if (!$this->input->is_ajax_request()) {
@@ -142,13 +143,13 @@ class Restrict extends CI_Controller
 		$json = array();
 		$json["status"] = 1;
 
-		$this->load->model("clientes_model");
-		$clientes_id = $this->input->post("clientes_id");
-		$this->clientes_model->delete($clientes_id);
+		$this->load->model("despesas_model");
+		$id_despesas = $this->input->post("id_despesas");
+		$this->despesas_model->delete($id_despesas);
 
 		echo json_encode($json);
 	}
-	public function ajax_get_clientes_data() // Função  para obter dados para modificar os clientes
+	public function ajax_get_despesas_data() // Função  para obter dados para modificar os clientes
 	{
 
 		if (!$this->input->is_ajax_request()) {
@@ -159,20 +160,21 @@ class Restrict extends CI_Controller
 		$json["status"] = 1;
 		$json["input"] = array();
 
-		$this->load->model("clientes_model");
+		$this->load->model("despesas_model");
 
-		$clientes_id = $this->input->post("clientes_id");
+		$clientes_id = $this->input->post("id_despesas");
 		$data = $this->clientes_model->get_data($clientes_id)->result_array()[0];
-		$json["input"]["clientes_id"] = $data["clientes_id"];
-		$json["input"]["cl_nome"] = $data["cl_nome"];
-		$json["input"]["cl_cpf"] = $data["cl_cpf"];
-		$json["input"]["cl_endereco"] = $data["cl_endereco"];
-		$json["input"]["cl_email"] = $data["cl_email"];
-		$json["input"]["cl_datadenascimento"] = $data["cl_datadenascimento"];
+		$json["input"]["id_despesas"] = $data["id_despesas	"];
+		$json["input"]["dp_servico"] = $data["dp_servico"];
+		$json["input"]["dp_valor"] = $data["dp_valor"];
+		$json["input"]["dp_local"] = $data["dp_local"];
+		$json["input"]["dp_data"] = $data["dp_data"];
+		$json["input"]["dp_viagem"] = $data["dp_viagem"];
+		$json["input"]["dp_form_pagamento"] = $data["dp_form_pagamento"];
 
 		echo json_encode($json);
 	}
-	public function ajax_save_clientes() //Função para salvar os clientes no banco de dados
+	public function ajax_save_despesas() //Função para salvar os clientes no banco de dados
 	{
 
 		if (!$this->input->is_ajax_request()) {
@@ -183,51 +185,51 @@ class Restrict extends CI_Controller
 		$json["status"] = 1;
 		$json["error_list"] = array();
 
-		$this->load->model("clientes_model");
+		$this->load->model("despesas_model");
 
 		$data = $this->input->post();
 
-		if (empty($data["cl_nome"])) {
-			$json["error_list"]["#cl_nome"] = "Nome é obrigatório!";
+		if (empty($data["dp_servico"])) {
+			$json["error_list"]["#dp_servico"] = "Nome é obrigatório!";
 		} else {
 			if ($this->clientes_model->is_duplicated("cl_nome", $data["cl_nome"], $data["clientes_id"])) {
-				$json["error_list"]["#cl_nome"] = "Nome já existente!";
+				$json["error_list"]["#dp_servico"] = "Nome já existente!";
 			}
 		}
 
-		if (empty($data["cl_cpf"])) {
-			$json["error_list"]["#cl_cpf"] = "CPF é obrigatório!";
+		if (empty($data["dp_valor"])) {
+			$json["error_list"]["#dp_valor"] = "CPF é obrigatório!";
 		} else {
 			if ($this->clientes_model->is_duplicated("cl_cpf", $data["cl_cpf"], $data["clientes_id"])) {
-				$json["error_list"]["#cl_cpf"] = "CPF já existente!";
+				$json["error_list"]["#dp_valor"] = "CPF já existente!";
 			}
 		}
 
-		if (empty($data["cl_endereco"])) {
-			$json["error_list"]["#cl_endereco"] = "Endereço é obrigatório!";
+		if (empty($data["dp_local"])) {
+			$json["error_list"]["#dp_local"] = "Endereço é obrigatório!";
 		}
 
-		if (empty($data["cl_email"])) {
-			$json["error_list"]["#cl_email"] = "E-mail é obrigatório!";
-		} else {
-			if ($this->clientes_model->is_duplicated("cl_email", $data["cl_email"], $data["clientes_id"])) {
-				$json["error_list"]["#cl_email"] = "E-mail já existente!";
-			}
+		if (empty($data["dp_data"])) {
+			$json["error_list"]["#dp_data"] = "E-mail é obrigatório!";
+		} 
+
+		if (empty($data["dp_viagem"])) {
+			$json["error_list"]["#dp_viagem"] = "Data de nascimento é obrigatório!";
 		}
 
-		if (empty($data["cl_datadenascimento"])) {
-			$json["error_list"]["#cl_datadenascimento"] = "Data de nascimento é obrigatório!";
+		if (empty($data["dp_form_pagamento	"])) {
+			$json["error_list"]["#dp_form_pagamento	"] = "Data de nascimento é obrigatório!";
 		}
 
 		if (!empty($json["error_list"])) {
 			$json["status"] = 0;
 		} else {
-			if (empty($data["clientes_id"])) {
-				$this->clientes_model->insert($data);
+			if (empty($data["id_despesas"])) {
+				$this->despesas_model->insert($data);
 			} else {
-				$clientes_id = $data["clientes_id"];
-				unset($data["clientes_id"]);
-				$this->clientes_model->update($clientes_id, $data);
+				$id_despesas = $data["id_despesas"];
+				unset($data["id_depesas"]);
+				$this->despesas_model->update($id_despesas, $data);
 			}
 		}
 

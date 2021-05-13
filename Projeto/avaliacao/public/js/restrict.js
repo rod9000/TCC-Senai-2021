@@ -6,36 +6,33 @@ $(function() {
 		$("#form_viagens")[0].reset();
 		$("#modal_viagens").modal();
 	});
-
 	$("#btn_add_despesas").click(function(){
 		clearErrors();
 		$("#form_despesas")[0].reset();
 		$("#modal_despesas").modal();
 	});
-
 	$("#btn_add_user").click(function(){
 		clearErrors();
 		$("#form_user")[0].reset();
 		$("#modal_user").modal();
-	});
-	
-	$("#form_clientes").submit(function () //Js para salvar os dados do form do clientes
+	});	
+	$("#form_despesas").submit(function () //Js para salvar os dados do form da despesas
 	{
 
 		$.ajax({
 			type: "POST",
-			url: BASE_URL + "restrict/ajax_save_clientes",
+			url: BASE_URL + "restrict/ajax_save_despesas",
 			dataType: "json",
 			data: $(this).serialize(),
 			beforeSend: function () {
 				clearErrors();
-				$("#btn_save_clientes").siblings(".help-block").html(loadingImg("Verificando..."));
+				$("#btn_save_despesas").siblings(".help-block").html(loadingImg("Verificando..."));
 			},
 			success: function (response) {
 				clearErrors();
 				if (response["status"]) {
-					$("#modal_clientes").modal("hide");
-					swal("Sucesso!", "Cliente salvo com sucesso!", "success");
+					$("#modal_despesas").modal("hide");
+					swal("Sucesso!", "Despesas salvoa com sucesso!", "success");
 					dt_clientes.ajax.reload();
 				} else {
 					showErrorsModal(response["error_list"])
@@ -45,50 +42,24 @@ $(function() {
 
 		return false;
 	});
-	$("#form_produtos").submit(function () //Js para salvar os dados do form do produtos
+	$("#form_viagens").submit(function () //Js para salvar os dados do form da viagem
 	{
 
 		$.ajax({
 			type: "POST",
-			url: BASE_URL + "restrict/ajax_save_produtos",
+			url: BASE_URL + "restrict/ajax_save_viagens",
 			dataType: "json",
 			data: $(this).serialize(),
 			beforeSend: function () {
 				clearErrors();
-				$("#btn_save_produtos").siblings(".help-block").html(loadingImg("Verificando..."));
+				$("#btn_save_viagens").siblings(".help-block").html(loadingImg("Verificando..."));
 			},
 			success: function (response) {
 				clearErrors();
 				if (response["status"]) {
-					$("#modal_produtos").modal("hide");
-					swal("Sucesso!", "Produto salvo com sucesso!", "success");
+					$("#modal_viagens").modal("hide");
+					swal("Sucesso!", "Viagem salva com sucesso!", "success");
 					dt_produtos.ajax.reload();
-				} else {
-					showErrorsModal(response["error_list"])
-				}
-			}
-		})
-
-		return false;
-	});
-	$("#form_pedidos").submit(function () //Js para salvar os dados do form do pedidos
-	{
-
-		$.ajax({
-			type: "POST",
-			url: BASE_URL + "restrict/ajax_save_pedidos",
-			dataType: "json",
-			data: $(this).serialize(),
-			beforeSend: function () {
-				clearErrors();
-				$("#btn_save_pedidos").siblings(".help-block").html(loadingImg("Verificando..."));
-			},
-			success: function (response) {
-				clearErrors();
-				if (response["status"]) {
-					$("#modal_pedidos").modal("hide");
-					swal("Sucesso!", "Produto salvo com sucesso!", "success");
-					dt_pedidos.ajax.reload();
 				} else {
 					showErrorsModal(response["error_list"])
 				}
@@ -123,7 +94,6 @@ $(function() {
 
 		return false;
 	});
-
 	$("#btn_your_user").click(function() //Js para obter dados dos usuarios e colocar no form do usuário logado
 	{
 
@@ -144,13 +114,13 @@ $(function() {
 
 		return false;
 	});
-	var dt_clientes = $("#dt_clientes").DataTable({ //Js de organização do data table dos clientes
+	var dt_despesas = $("#dt_despesas").DataTable({ //Js de organização do data table das despesas
 		"oLanguage": DATATABLE_PTBR,
 		"autoWidth": false,
 		"processing": true,
 		"serverSide": true,
 		"ajax": {
-			"url": BASE_URL + "restrict/ajax_list_clientes",
+			"url": BASE_URL + "restrict/ajax_list_despesas",
 			"type": "POST",
 		},
 		"columnDefs": [
@@ -158,35 +128,34 @@ $(function() {
 			{ targets: "dt-center", className: "dt-center" },
 		],
 		"drawCallback": function() {
-			active_btn_clientes();
+			active_btn_despesas();
 		}
 	});
-
-	function active_btn_clientes() { //Js do botão edita e exlui da data table
+	function active_btn_despesas() { //Js do botão edita e exlui da data table
 		
 		$(".btn-edit-clt").click(function(){
 			$.ajax({
 				type: "POST",
-				url: BASE_URL + "restrict/ajax_get_clientes_data",
+				url: BASE_URL + "restrict/ajax_get_despesas_data",
 				dataType: "json",
-				data: {"clientes_id": $(this).attr("clientes_id")},
+				data: {"id_despesas": $(this).attr("id_despesas")},
 				success: function(response) {
 					clearErrors();
-					$("#form_clientes")[0].reset();
+					$("#form_despesas")[0].reset();
 					$.each(response["input"], function(id, value) {
 						$("#"+id).val(value);
 					});
-					$("#modal_clientes").modal();
+					$("#modal_despesas").modal();
 				}
 			})
 		});
 
-		$(".btn-del-clt").click(function(){
+		$(".btn-del-dps").click(function(){
 			
-			clientes_id	 = $(this);
+			id_despesas	 = $(this);
 			swal({
 				title: "Atenção!",
-				text: "Deseja deletar esse usuário?",
+				text: "Deseja deletar essa despesas?",
 				type: "warning",
 				showCancelButton: true,
 				confirmButtonColor: "#d9534f",
@@ -198,12 +167,12 @@ $(function() {
 				if (result.value) {
 					$.ajax({
 						type: "POST",
-						url: BASE_URL + "restrict/ajax_delete_clientes_data",
+						url: BASE_URL + "restrict/ajax_delete_despesas_data",
 						dataType: "json",
-						data: {"clientes_id": clientes_id.attr("clientes_id")},
+						data: {"id_despesas": id_despesas.attr("id_despesas")},
 						success: function(response) {
 							swal("Sucesso!", "Ação executada com sucesso", "success");
-							dt_clientes.ajax.reload();
+							dt_despesas.ajax.reload();
 						}
 					})
 				}
@@ -211,14 +180,13 @@ $(function() {
 
 		});
 	}
-	
-	var dt_produtos = $("#dt_produtos").DataTable({ //Js de organização do data table dos produtos
+	var dt_viagens = $("#dt_viagens").DataTable({ //Js de organização do data table das viagens
 		"oLanguage": DATATABLE_PTBR,
 		"autoWidth": false,
 		"processing": true,
 		"serverSide": true,
 		"ajax": {
-			"url": BASE_URL + "restrict/ajax_list_produtos",
+			"url": BASE_URL + "restrict/ajax_list_viagens",
 			"type": "POST",
 		},
 		"columnDefs": [
@@ -226,34 +194,34 @@ $(function() {
 			{ targets: "dt-center", className: "dt-center" },
 		],
 		"drawCallback": function() {
-			active_btn_prod();
+			active_btn_viag();
 		}
 	});
-	function active_btn_prod() { //Js do botão edita e exlui da data table
+	function active_btn_viag() { //Js do botão edita e exlui da data table
 		
 		$(".btn-edit-prod").click(function(){
 			$.ajax({
 				type: "POST",
-				url: BASE_URL + "restrict/ajax_get_produtos_data",
+				url: BASE_URL + "restrict/ajax_get_viagens_data",
 				dataType: "json",
-				data: {"produtos_id": $(this).attr("produtos_id")},
+				data: {"id_viagens": $(this).attr("id_viagens")},
 				success: function(response) {
 					clearErrors();
-					$("#form_produtos")[0].reset();
+					$("#form_viagens")[0].reset();
 					$.each(response["input"], function(id, value) {
 						$("#"+id).val(value);
 					});
-					$("#modal_produtos").modal();
+					$("#modal_viagens").modal();
 				}
 			})
 		});
 
-		$(".btn-del-prod").click(function(){
+		$(".btn-del-viag").click(function(){
 			
-			produtos_id = $(this);
+			id_viagens = $(this);
 			swal({
 				title: "Atenção!",
-				text: "Deseja deletar esse Produto?",
+				text: "Deseja deletar essa viagem?",
 				type: "warning",
 				showCancelButton: true,
 				confirmButtonColor: "#d9534f",
@@ -265,12 +233,12 @@ $(function() {
 				if (result.value) {
 					$.ajax({
 						type: "POST",
-						url: BASE_URL + "restrict/ajax_delete_produtos_data",
+						url: BASE_URL + "restrict/ajax_delete_viagens_data",
 						dataType: "json",
-						data: {"produtos_id": produtos_id.attr("produtos_id")},
+						data: {"id_viagens": id_viagens.attr("id_viagens")},
 						success: function(response) {
 							swal("Sucesso!", "Ação executada com sucesso", "success");
-							dt_produtos.ajax.reload();
+							dt_viagens.ajax.reload();
 						}
 					})
 				}
@@ -278,74 +246,6 @@ $(function() {
 	
 		});
 	}
-
-	var dt_pedidos = $("#dt_pedidos").DataTable({ //Js de organização do data table dos pedidos
-		"oLanguage": DATATABLE_PTBR,
-		"autoWidth": false,
-		"processing": true,
-		"serverSide": true,
-		"ajax": {
-			"url": BASE_URL + "restrict/ajax_list_pedidos",
-			"type": "POST",
-		},
-		"columnDefs": [
-			{ targets: "no-sort", orderable: false },
-			{ targets: "dt-center", className: "dt-center" },
-		],
-		"drawCallback": function() {
-			active_btn_pedidos();
-		}
-	});
-	function active_btn_pedidos() { //Js do botão edita e exlui da data table
-		
-		$(".btn-edit-pdd").click(function(){
-			$.ajax({
-				type: "POST",
-				url: BASE_URL + "restrict/ajax_get_pedidos_data",
-				dataType: "json",
-				data: {"pedidos_id": $(this).attr("pedidos_id")},
-				success: function(response) {
-					clearErrors();
-					$("#form_pedidos")[0].reset();
-					$.each(response["input"], function(id, value) {
-						$("#"+id).val(value);
-					});
-					$("#modal_pedidos").modal();
-				}
-			})
-		});
-
-		$(".btn-del-pdd").click(function(){
-			
-			pedidos_id = $(this);
-			swal({
-				title: "Atenção!",
-				text: "Deseja deletar esse usuário?",
-				type: "warning",
-				showCancelButton: true,
-				confirmButtonColor: "#d9534f",
-				confirmButtonText: "Sim",
-				cancelButtontext: "Não",
-				closeOnConfirm: true,
-				closeOnCancel: true,
-			}).then((result) => {
-				if (result.value) {
-					$.ajax({
-						type: "POST",
-						url: BASE_URL + "restrict/ajax_delete_pedidos_data",
-						dataType: "json",
-						data: {"pedidos_id": pedidos_id.attr("pedidos_id")},
-						success: function(response) {
-							swal("Sucesso!", "Ação executada com sucesso", "success");
-							dt_pedidos.ajax.reload();
-						}
-					})
-				}
-			})
-
-		});
-	}
-
 	var dt_user = $("#dt_users").DataTable({ //Js de organização do data table dos usuários
 		"oLanguage": DATATABLE_PTBR,
 		"autoWidth": false,
