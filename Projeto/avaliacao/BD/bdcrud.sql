@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 13-Maio-2021 às 00:55
+-- Tempo de geração: 13-Maio-2021 às 13:41
 -- Versão do servidor: 10.4.18-MariaDB
 -- versão do PHP: 7.3.28
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `despesas` (
-  `id` int(11) NOT NULL,
+  `id_despesas` int(11) NOT NULL,
   `servico` varchar(100) NOT NULL,
   `valor` decimal(10,0) NOT NULL,
   `local` varchar(100) NOT NULL,
@@ -66,7 +66,7 @@ INSERT INTO `users` (`user_id`, `user_login`, `password_hash`, `user_full_name`,
 --
 
 CREATE TABLE `viagens` (
-  `id` int(11) NOT NULL,
+  `id_viagens` int(11) NOT NULL,
   `local` varchar(100) NOT NULL,
   `data` date NOT NULL,
   `servico` varchar(100) NOT NULL,
@@ -82,7 +82,7 @@ CREATE TABLE `viagens` (
 -- Índices para tabela `despesas`
 --
 ALTER TABLE `despesas`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_despesas`);
 
 --
 -- Índices para tabela `users`
@@ -94,7 +94,7 @@ ALTER TABLE `users`
 -- Índices para tabela `viagens`
 --
 ALTER TABLE `viagens`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_viagens`);
 
 --
 -- AUTO_INCREMENT de tabelas despejadas
@@ -104,7 +104,7 @@ ALTER TABLE `viagens`
 -- AUTO_INCREMENT de tabela `despesas`
 --
 ALTER TABLE `despesas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_despesas` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `users`
@@ -116,7 +116,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de tabela `viagens`
 --
 ALTER TABLE `viagens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_viagens` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
