@@ -124,7 +124,7 @@
       <div class="modal-body">
         <form id="form_viagens">
 
-          <input id="viagens_id" name="viagens_id" hidden>
+          <input id="id_viagens" name="id_viagens" hidden>
 
           <div class="form-group">
             <label class="col-lg-2 control-label">Destino</label>
@@ -145,7 +145,7 @@
           <div class="form-group">
             <label class="col-lg-2 control-label">Data de retorno</label>
             <div class="col-lg-10">
-              <input type="date" id="vg_dtretorno" name="vg_dtretorno" class="form-control" maxlength="100">
+              <input type="date" id="vg_dtretorno" name="vg_dretorno" class="form-control" maxlength="100">
               <span class="help-block"></span>
             </div>
           </div>

@@ -96,7 +96,7 @@ class Restrict extends CI_Controller
 			exit("Nenhum acesso de script direto permitido!");
 		}
 
-		$this->load->model("Despesas_model");
+		$this->load->model("despesas_model");
 		$despesas = $this->despesas_model->get_datatable();
 
 		$data = array();
@@ -250,11 +250,14 @@ class Restrict extends CI_Controller
 		foreach ($viagens as $viagens) {
 
 			$row = array();
-			$row[] = $viagens->pd_local;
-			$row[] = $viagens->pd_data;
-			$row[] = $viagens->pd_servico;
-			$row[] = $viagens->pd_funcionario;
-			$row[] = $viagens->pd_valor;
+			$row[] = $viagens->vg_destino;
+			$row[] = $viagens->vg_dsaida;
+			$row[] = $viagens->vg_dretorno;
+			$row[] = $viagens->vg_servico;
+			$row[] = $viagens->vg_valorIn;
+			$row[] = $viagens->vg_realizada;
+			$row[] = $viagens->vg_motivo;
+
 
 			$row[] = '<div style="display: inline-block;">
 						<button class="btn btn-primary btn-edit-prod" 
@@ -334,33 +337,36 @@ class Restrict extends CI_Controller
 
 		$data = $this->input->post();
 
-		if (empty($data["pd_local"])) {
-			$json["error_list"]["#pd_local"] = "local é obrigatório!";
-		} else {
-			if ($this->viagens_model->is_duplicated("pd_local", $data["pd_local"], $data["id_viagens"])) {
-				$json["error_list"]["#pd_local"] = "local já existente!";
-			}
+		if (empty($data["vg_destino"])) {
+			$json["error_list"]["#vg_destino"] = "Destino é obrigatório!";
 		}
 
-		if (empty($data["pd_data"])) {
-			$json["error_list"]["#pd_data"] = "Data é obrigatório!";
-		} else {
-			if ($this->viagens_model->is_duplicated("pd_data", $data["pd_data"], $data["id_viagens"])&& empty($data["id_viagens"])) {
-				$json["error_list"]["#pd_data"] = "Data já existente!";
-			}
+		if (empty($data["vg_dsaida"])) {
+			$json["error_list"]["#vg_dsaida"] = "Data de saida é obrigatório!";
+		} 
+
+		if (empty($data["vg_dretorno"])) {
+			$json["error_list"]["#vg_dretorno"] = "Data de retorno é obrigatório!";
+		} 
+
+		if (empty($data["vg_servico"])) {
+			$json["error_list"]["#vg_servico"] = "Serviço é obrigatório!";
 		}
 
-		if (empty($data["pd_servico"])) {
-			$json["error_list"]["#pd_servico"] = "Serviço é obrigatório!";
+		if (empty($data["vg_funcionario"])) {
+			$json["error_list"]["#vg_funcionario"] = "Funcionário é obrigatório!";
 		}
 
-		if (empty($data["pd_funcionario"])) {
-			$json["error_list"]["#pd_funcionario"] = "Funcionário é obrigatório!";
+		if (empty($data["vg_valorIn"])) {
+			$json["error_list"]["#vg_valorIn"] = "valor é obrigatório!";
+		}
+		if (empty($data["vg_realizada"])) {
+			$json["error_list"]["#vg_realizada"] = "Realizada é obrigatório!";
+		}
+		if (empty($data["vg_motivo"])) {
+			$json["error_list"]["#vg_motivo"] = "Motivo é obrigatório!";
 		}
 
-		if (empty($data["pd_valor"])) {
-			$json["error_list"]["#pd_valor"] = "valor é obrigatório!";
-		}
 
 		if (!empty($json["error_list"])) {
 			$json["status"] = 0;

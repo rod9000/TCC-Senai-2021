@@ -59,7 +59,7 @@ $(function() {
 				if (response["status"]) {
 					$("#modal_viagens").modal("hide");
 					swal("Sucesso!", "Viagem salva com sucesso!", "success");
-					dt_produtos.ajax.reload();
+					dt_viagens.ajax.reload();
 				} else {
 					showErrorsModal(response["error_list"])
 				}

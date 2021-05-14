@@ -37,6 +37,10 @@ class Viagens_model extends CI_Model {
 		$this->db->where($field, $value);
 		return $this->db->get()->num_rows() > 0;
 	}
+
+	var $column_search = array("id_viagens ", "vg_destino", "vg_dsaida", "vg_dretorno", "vg_funcionario", );
+	var $column_order = array("id_viagens", "vg_destino", "vg_funcionario");
+
 	private function _get_datatable() {
 
 		$search = NULL;
@@ -51,7 +55,7 @@ class Viagens_model extends CI_Model {
 			$order_dir = $order[0]["dir"];
 		}
 
-		$this->db->from("users");
+		$this->db->from("viagens");
 		if (isset($search)) {
 			$first = TRUE;
 			foreach ($this->column_search as $field) {
@@ -92,7 +96,7 @@ class Viagens_model extends CI_Model {
 
 	public function records_total() {
 
-		$this->db->from("users");
+		$this->db->from("viagens");
 		return $this->db->count_all_results();
 	}
 }

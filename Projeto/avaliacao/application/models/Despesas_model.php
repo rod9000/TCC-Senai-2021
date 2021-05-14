@@ -38,6 +38,9 @@ class Despesas_model extends CI_Model {
 		return $this->db->get()->num_rows() > 0;
 	}
 
+	var $column_search = array("id_despesas  ", "dp_servico", "dp_valor", "dp_local", "dp_data", "dp_viagem", "dp_form_pagamento");
+	var $column_order = array("id_despesas", "dp_servico", "dp_valor", "dp_local", "dp_data", "dp_viagem",);
+
 	private function _get_datatable() {
 
 		$search = NULL;
@@ -52,7 +55,7 @@ class Despesas_model extends CI_Model {
 			$order_dir = $order[0]["dir"];
 		}
 
-		$this->db->from("users");
+		$this->db->from("despesas");
 		if (isset($search)) {
 			$first = TRUE;
 			foreach ($this->column_search as $field) {
@@ -93,7 +96,7 @@ class Despesas_model extends CI_Model {
 
 	public function records_total() {
 
-		$this->db->from("users");
+		$this->db->from("despesas");
 		return $this->db->count_all_results();
 	}
 }
