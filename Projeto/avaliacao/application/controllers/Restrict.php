@@ -104,7 +104,7 @@ class Restrict extends CI_Controller
 
 			$row = array();
 			$row[] = $despesa->dp_servico;
-			$row[] = $despesa->dp_valor;
+			$row[] = $despesa->dp_funcionario;
 			$row[] = $despesa->dp_local;
 			$row[] = $despesa->dp_data;
 			$row[] = $despesa->dp_viagem;
@@ -166,7 +166,7 @@ class Restrict extends CI_Controller
 		$data = $this->clientes_model->get_data($clientes_id)->result_array()[0];
 		$json["input"]["id_despesas"] = $data["id_despesas	"];
 		$json["input"]["dp_servico"] = $data["dp_servico"];
-		$json["input"]["dp_valor"] = $data["dp_valor"];
+		$json["input"]["dp_funcionario"] = $data["dp_funcionario"];
 		$json["input"]["dp_local"] = $data["dp_local"];
 		$json["input"]["dp_data"] = $data["dp_data"];
 		$json["input"]["dp_viagem"] = $data["dp_viagem"];
@@ -190,18 +190,18 @@ class Restrict extends CI_Controller
 		$data = $this->input->post();
 
 		if (empty($data["dp_servico"])) {
-			$json["error_list"]["#dp_servico"] = "Nome é obrigatório!";
+			$json["error_list"]["#dp_servico"] = "local é obrigatório!";
 		} else {
-			if ($this->clientes_model->is_duplicated("cl_nome", $data["cl_nome"], $data["clientes_id"])) {
-				$json["error_list"]["#dp_servico"] = "Nome já existente!";
+			if ($this->clientes_model->is_duplicated("cl_local", $data["cl_local"], $data["clientes_id"])) {
+				$json["error_list"]["#dp_servico"] = "local já existente!";
 			}
 		}
 
-		if (empty($data["dp_valor"])) {
-			$json["error_list"]["#dp_valor"] = "CPF é obrigatório!";
+		if (empty($data["dp_funcionario"])) {
+			$json["error_list"]["#dp_funcionario"] = "CPF é obrigatório!";
 		} else {
 			if ($this->clientes_model->is_duplicated("cl_cpf", $data["cl_cpf"], $data["clientes_id"])) {
-				$json["error_list"]["#dp_valor"] = "CPF já existente!";
+				$json["error_list"]["#dp_funcionario"] = "CPF já existente!";
 			}
 		}
 
@@ -235,36 +235,34 @@ class Restrict extends CI_Controller
 
 		echo json_encode($json);
 	}
-	
 
-	public function ajax_list_produtos() //Função  para Data table e botões Exclui e editar
+	public function ajax_list_viagens() //Função  para Data table e botões Exclui e editar
 	{
 
 		if (!$this->input->is_ajax_request()) {
 			exit("Nenhum acesso de script direto permitido!");
 		}
 
-		$this->load->model("produtos_model");
-		$produtos = $this->produtos_model->get_datatable();
+		$this->load->model("viagens_model");
+		$viagens = $this->viagens_model->get_datatable();
 
 		$data = array();
-		foreach ($produtos as $produto) {
+		foreach ($viagens as $viagens) {
 
 			$row = array();
-			$row[] = $produto->pd_nome;
-			$row[] = $produto->pd_codigodebarras;
-			$row[] = $produto->pd_descricao;
-			$row[] = $produto->pd_valor;
-			$row[] = $produto->pd_quantidade;
-			$row[] = $produto->pd_datadecadastro;
+			$row[] = $viagens->pd_local;
+			$row[] = $viagens->pd_data;
+			$row[] = $viagens->pd_servico;
+			$row[] = $viagens->pd_funcionario;
+			$row[] = $viagens->pd_valor;
 
 			$row[] = '<div style="display: inline-block;">
 						<button class="btn btn-primary btn-edit-prod" 
-						produtos_id="' . $produto->produtos_id . '">
+						id_viagens="' . $viagens->id_viagens . '">
 							<i class="fa fa-edit"></i>
 						</button>
 						<button class="btn btn-danger btn-del-prod" 
-						produtos_id="' . $produto->produtos_id . '">
+						id_viagens="' . $viagens->id_viagens . '">
 							<i class="fa fa-times"></i>
 						</button>
 					</div>';
@@ -274,14 +272,14 @@ class Restrict extends CI_Controller
 
 		$json = array(
 			"draw" => $this->input->post("draw"),
-			"recordsTotal" => $this->produtos_model->records_total(),
-			"recordsFiltered" => $this->produtos_model->records_filtered(),
+			"recordsTotal" => $this->viagens_model->records_total(),
+			"recordsFiltered" => $this->viagens_model->records_filtered(),
 			"data" => $data,
 		);
 
 		echo json_encode($json);
 	}
-	public function ajax_delete_produtos_data() // Função  Para exclusão de produtos
+	public function ajax_delete_viagens_data() // Função  Para exclusão de viagens
 	{
 
 		if (!$this->input->is_ajax_request()) {
@@ -291,13 +289,13 @@ class Restrict extends CI_Controller
 		$json = array();
 		$json["status"] = 1;
 
-		$this->load->model("produtos_model");
-		$produtos_id = $this->input->post("produtos_id");
-		$this->produtos_model->delete($produtos_id);
+		$this->load->model("viagens_model");
+		$id_viagens = $this->input->post("id_viagens");
+		$this->viagens_model->delete($id_viagens);
 
 		echo json_encode($json);
 	}
-	public function ajax_get_produtos_data() // Função  para obter dados para modificar os produtos
+	public function ajax_get_viagens_data() // Função  para obter dados para modificar os viagens
 	{
 
 		if (!$this->input->is_ajax_request()) {
@@ -308,21 +306,20 @@ class Restrict extends CI_Controller
 		$json["status"] = 1;
 		$json["input"] = array();
 
-		$this->load->model("produtos_model");
+		$this->load->model("viagens_model");
 
-		$produtos_id = $this->input->post("produtos_id");
-		$data = $this->produtos_model->get_data($produtos_id)->result_array()[0];
-		$json["input"]["produtos_id"] = $data["produtos_id"];
-		$json["input"]["pd_nome"] = $data["pd_nome"];
-		$json["input"]["pd_codigodebarras"] = $data["pd_codigodebarras"];
-		$json["input"]["pd_descricao"] = $data["pd_descricao"];
+		$id_viagens = $this->input->post("id_viagens");
+		$data = $this->viagens_model->get_data($id_viagens)->result_array()[0];
+		$json["input"]["id_viagens"] = $data["id_viagens"];
+		$json["input"]["pd_local"] = $data["pd_local"];
+		$json["input"]["pd_data"] = $data["pd_data"];
+		$json["input"]["pd_servico"] = $data["pd_servico"];
+		$json["input"]["pd_funcionario"] = $data["pd_funcionario"];
 		$json["input"]["pd_valor"] = $data["pd_valor"];
-		$json["input"]["pd_quantidade"] = $data["pd_quantidade"];
-		$json["input"]["pd_datadecadastro"] = $data["pd_datadecadastro"];
 
 		echo json_encode($json);
 	}
-	public function ajax_save_produtos() //Função para salvar os produtos no banco de dados
+	public function ajax_save_viagens() //Função para salvar os viagens no banco de dados
 	{
 
 		if (!$this->input->is_ajax_request()) {
@@ -333,187 +330,47 @@ class Restrict extends CI_Controller
 		$json["status"] = 1;
 		$json["error_list"] = array();
 
-		$this->load->model("produtos_model");
+		$this->load->model("viagens_model");
 
 		$data = $this->input->post();
 
-		if (empty($data["pd_nome"])) {
-			$json["error_list"]["#pd_nome"] = "Nome é obrigatório!";
+		if (empty($data["pd_local"])) {
+			$json["error_list"]["#pd_local"] = "local é obrigatório!";
 		} else {
-			if ($this->produtos_model->is_duplicated("pd_nome", $data["pd_nome"], $data["produtos_id"])) {
-				$json["error_list"]["#pd_nome"] = "Nome já existente!";
+			if ($this->viagens_model->is_duplicated("pd_local", $data["pd_local"], $data["id_viagens"])) {
+				$json["error_list"]["#pd_local"] = "local já existente!";
 			}
 		}
 
-		if (empty($data["pd_codigodebarras"])) {
-			$json["error_list"]["#pd_codigodebarras"] = "Codigo de barras é obrigatório!";
+		if (empty($data["pd_data"])) {
+			$json["error_list"]["#pd_data"] = "Data é obrigatório!";
 		} else {
-			if ($this->produtos_model->is_duplicated("pd_codigodebarras", $data["pd_codigodebarras"], $data["produtos_id"])&& empty($data["produtos_id"])) {
-				$json["error_list"]["#pd_codigodebarras"] = "Codigo de barras já existente!";
+			if ($this->viagens_model->is_duplicated("pd_data", $data["pd_data"], $data["id_viagens"])&& empty($data["id_viagens"])) {
+				$json["error_list"]["#pd_data"] = "Data já existente!";
 			}
 		}
 
-		if (empty($data["pd_descricao"])) {
-			$json["error_list"]["#pd_descricao"] = "Descrição é obrigatório!";
+		if (empty($data["pd_servico"])) {
+			$json["error_list"]["#pd_servico"] = "Serviço é obrigatório!";
+		}
+
+		if (empty($data["pd_funcionario"])) {
+			$json["error_list"]["#pd_funcionario"] = "Funcionário é obrigatório!";
 		}
 
 		if (empty($data["pd_valor"])) {
-			$json["error_list"]["#pd_valor"] = "Valor é obrigatório!";
-		}
-
-		if (empty($data["pd_quantidade"])) {
-			$json["error_list"]["#pd_quantidade"] = "Quantidade é obrigatório!";
-		}
-
-		if (empty($data["pd_datadecadastro"])) {
-			$json["error_list"]["#pd_datadecadastro"] = "Data de cadastro é obrigatório!";
+			$json["error_list"]["#pd_valor"] = "valor é obrigatório!";
 		}
 
 		if (!empty($json["error_list"])) {
 			$json["status"] = 0;
 		} else {
-			if (empty($data["produtos_id"])) {
-				$this->produtos_model->insert($data);
+			if (empty($data["id_viagens"])) {
+				$this->viagens_model->insert($data);
 			} else {
-				$produtos_id = $data["produtos_id"];
-				unset($data["produtos_id"]);
-				$this->produtos_model->update($produtos_id, $data);
-			}
-		}
-
-		echo json_encode($json);
-	}
-
-	public function ajax_list_pedidos() //Função  para Data table e botões Exclui e editar
-	{
-
-		if (!$this->input->is_ajax_request()) {
-			exit("Nenhum acesso de script direto permitido!");
-		}
-
-		$this->load->model("pedidos_model");
-		$pedidos = $this->pedidos_model->get_datatable();
-
-		$data = array();
-		foreach ($pedidos as $pedido) {
-
-			$row = array();
-			$row[] = $pedido->pdd_cliente;
-			$row[] = $pedido->pdd_produtos;
-			$row[] = $pedido->pdd_valor;
-			$row[] = $pedido->pdd_quantitade;
-			$row[] = $pedido->pdd_total;
-			$row[] = $pedido->pdd_datadecadastro;
-
-			$row[] = '<div style="display: inline-block;">
-						<button class="btn btn-primary btn-edit-pdd" 
-						pedidos_id="' . $pedido->pedidos_id . '">
-							<i class="fa fa-edit"></i>
-						</button>
-						<button class="btn btn-danger btn-del-pdd" 
-						pedidos_id="' . $pedido->pedidos_id . '">
-							<i class="fa fa-times"></i>
-						</button>
-					</div>';
-
-			$data[] = $row;
-		}
-
-		$json = array(
-			"draw" => $this->input->post("draw"),
-			"recordsTotal" => $this->pedidos_model->records_total(),
-			"recordsFiltered" => $this->pedidos_model->records_filtered(),
-			"data" => $data,
-		);
-
-		echo json_encode($json);
-	}
-	public function ajax_delete_pedidos_data() // Função  Para exclusão de pedidos
-	{
-
-		if (!$this->input->is_ajax_request()) {
-			exit("Nenhum acesso de script direto permitido!");
-		}
-
-		$json = array();
-		$json["status"] = 1;
-
-		$this->load->model("pedidos_model");
-		$pedidos_id = $this->input->post("pedidos_id");
-		$this->pedidos_model->delete($pedidos_id);
-
-		echo json_encode($json);
-	}
-	public function ajax_get_pedidos_data() // Função  para obter dados para modificar os pedidos
-	{
-
-		if (!$this->input->is_ajax_request()) {
-			exit("Nenhum acesso de script direto permitido!");
-		}
-
-		$json = array();
-		$json["status"] = 1;
-		$json["input"] = array();
-
-		$this->load->model("pedidos_model");
-
-		$pedidos_id = $this->input->post("pedidos_id");
-		$data = $this->pedidos_model->get_data($pedidos_id)->result_array()[0];
-		$json["input"]["pedidos_id"] = $data["pedidos_id"];
-		$json["input"]["pdd_cliente"] = $data["pdd_cliente"];
-		$json["input"]["pdd_produtos"] = $data["pdd_produtos"];
-		$json["input"]["pdd_valor"] = $data["pdd_valor"];
-		$json["input"]["pdd_quantitade"] = $data["pdd_quantitade"];
-		$json["input"]["pdd_datadecadastro"] = $data["pdd_datadecadastro"];
-
-		echo json_encode($json);
-	}
-	public function ajax_save_pedidos() //Função para salvar os pedidos no banco de dados
-	{
-
-		if (!$this->input->is_ajax_request()) {
-			exit("Nenhum acesso de script direto permitido!");
-		}
-
-		$json = array();
-		$json["status"] = 1;
-		$json["error_list"] = array();
-
-		$this->load->model("pedidos_model");
-
-		$data = $this->input->post();
-
-		if (empty($data["pdd_cliente"])) {
-			$json["error_list"]["#pdd_cliente"] = "Cliente é obrigatório!";
-		} 
-
-		if (empty($data["pdd_produtos"])) {
-			$json["error_list"]["#pdd_produtos"] = "Selecione o produto!";
-		}
-
-		if (empty($data["pdd_valor"])) {
-			$json["error_list"]["#pdd_valor"] = "Valor é obrigatório!";
-		}
-
-		if (empty($data["pdd_quantitade"])) {
-			$json["error_list"]["#pdd_quantitade"] = "Quantidade é obrigatório!";
-		}
-		if (empty($data["pdd_total"])) {
-			$json["error_list"]["#pdd_total"] = "Total é obrigatório!";
-		}
-		if (empty($data["pdd_datadecadastro"])) {
-			$json["error_list"]["#pdd_datadecadastro"] = "Coloque a data de cadastro!";
-		}
-
-		if (!empty($json["error_list"])) {
-			$json["status"] = 0;
-		} else {
-			if (empty($data["pedidos_id"])) {
-				$this->pedidos_model->insert($data);
-			} else {
-				$pedidos_id = $data["pedidos_id"];
-				unset($data["pedidos_id"]);
-				$this->pedidos_model->update($pedidos_id, $data);
+				$id_viagens = $data["id_viagens"];
+				unset($data["id_viagens"]);
+				$this->viagens_model->update($id_viagens, $data);
 			}
 		}
 
@@ -626,7 +483,7 @@ class Restrict extends CI_Controller
 		}
 
 		if (empty($data["user_full_name"])) {
-			$json["error_list"]["#user_full_name"] = "Nome Completo é obrigatório!";
+			$json["error_list"]["#user_full_name"] = "local Completo é obrigatório!";
 		}
 
 		if (empty($data["user_email"])) {
