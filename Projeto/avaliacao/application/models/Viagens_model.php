@@ -38,6 +38,19 @@ class Viagens_model extends CI_Model {
 		return $this->db->get()->num_rows() > 0;
 	}
 
+	public function get_funcionario(){
+		$this->db->select("*");
+		$this->db->from("user");
+		$this->db->order_by("user_id");
+		$qry_res = $this->db->get()->result();
+
+		$arr = array();
+		foreach($qry_res as $key => $value):
+			$arr[$value->user_id] = $value->user_login;
+		endforeach;
+		return $arr;
+	}
+
 	var $column_search = array("id_viagens ", "vg_destino", "vg_dsaida", "vg_dretorno", "vg_funcionario", );
 	var $column_order = array("id_viagens", "vg_destino", "vg_funcionario");
 

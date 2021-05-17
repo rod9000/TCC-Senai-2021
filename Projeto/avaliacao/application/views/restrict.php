@@ -166,6 +166,12 @@
         <label class="col-lg-2 control-label">Funcionário</label>
         <div class="col-lg-10">
           <input type="text" step="0.1" id="vg_funcionario" name="vg_funcionario" class="form-control">
+          <select id="vg_funcionario" name="vg_funcionario" class="form-control search-input-select selectpicker" data-live-search="true" >
+                <option value="">Selecione...</option>
+                <?php foreach ($funcionario as $key => $value) : ?>
+                <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                <?php endforeach; ?>
+              </select>
           <span class="help-block"></span>
         </div>
       </div>
@@ -260,6 +266,7 @@
                 <?php foreach ($viagens as $key => $value) : ?>
                 <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
                 <?php endforeach; ?>
+              </select>
               <span class="help-block"></span>
             </div>
           </div>

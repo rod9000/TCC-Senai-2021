@@ -18,16 +18,16 @@ class Restrict extends CI_Controller
 			$data = array(
 				"styles" => array(
 					"dataTables.bootstrap.min.css",
+					"bootstrap-select.min",
 					"datatables.min.css",
-					"select2.min.css"
 				),
 				"scripts" => array(
 					"sweetalert2.all.min.js",
 					"dataTables.bootstrap.min.js",
+					"bootstrap-select.min",
 					"datatables.min.js",
 					"util.js",	
 					"restrict.js",
-					"select2.min.js"
 				),
 				"user_id" => $this->session->userdata("user_id")
 			);
