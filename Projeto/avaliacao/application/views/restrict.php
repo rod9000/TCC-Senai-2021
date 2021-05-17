@@ -17,7 +17,7 @@
       </div>
     </div>
   </div>
-
+  
   <div class="container">
     <!-- Abas de Navegação -->
     <ul class="nav nav-tabs">
@@ -35,11 +35,15 @@
           <table id="dt_viagens" class="table table-striped table-bordered">
             <thead>
               <tr class="tableheader">
-                <th class="dt-center">Local</th>
-                <th type="date" class="dt-center">Data</th>
+                <th class="dt-center">ID</th>
+                <th class="dt-center">Destino</th>
+                <th type="date" class="dt-center">Data Saida</th>
+                <th type="date" class="dt-center">Data Retorno</th>
                 <th class="dt-center">Serviço</th>
                 <th class="dt-center">Funcionário</th>
-                <th class="dt-center">Valor para despesas</th>
+                <th class="dt-center">Valor inicial</th>
+                <th class="dt-center">Realizada</th>
+                <th class="dt-center">Motivo</th>
                 <th class="dt-center no-sort">Ações</th>
               </tr>
             </thead>
@@ -180,7 +184,7 @@
           <input id="vg_realizada" name="vg_realizada" class="form-control" maxlength="100">
           <span class="help-block"></span>
         </div>
-      </div>     
+      </div>
 
       <div class="form-group">
         <label class="col-lg-2 control-label">Motivo da Viagem</label>
@@ -189,7 +193,7 @@
           <span class="help-block"></span>
         </div>
       </div>
- 
+
       <div class="form-group text-center">
         <button type="submit" id="btn_save_viagens" class="btn btn-primary">
           <i class="fa fa-save"></i>&nbsp;&nbsp;Salvar
@@ -206,7 +210,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
 
-    <div class="modal-header">
+      <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">x</button>
         <h4 class="modal-title">despesas</h4>
       </div>
@@ -214,7 +218,7 @@
       <div class="modal-body">
         <form id="form_despesas">
 
-      <input id="despesas_id" name="despesas_id" hidden>
+          <input id="despesas_id" name="despesas_id" hidden>
 
           <div class="form-group">
             <label class="col-lg-2 control-label">Serviço</label>
@@ -251,7 +255,11 @@
           <div class="form-group">
             <label class="col-lg-2 control-label">Viagem</label>
             <div class="col-lg-10">
-              <input id="dp_viagem" name="dp_viagem" class="form-control"  maxlength="100">
+              <select id="dp_viagem" name="dp_viagem" class="form-control search-input-select selectpicker" data-live-search="true" >
+                <option value="">Selecione...</option>
+                <?php foreach ($viagens as $key => $value) : ?>
+                <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                <?php endforeach; ?>
               <span class="help-block"></span>
             </div>
           </div>

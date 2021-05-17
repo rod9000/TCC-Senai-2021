@@ -31,6 +31,12 @@ class Restrict extends CI_Controller
 				),
 				"user_id" => $this->session->userdata("user_id")
 			);
+			$this->load->model("despesas_model");
+
+			$viagens = $this->despesas_model->get_viagens();
+			$dados["viagens"] = $viagens;
+			
+			$this->load->vars($dados);
 			$this->template->show("restrict.php", $data);
 		} else {
 			$data = array(
@@ -191,19 +197,11 @@ class Restrict extends CI_Controller
 
 		if (empty($data["dp_servico"])) {
 			$json["error_list"]["#dp_servico"] = "local é obrigatório!";
-		} else {
-			if ($this->clientes_model->is_duplicated("cl_local", $data["cl_local"], $data["clientes_id"])) {
-				$json["error_list"]["#dp_servico"] = "local já existente!";
-			}
-		}
+		} 
 
 		if (empty($data["dp_funcionario"])) {
 			$json["error_list"]["#dp_funcionario"] = "CPF é obrigatório!";
-		} else {
-			if ($this->clientes_model->is_duplicated("cl_cpf", $data["cl_cpf"], $data["clientes_id"])) {
-				$json["error_list"]["#dp_funcionario"] = "CPF já existente!";
-			}
-		}
+		} 
 
 		if (empty($data["dp_local"])) {
 			$json["error_list"]["#dp_local"] = "Endereço é obrigatório!";
@@ -250,10 +248,12 @@ class Restrict extends CI_Controller
 		foreach ($viagens as $viagens) {
 
 			$row = array();
+			$row[] = $viagens->id_viagens;
 			$row[] = $viagens->vg_destino;
 			$row[] = $viagens->vg_dsaida;
 			$row[] = $viagens->vg_dretorno;
 			$row[] = $viagens->vg_servico;
+			$row[] = $viagens->vg_funcionario;
 			$row[] = $viagens->vg_valorIn;
 			$row[] = $viagens->vg_realizada;
 			$row[] = $viagens->vg_motivo;

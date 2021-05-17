@@ -37,6 +37,18 @@ class Despesas_model extends CI_Model {
 		$this->db->where($field, $value);
 		return $this->db->get()->num_rows() > 0;
 	}
+	public function get_viagens(){
+		$this->db->select("*");
+		$this->db->from("viagens");
+		$this->db->order_by("id_viagens");
+		$qry_res = $this->db->get()->result();
+
+		$arr = array();
+		foreach($qry_res as $key => $value):
+			$arr[$value->id_viagens] = $value->vg_destino;
+		endforeach;
+		return $arr;
+	}
 
 	var $column_search = array("id_despesas  ", "dp_servico", "dp_valor", "dp_local", "dp_data", "dp_viagem", "dp_form_pagamento");
 	var $column_order = array("id_despesas", "dp_servico", "dp_valor", "dp_local", "dp_data", "dp_viagem",);
