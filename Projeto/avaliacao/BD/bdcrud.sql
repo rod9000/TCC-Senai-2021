@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 14-Maio-2021 às 05:58
--- Versão do servidor: 10.4.13-MariaDB
--- versão do PHP: 7.4.8
+-- Tempo de geração: 19-Maio-2021 às 00:14
+-- Versão do servidor: 10.4.18-MariaDB
+-- versão do PHP: 7.3.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,8 +34,16 @@ CREATE TABLE `despesas` (
   `dp_local` varchar(100) NOT NULL,
   `dp_data` date NOT NULL,
   `dp_viagem` varchar(50) NOT NULL,
-  `dp_form_pagamento` varchar(10) NOT NULL
+  `dp_funcionario` int(11) NOT NULL,
+  `dp_formDePgm` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `despesas`
+--
+
+INSERT INTO `despesas` (`id_despesas`, `dp_servico`, `dp_valor`, `dp_local`, `dp_data`, `dp_viagem`, `dp_funcionario`, `dp_formDePgm`) VALUES
+(1, 'test', '1222', 'teste', '2001-02-12', '2', 1, 'teste');
 
 -- --------------------------------------------------------
 
@@ -82,7 +90,8 @@ CREATE TABLE `viagens` (
 --
 
 INSERT INTO `viagens` (`id_viagens`, `vg_destino`, `vg_dsaida`, `vg_dretorno`, `vg_servico`, `vg_funcionario`, `vg_valorIn`, `vg_realizada`, `vg_motivo`) VALUES
-(1, 'teste', '0000-00-00', '3111-12-12', 'teste', 'teste', '12', 'teste', 'teste');
+(1, 'teste', '0000-00-00', '3111-12-12', 'teste', 'teste', '12', 'teste', 'teste'),
+(2, 'teste2', '2021-05-17', '2021-05-18', 'teste', 'teste', '123', 'teste', 'teste');
 
 --
 -- Índices para tabelas despejadas
@@ -114,7 +123,7 @@ ALTER TABLE `viagens`
 -- AUTO_INCREMENT de tabela `despesas`
 --
 ALTER TABLE `despesas`
-  MODIFY `id_despesas` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_despesas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `users`
@@ -126,7 +135,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de tabela `viagens`
 --
 ALTER TABLE `viagens`
-  MODIFY `id_viagens` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_viagens` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
