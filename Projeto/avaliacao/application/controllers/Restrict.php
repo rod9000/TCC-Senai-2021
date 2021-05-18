@@ -18,13 +18,13 @@ class Restrict extends CI_Controller
 			$data = array(
 				"styles" => array(
 					"dataTables.bootstrap.min.css",
-					"bootstrap-select.min",
+					"bootstrap-select.scss",
 					"datatables.min.css",
 				),
 				"scripts" => array(
 					"sweetalert2.all.min.js",
 					"dataTables.bootstrap.min.js",
-					"bootstrap-select.min",
+					"bootstrap-select.js",
 					"datatables.min.js",
 					"util.js",	
 					"restrict.js",
@@ -32,9 +32,12 @@ class Restrict extends CI_Controller
 				"user_id" => $this->session->userdata("user_id")
 			);
 			$this->load->model("despesas_model");
+			$this->load->model("viagens_model");
 
 			$viagens = $this->despesas_model->get_viagens();
+			$fucionario = $this->viagens_model->get_funcionario();			
 			$dados["viagens"] = $viagens;
+			$dados["funcionario"] = $fucionario;
 			
 			$this->load->vars($dados);
 			$this->template->show("restrict.php", $data);
@@ -117,11 +120,11 @@ class Restrict extends CI_Controller
 			$row[] = $despesa->dp_form_pagamento;
 
 			$row[] = '<div style="display: inline-block;">
-						<button class="btn btn-primary btn-edit-clt" 
+						<button class="btn btn-primary btn-edit-dps" 
 						id_despesas	="' . $despesa->id_despesas . '">
 							<i class="fa fa-edit"></i>
 						</button>
-						<button class="btn btn-danger btn-del-clt" 
+						<button class="btn btn-danger btn-del-dps" 
 						id_despesas ="' . $despesa->id_despesas . '">
 							<i class="fa fa-times"></i>
 						</button>
@@ -260,11 +263,11 @@ class Restrict extends CI_Controller
 
 
 			$row[] = '<div style="display: inline-block;">
-						<button class="btn btn-primary btn-edit-prod" 
+						<button class="btn btn-primary btn-edit-viag" 
 						id_viagens="' . $viagens->id_viagens . '">
 							<i class="fa fa-edit"></i>
 						</button>
-						<button class="btn btn-danger btn-del-prod" 
+						<button class="btn btn-danger btn-del-viag" 
 						id_viagens="' . $viagens->id_viagens . '">
 							<i class="fa fa-times"></i>
 						</button>
@@ -314,11 +317,14 @@ class Restrict extends CI_Controller
 		$id_viagens = $this->input->post("id_viagens");
 		$data = $this->viagens_model->get_data($id_viagens)->result_array()[0];
 		$json["input"]["id_viagens"] = $data["id_viagens"];
-		$json["input"]["pd_local"] = $data["pd_local"];
-		$json["input"]["pd_data"] = $data["pd_data"];
-		$json["input"]["pd_servico"] = $data["pd_servico"];
-		$json["input"]["pd_funcionario"] = $data["pd_funcionario"];
-		$json["input"]["pd_valor"] = $data["pd_valor"];
+		$json["input"]["vg_destino"] = $data["vg_destino"];
+		$json["input"]["vg_dsaida"] = $data["vg_dsaida"];
+		$json["input"]["vg_dretorno"] = $data["vg_dretorno"];
+		$json["input"]["vg_servico"] = $data["vg_servico"];
+		$json["input"]["vg_funcionario"] = $data["vg_funcionario"];
+		$json["input"]["vg_valorIn"] = $data["vg_valorIn"];
+		$json["input"]["vg_realizada"] = $data["vg_realizada"];
+		$json["input"]["vg_motivo"] = $data["vg_motivo"];
 
 		echo json_encode($json);
 	}

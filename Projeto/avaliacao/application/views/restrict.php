@@ -165,8 +165,7 @@
       <div class="form-group">
         <label class="col-lg-2 control-label">Funcionário</label>
         <div class="col-lg-10">
-          <input type="text" step="0.1" id="vg_funcionario" name="vg_funcionario" class="form-control">
-          <select id="vg_funcionario" name="vg_funcionario" class="form-control search-input-select selectpicker" data-live-search="true" >
+          <select id="vg_funcionario" name="vg_funcionario" class="selectpicker show-tick form-control" data-live-search="true" >
                 <option value="">Selecione...</option>
                 <?php foreach ($funcionario as $key => $value) : ?>
                 <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
@@ -194,10 +193,15 @@
 
       <div class="form-group">
         <label class="col-lg-2 control-label">Motivo da Viagem</label>
-        <div class="col-lg-10">
-          <input id="vg_motivo" name="vg_motivo" class="form-control" maxlength="100">
+        <div class="col-lg-10" style="padding-right: 250px;">
+          <div class="row">
+          <select id="vg_motivo" name="vg_motivo" class="selectpicker">
+          <option value="1">Sim</option>
+          <option value="0">Não</option>
+        </select>
           <span class="help-block"></span>
         </div>
+      </div>
       </div>
 
       <div class="form-group text-center">
@@ -261,7 +265,7 @@
           <div class="form-group">
             <label class="col-lg-2 control-label">Viagem</label>
             <div class="col-lg-10">
-              <select id="dp_viagem" name="dp_viagem" class="form-control search-input-select selectpicker" data-live-search="true" >
+              <select id="dp_viagem" name="dp_viagem" class="selectpicker show-tick form-control" data-live-search="true" >
                 <option value="">Selecione...</option>
                 <?php foreach ($viagens as $key => $value) : ?>
                 <option value="<?php echo $key; ?>"><?php echo $value; ?></option>

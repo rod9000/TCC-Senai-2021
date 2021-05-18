@@ -40,7 +40,7 @@ class Viagens_model extends CI_Model {
 
 	public function get_funcionario(){
 		$this->db->select("*");
-		$this->db->from("user");
+		$this->db->from("users");
 		$this->db->order_by("user_id");
 		$qry_res = $this->db->get()->result();
 

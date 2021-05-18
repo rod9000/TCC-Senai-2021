@@ -1,4 +1,5 @@
-$(function() {
+
+$(document).ready(function() {
 
 	// EXIBIR MODAIS
 	$("#btn_add_viagens").click(function(){
@@ -16,6 +17,9 @@ $(function() {
 		$("#form_user")[0].reset();
 		$("#modal_user").modal();
 	});	
+
+	
+	
 	$("#form_despesas").submit(function () //Js para salvar os dados do form da despesas
 	{
 
@@ -133,7 +137,7 @@ $(function() {
 	});
 	function active_btn_despesas() { //Js do botão edita e exlui da data table
 		
-		$(".btn-edit-clt").click(function(){
+		$(".btn-edit-dps").click(function(){
 			$.ajax({
 				type: "POST",
 				url: BASE_URL + "restrict/ajax_get_despesas_data",
@@ -193,13 +197,14 @@ $(function() {
 			{ targets: "no-sort", orderable: false },
 			{ targets: "dt-center", className: "dt-center" },
 		],
+	
 		"drawCallback": function() {
 			active_btn_viag();
 		}
 	});
 	function active_btn_viag() { //Js do botão edita e exlui da data table
 		
-		$(".btn-edit-prod").click(function(){
+		$(".btn-edit-viag").click(function(){
 			$.ajax({
 				type: "POST",
 				url: BASE_URL + "restrict/ajax_get_viagens_data",

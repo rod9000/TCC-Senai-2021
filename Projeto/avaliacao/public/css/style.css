@@ -71,7 +71,7 @@ a, a:hover, a:focus, a:active, a.active {
 
 ::selection {
     text-shadow: none;
-    background: #fed136;
+    background: #8d8d8d;
 }
 
 @media (min-width: 768px) {
@@ -621,7 +621,7 @@ footer p a {
 }
 
 footer p a span {
-    color: #FF9F46;
+    color: #d1d1d0;
     font-size: 10px;
     letter-spacing: 1px;
     font-weight: 700;
@@ -674,15 +674,15 @@ font-size: 11px;
 --------------------*/
 
 .btn-xl:hover, .btn-xl:focus, .btn-xl:active, .btn-xl.active, .open .dropdown-toggle.btn-xl {
-    color: #fff;
-    background-color: #fec503;
-    border-color: #f6bf01;
+    color: rgb(0, 0, 0);
+    background-color: #94938f;
+    border-color: #000000;
 }
 
 .btn:hover, .btn:focus, .btn:active, .btn.active, .open .dropdown-toggle.btn {
-    color: #fff;
-    background-color: #fec503;
-    border-color: #f6bf01;
+    color: rgb(0, 0, 0);
+    background-color: #757575;
+    border-color: #000000;
 }
 
 .btn {
