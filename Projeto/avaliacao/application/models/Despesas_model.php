@@ -50,7 +50,7 @@ class Despesas_model extends CI_Model {
 		return $arr;
 	}
 
-	var $column_search = array("id_despesas  ", "dp_servico", "dp_valor", "dp_local", "dp_data", "dp_viagem", "dp_form_pagamento");
+	var $column_search = array("id_despesas  ", "dp_servico", "dp_valor", "dp_local", "dp_data", "dp_viagem", "dp_formDePgm");
 	var $column_order = array("id_despesas", "dp_servico", "dp_valor", "dp_local", "dp_data", "dp_viagem",);
 
 	private function _get_datatable() {

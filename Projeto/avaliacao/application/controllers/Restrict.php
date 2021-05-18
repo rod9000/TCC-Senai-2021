@@ -38,7 +38,8 @@ class Restrict extends CI_Controller
 			$fucionario = $this->viagens_model->get_funcionario();			
 			$dados["viagens"] = $viagens;
 			$dados["funcionario"] = $fucionario;
-			
+			$dados["funcionario2"] = $fucionario;
+
 			$this->load->vars($dados);
 			$this->template->show("restrict.php", $data);
 		} else {
@@ -117,7 +118,7 @@ class Restrict extends CI_Controller
 			$row[] = $despesa->dp_local;
 			$row[] = $despesa->dp_data;
 			$row[] = $despesa->dp_viagem;
-			$row[] = $despesa->dp_form_pagamento;
+			$row[] = $despesa->dp_formDePgm;
 
 			$row[] = '<div style="display: inline-block;">
 						<button class="btn btn-primary btn-edit-dps" 
@@ -171,15 +172,15 @@ class Restrict extends CI_Controller
 
 		$this->load->model("despesas_model");
 
-		$clientes_id = $this->input->post("id_despesas");
-		$data = $this->clientes_model->get_data($clientes_id)->result_array()[0];
+		$id_despesas = $this->input->post("id_despesas");
+		$data = $this->despesas->get_data($id_despesas)->result_array()[0];
 		$json["input"]["id_despesas"] = $data["id_despesas	"];
 		$json["input"]["dp_servico"] = $data["dp_servico"];
 		$json["input"]["dp_funcionario"] = $data["dp_funcionario"];
 		$json["input"]["dp_local"] = $data["dp_local"];
 		$json["input"]["dp_data"] = $data["dp_data"];
 		$json["input"]["dp_viagem"] = $data["dp_viagem"];
-		$json["input"]["dp_form_pagamento"] = $data["dp_form_pagamento"];
+		$json["input"]["dp_formDePgm"] = $data["dp_formDePgm"];
 
 		echo json_encode($json);
 	}
@@ -218,8 +219,8 @@ class Restrict extends CI_Controller
 			$json["error_list"]["#dp_viagem"] = "Data de nascimento é obrigatório!";
 		}
 
-		if (empty($data["dp_form_pagamento	"])) {
-			$json["error_list"]["#dp_form_pagamento	"] = "Data de nascimento é obrigatório!";
+		if (empty($data["dp_formDePgm"])) {
+			$json["error_list"]["#dp_formDePgm"] = "Data de nascimento é obrigatório!";
 		}
 
 		if (!empty($json["error_list"])) {

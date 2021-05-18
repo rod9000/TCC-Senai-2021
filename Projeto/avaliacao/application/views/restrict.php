@@ -228,7 +228,7 @@
       <div class="modal-body">
         <form id="form_despesas">
 
-          <input id="despesas_id" name="despesas_id" hidden>
+          <input id="id_despesas" name="id_despesas" hidden>
 
           <div class="form-group">
             <label class="col-lg-2 control-label">Serviço</label>
@@ -274,6 +274,19 @@
               <span class="help-block"></span>
             </div>
           </div>
+
+          <div class="form-group">
+        <label class="col-lg-2 control-label">Funcionário</label>
+        <div class="col-lg-10">
+          <select id="dp_funcionario" name="dp_funcionario" class="selectpicker show-tick form-control" data-live-search="true" >
+                <option value="">Selecione...</option>
+                <?php foreach ($funcionario2 as $key => $value) : ?>
+                <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                <?php endforeach; ?>
+              </select>
+          <span class="help-block"></span>
+        </div>
+      </div>
 
           <div class="form-group">
             <label class="col-lg-2 control-label">Forma de Pagamento</label>
