@@ -173,9 +173,10 @@ class Restrict extends CI_Controller
 		$this->load->model("despesas_model");
 
 		$id_despesas = $this->input->post("id_despesas");
-		$data = $this->despesas->get_data($id_despesas)->result_array()[0];
-		$json["input"]["id_despesas"] = $data["id_despesas	"];
+		$data = $this->despesas_model->get_data($id_despesas)->result_array()[0];
+		$json["input"]["id_despesas"] = $data["id_despesas"];
 		$json["input"]["dp_servico"] = $data["dp_servico"];
+		$json["input"]["dp_valor"] = $data["dp_valor"];
 		$json["input"]["dp_funcionario"] = $data["dp_funcionario"];
 		$json["input"]["dp_local"] = $data["dp_local"];
 		$json["input"]["dp_data"] = $data["dp_data"];
