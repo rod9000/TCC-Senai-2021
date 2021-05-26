@@ -1,4 +1,5 @@
-<form id="form_viagens">
+<div class="form-group">
+        <form id="form_viagens">
 
           <input id="id_viagens" name="id_viagens" hidden>
 
@@ -86,3 +87,4 @@
       </div>
 
       </form>
+                </div>

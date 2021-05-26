@@ -9,6 +9,13 @@
 		<meta name="author" content="">
 		<link rel="icon" href="favicon.ico">
 		<title>Sistema</title>
+		<!--selectpicker-->
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+		<!-- dt -->
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.jqueryui.min.css">
+		<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> 
+		<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.jqueryui.min.css">
 		<!-- Bootstrap core CSS -->
 		<link href="<?php echo base_url(); ?>public/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -55,11 +62,22 @@
 							<a href="#page-top"></a>
 						</li>
 						<li>
-							<a class="page-scroll" href="<?php echo base_url(); ?>#home">Home</a>
+							<a class="header-button" href="<?php echo base_url(); ?>home">Home</a>
+						</li>
+						<?php if($this->uri->segment(1) == 'cadastro_viagens' || $this->uri->segment(1) == 'cadastro_despesas' || $this->uri->segment(1) == 'cadastro_usuario'): ?>
+						<li>
+							<a class="header-button" href="<?php echo base_url(); ?>restrict">Relatorios</a>
+						</li>
+						<?php endif; ?>
+
+						<?php if($this->uri->segment(1) == 'home' || $this->uri->segment(1) == ''): ?>
+						<li>
+							<a class="header-button" href="<?php echo base_url(); ?>restrict">Login</a>
 						</li>
 						<li>
-							<a class="page-scroll" href="<?php echo base_url(); ?>restrict">Login</a>
+							<a class="header-button" href="<?php echo base_url(); ?>contato">Contato</a>
 						</li>
+						<?php endif; ?>
 					</ul>
 				</div>
 				<!-- /.navbar-collapse -->

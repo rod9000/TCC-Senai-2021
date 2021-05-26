@@ -2,7 +2,7 @@
 $(document).ready(function() {
 
 	// EXIBIR MODAIS
-	$("#btn_add_viagens").click(function(){
+	$("#btn_add_viagens").on('click', function(){
 		clearErrors();
 		$("#form_viagens")[0].reset();
 		$("#modal_viagens").modal();
@@ -185,6 +185,7 @@ $(document).ready(function() {
 		});
 	}
 	var dt_viagens = $("#dt_viagens").DataTable({ //Js de organização do data table das viagens
+	
 		"oLanguage": DATATABLE_PTBR,
 		"autoWidth": false,
 		"processing": true,
@@ -197,10 +198,10 @@ $(document).ready(function() {
 			{ targets: "no-sort", orderable: false },
 			{ targets: "dt-center", className: "dt-center" },
 		],
-	
 		"drawCallback": function() {
 			active_btn_viag();
 		}
+
 	});
 	function active_btn_viag() { //Js do botão edita e exlui da data table
 		
@@ -251,6 +252,36 @@ $(document).ready(function() {
 	
 		});
 	}
+	var dt_relatorio = $("#dt_relatorio").DataTable({ //Js de organização do data table dos usuários
+		"oLanguage": DATATABLE_PTBR,
+		"autoWidth": false,
+		"processing": true,
+		"serverSide": true,
+		"ajax": {
+			"url": BASE_URL + "restrict/ajax_list_user",
+			"type": "POST",
+		},
+		"columnDefs": [
+			{ targets: "no-sort", orderable: false },
+			{ targets: "dt-center", className: "dt-center" },
+		],
+		"drawCallback": function() {
+			active_btn_user();
+		},
+		"dom": 'Bfrtip',
+		"buttons": [
+			{
+				extend: 'collection',
+				text: 'Gerar Relatório',
+				buttons: [
+					'excel',
+					'csv',
+					'pdf',
+					'print'
+				]
+			}
+		],
+	});
 	var dt_user = $("#dt_users").DataTable({ //Js de organização do data table dos usuários
 		"oLanguage": DATATABLE_PTBR,
 		"autoWidth": false,
@@ -318,4 +349,4 @@ $(document).ready(function() {
 		});
 	}
 	
-})
+});

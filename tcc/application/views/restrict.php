@@ -31,7 +31,7 @@
       <div id="tab_viagens" class="tab-pane active">
         <div class="container-fluid">
           <h2 class="text-center"><strong>Gerenciar Viagens</strong></h2>
-          <a id="btn_add_viagens" class="btn btn-primary"><i class="fa fa-plus">&nbsp;&nbsp;Adicionar viagens</i></a>
+          <a id="btn_add_viagens" class="btn btn-primary" href="<?php echo base_url(); ?>cadastro_viagens"><i class="fa fa-plus">&nbsp;&nbsp;Adicionar viagens</i></a>
           <table id="dt_viagens" class="table table-striped table-bordered">
             <thead>
               <tr class="tableheader">
@@ -56,7 +56,7 @@
       <div id="tab_despesas" class="tab-pane">
         <div class="container-fluid">
           <h2 class="text-center"><strong>Gerenciar despesas</strong></h2>
-          <a id="btn_add_despesas" class="btn btn-primary"><i class="fa fa-plus">&nbsp;&nbsp;Adicionar despesas</i></a>
+          <a id="btn_add_despesas" class="btn btn-primary" href="<?php echo base_url(); ?>cadastro_despesas"><i class="fa fa-plus">&nbsp;&nbsp;Adicionar despesas</i></a>
           <table id="dt_despesas" class="table table-striped table-bordered">
             <thead>
               <tr class="tableheader">
@@ -80,7 +80,7 @@
       <div id="tab_relatorio" class="tab-pane">
         <div class="container-fluid">
           <h2 class="text-center"><strong>Gerenciar relatório</strong></h2>
-          <a id="btn_add_relatorio" class="btn btn-primary"><i class="fa fa-plus">&nbsp;&nbsp;Gerar relatório</i></a>
+<!--          <a id="btn_add_relatorio" stlye ="marring-bottom: 2px" class="btn btn-primary"><i class="fa fa-plus">&nbsp;&nbsp;Gerar relatório</i></a> -->
           <table id="dt_relatorio" class="table table-striped table-bordered">
             <thead>
               <tr class="tableheader">
@@ -99,7 +99,7 @@
       <div id="tab_user" class="tab-pane">
         <div class="container-fluid">
           <h2 class="text-center"><strong>Gerenciar Usuários</strong></h2>
-          <a id="btn_add_user" class="btn btn-primary"><i class="fa fa-plus">&nbsp;&nbsp;Adicionar Usuário</i></a>
+          <a id="btn_add_user" class="btn btn-primary" href="<?php echo base_url(); ?>cadastro_usuario"><i class="fa fa-plus">&nbsp;&nbsp;Adicionar Usuário</i></a>
           <table id="dt_users" class="table table-striped table-bordered">
             <thead>
               <tr class="tableheader">
@@ -117,273 +117,3 @@
     </div>
   </div>
 </section>
-<!-- Forms e modais -->
-<div id="modal_viagens" class="modal fade">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">x</button>
-        <h4 class="modal-title">viagens</h4>
-      </div>
-
-      <div class="modal-body">
-        <form id="form_viagens">
-
-          <input id="id_viagens" name="id_viagens" hidden>
-
-          <div class="form-group">
-            <label class="col-lg-2 control-label">Destino</label>
-            <div class="col-lg-10">
-              <input id="vg_destino" name="vg_destino" class="form-control" maxlength="100">
-              <span class="help-block"></span>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="col-lg-2 control-label">Data de saida</label>
-            <div class="col-lg-10">
-              <input type="date" id="vg_dsaida" name="vg_dsaida" class="form-control" maxlength="100">
-              <span class="help-block"></span>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="col-lg-2 control-label">Data de retorno</label>
-            <div class="col-lg-10">
-              <input type="date" id="vg_dtretorno" name="vg_dretorno" class="form-control" maxlength="100">
-              <span class="help-block"></span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-lg-2 control-label">Serviço</label>
-            <div class="col-lg-10">
-              <input type="text" step="0.1" id="vg_servico" name="vg_servico" class="form-control">
-              <span class="help-block"></span>
-            </div>
-          </div>
-
-      </div>
-      <div class="form-group">
-        <label class="col-lg-2 control-label">Funcionário</label>
-        <div class="col-lg-10">
-          <select id="vg_funcionario" name="vg_funcionario" class="selectpicker show-tick form-control" data-live-search="true" >
-                <option value="">Selecione...</option>
-                <?php foreach ($funcionario as $key => $value) : ?>
-                <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
-                <?php endforeach; ?>
-              </select>
-          <span class="help-block"></span>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="col-lg-2 control-label">Valor inicial</label>
-        <div class="col-lg-10">
-          <input id="vg_valorIn" name="vg_valorIn" class="form-control" maxlength="100">
-          <span class="help-block"></span>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="col-lg-2 control-label">Realizada</label>
-        <div class="col-lg-10">
-        <div class="row" style="padding-left: 2%;">
-          <select id="vg_realizada" name="vg_realizada" class="selectpicker">
-          <option value="1">Sim</option>
-          <option value="0">Não</option>
-        </select>
-          <span class="help-block"></span>
-        </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="col-lg-2 control-label">Motivo da Viagens</label>
-        <div class="col-lg-10">
-          <div class="row" style="padding-left: 2%; padding-right: 2%">
-          <input id="vg_motivo" name="vg_motivo" class="form-control" maxlength="100">
-          <span class="help-block"></span>
-        </div>
-      </div>
-      </div>
-
-      <div class="form-group text-center">
-        <button type="submit" id="btn_save_viagens" class="btn btn-primary">
-          <i class="fa fa-save"></i>&nbsp;&nbsp;Salvar
-        </button>
-        <span class="help-block"></span>
-      </div>
-
-      </form>
-    </div>
-  </div>
-</div>
-
-<div id="modal_despesas" class="modal fade">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">x</button>
-        <h4 class="modal-title">despesas</h4>
-      </div>
-
-      <div class="modal-body">
-        <form id="form_despesas">
-
-          <input id="id_despesas" name="id_despesas" hidden>
-
-          <div class="form-group">
-            <label class="col-lg-2 control-label">Serviço</label>
-            <div class="col-lg-10">
-              <input id="dp_servico" name="dp_servico" class="form-control" maxlength="100">
-              <span class="help-block"></span>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="col-lg-2 control-label">Valor</label>
-            <div class="col-lg-10">
-              <input id="dp_valor" name="dp_valor" class="form-control" maxlength="100">
-              <span class="help-block"></span>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="col-lg-2 control-label">Local</label>
-            <div class="col-lg-10">
-              <input id="dp_local" name="dp_local" class="form-control"></input>
-              <span class="help-block"></span>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="col-lg-2 control-label">Data da Viagem</label>
-            <div class="col-lg-10">
-              <input type="date" id="dp_data" name="dp_data" class="form-control" maxlength="100">
-              <span class="help-block"></span>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="col-lg-2 control-label">Viagem</label>
-            <div class="col-lg-10">
-              <select id="dp_viagem" name="dp_viagem" class="selectpicker show-tick form-control" data-live-search="true" >
-                <option value="">Selecione...</option>
-                <?php foreach ($viagens as $key => $value) : ?>
-                <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
-                <?php endforeach; ?>
-              </select>
-              <span class="help-block"></span>
-            </div>
-          </div>
-
-          <div class="form-group">
-        <label class="col-lg-2 control-label">Funcionário</label>
-        <div class="col-lg-10">
-          <select id="dp_funcionario" name="dp_funcionario" class="selectpicker show-tick form-control" data-live-search="true" >
-                <option value="">Selecione...</option>
-                <?php foreach ($funcionario2 as $key => $value) : ?>
-                <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
-                <?php endforeach; ?>
-              </select>
-          <span class="help-block"></span>
-        </div>
-      </div>
-
-          <div class="form-group">
-            <label class="col-lg-2 control-label">Forma de Pagamento</label>
-            <div class="col-lg-10">
-              <input id="dp_formDePgm" name="dp_formDePgm" class="form-control" maxlength="100">
-              <span class="help-block"></span>
-            </div>
-          </div>
-
-          <div class="form-group text-center">
-            <button type="submit" id="btn_save_despesas" class="btn btn-primary">
-              <i class="fa fa-save"></i>&nbsp;&nbsp;Salvar
-            </button>
-            <span class="help-block"></span>
-          </div>
-
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div id="modal_user" class="modal fade">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">x</button>
-        <h4 class="modal-title">Usuário</h4>
-      </div>
-
-      <div class="modal-body">
-        <form id="form_user">
-
-          <input id="user_id" name="user_id" hidden>
-
-          <div class="form-group">
-            <label class="col-lg-2 control-label">Login</label>
-            <div class="col-lg-10">
-              <input id="user_login" name="user_login" class="form-control" maxlength="30">
-              <span class="help-block"></span>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="col-lg-2 control-label">Nome Completo</label>
-            <div class="col-lg-10">
-              <input id="user_full_name" name="user_full_name" class="form-control" maxlength="100">
-              <span class="help-block"></span>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="col-lg-2 control-label">E-mail</label>
-            <div class="col-lg-10">
-              <input id="user_email" name="user_email" class="form-control" maxlength="100">
-              <span class="help-block"></span>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="col-lg-2 control-label">Confirmar E-mail</label>
-            <div class="col-lg-10">
-              <input id="user_email_confirm" name="user_email_confirm" class="form-control" maxlength="100">
-              <span class="help-block"></span>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="col-lg-2 control-label">Senha</label>
-            <div class="col-lg-10">
-              <input type="password" id="user_password" name="user_password" class="form-control">
-              <span class="help-block"></span>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="col-lg-2 control-label">Confirmar Senha</label>
-            <div class="col-lg-10">
-              <input type="password" id="user_password_confirm" name="user_password_confirm" class="form-control">
-              <span class="help-block"></span>
-            </div>
-          </div>
-
-          <div class="form-group text-center">
-            <button type="submit" id="btn_save_user" class="btn btn-primary">
-              <i class="fa fa-save"></i>&nbsp;&nbsp;Salvar
-            </button>
-            <span class="help-block"></span>
-          </div>
-
-        </form>
-      </div>
-    </div>
-  </div>
-</div>

@@ -35,6 +35,28 @@ Import Google Fonts
 /*--------------------
 1. General
 --------------------*/
+.dt-button  {
+color:white;
+background-color: #337ab7;
+border-color: #2e6da4;
+border-radius: 4px;
+font-size: 14px;
+font-weight: 400;
+text-align: center;
+padding: 8px 20px;
+
+}
+.dt-button:hover  {
+    color:white;
+    background-color: #1361a5;
+    border-color: #2e6da4;
+    border-radius: 4px;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    text-align: center;
+    padding: 8px 20px;
+
+}
 
 body {
   margin: 0px;
@@ -101,7 +123,7 @@ section {
 	color: #fec503
 }
 .navbar-default .navbar-collapse {
-	border-color: rgba(255,255,255,.02)
+	border-color: rgb(255, 255, 255)
 }
 .navbar-default .navbar-toggle {
 	background-color: #fed136;
@@ -118,7 +140,7 @@ section {
 	text-transform: uppercase;
 	font-weight: 400;
 	letter-spacing: 1px;
-	color:#fff
+	color:#fff !important;
 }
 .navbar-default .nav li a:hover,.navbar-default .nav li a:focus {
 	color: #fed136;
