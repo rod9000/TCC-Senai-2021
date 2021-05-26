@@ -4,25 +4,33 @@
 	<title>Formulário de contato</title>
 	<link rel="stylesheet" href="css/bulma.min.css">
 </head>
+<style>
+.center {
+  margin: auto;
+  width: 55%;
+  text-align: center;
+  padding: 50px;
+}
+</style>
 <body>
-	<section class="section">
+	<section style="min-height: calc(100vh - 83px)" class="light-bg">
 		<div class="container">
-			<div class="columns is-centered">
+			<div class="center">
 				<div class="column is-half">
-					<h1 class="title has-text-centered">Entre em contato:</h1>
-					<div style="top:29%;width:300px;height:270px;position:relative;border-style: double;">
+					<h1>Entre em contato:</h1>
+					<div >
 					<form action="enviar.php" method="POST">
 						<div class="field">
 							<label class="control-label" >Nome</label>
-							<div class="control">
-								<input name="nome" class="input" type="text" placeholder="Seu nome">
+							<div >
+								<input style="width: 100%;border: 2;"name="nome" class="form-control" type="text" placeholder="Seu nome" >
 							</div>
 						</div>
  
 						<div class="field">
 							<label class="control-label">Email *</label>
-							<div class="control">
-								<input name="email" class="input" type="email" placeholder="Seu email">
+							<div  >
+								<input style="width: 100%;border: 2;" class="form-control" name="email" type="email" placeholder="Seu email">
 							</div>
 						</div>
  
@@ -30,7 +38,7 @@
 							<label class="control-label">Assunto</label>
 							<div class="control">
 								<div class="select is-fullwidth">
-									<select name="assunto">
+									<select name="assunto" class="form-control">
 										<option>Selecione</option>
 										<option>Reportar erro</option>
 										<option>Conhecer serviço</option>
@@ -42,14 +50,14 @@
  
 						<div class="field">
 							<label class="control-label">Mensagem *</label>
-							<div class="control">
-								<textarea name="mensagem" class="textarea" placeholder="Deixe sua mensagem" maxlength="2000"></textarea>
+							<div>
+								<textarea class="form-control" style="width: 100%;border: 2;" name="mensagem"  placeholder="Deixe sua mensagem" maxlength="2000" class="form-control"></textarea>
 							</div>
 						</div>
- 
+						</br>
 						<div class="field is-grouped">
 							<div class="control">
-								<button class="button is-link is-medium">Enviar</button>
+								<button class="btn btn-block">Enviar</button>
 							</div>
 						</div>
 						</div>
