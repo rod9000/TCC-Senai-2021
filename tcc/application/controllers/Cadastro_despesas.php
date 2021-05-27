@@ -13,7 +13,8 @@ class Cadastro_despesas extends CI_Controller {
 	{
 		$data = array(
 			"styles" => array(
-				"bootstrap-select.scss",
+				"bootstrap.css",
+				"style.css"
 			),
 			"scripts" => array(
 				"sweetalert2.all.min.js",

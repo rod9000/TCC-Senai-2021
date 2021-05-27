@@ -13,8 +13,9 @@ class Cadastro_viagens extends CI_Controller {
 	{
 		$data = array(
 			"styles" => array(
-				//"bootstrap-select.scss",
-				"bootstrap.css"
+				"bootstrap.css",
+				"style.css"
+
 			),
 			"scripts" => array(
 				"sweetalert2.all.min.js",
