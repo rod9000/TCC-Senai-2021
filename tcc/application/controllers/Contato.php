@@ -13,7 +13,8 @@ class Contato extends CI_Controller {
 			),
 			"scripts" => array(
 				"owl.carousel.min.js",
-				"theme-scripts.js" 
+				"theme-scripts.js",
+				"restrict.js" 
 			)
 		);
 		$this->template->show("contato.php", $data);

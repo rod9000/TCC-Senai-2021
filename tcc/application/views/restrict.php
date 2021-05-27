@@ -39,11 +39,11 @@
                 <th class="dt-center">Destino</th>
                 <th type="date" class="dt-center">Data Saida</th>
                 <th type="date" class="dt-center">Data Retorno</th>
-                <th class="dt-center">Serviço</th>
+                <th class="dt-center no-sort">Serviço</th>
                 <th class="dt-center">Funcionário</th>
-                <th class="dt-center">Valor</th>
+                <th class="dt-center no-sort">Valor</th>
                 <th class="dt-center">Realizada</th>
-                <th class="dt-center">Motivo</th>
+                <th class="dt-center no-sort">Motivo</th>
                 <th class="dt-center no-sort">Ações</th>
               </tr>
             </thead>
@@ -63,11 +63,11 @@
                 <th class="dt-center">ID</th>
                 <th class="dt-center">Serviço</th>
                 <th class="dt-center no-sort">Valor</th>
-                <th class="no-sort">Local</th>
+                <th class="dt-center">Local</th>
                 <th type="date" class="dt-center">Data</th> 
-                <th type="date" class="dt-center">Viagem</th>
-                <th type="date" class="dt-center">Funcionário</th>
-                <th class="dt-center">Forma de pagamento</th>
+                <th class="dt-center">Viagem</th>
+                <th class="dt-center">Funcionário</th>
+                <th class="dt-center no-sort">Forma de pagamento</th>
                 <th class="dt-center no-sort">Ações</th>
               </tr>
             </thead>

@@ -35,6 +35,13 @@ Import Google Fonts
 /*--------------------
 1. General
 --------------------*/
+.center {
+    margin: auto;
+    width: 55%;
+    text-align: center;
+    padding: 50px;
+  } 
+  
 .dt-button  {
 color:white;
 background-color: #337ab7;
@@ -56,6 +63,11 @@ padding: 8px 20px;
     text-align: center;
     padding: 8px 20px;
 
+}
+.ui-icon{
+right: -5px;
+top: 50%;
+position: relative !important; 
 }
 
 body {

@@ -52,7 +52,7 @@ class Viagens_model extends CI_Model {
 	}
 
 	var $column_search = array("id_viagens ", "vg_destino", "vg_dsaida", "vg_dretorno", "vg_funcionario", );
-	var $column_order = array("id_viagens", "vg_destino", "vg_funcionario");
+	var $column_order = array("id_viagens", "vg_destino", "vg_dsaida", "vg_dretorno", "vg_funcionario");
 
 	private function _get_datatable() {
 

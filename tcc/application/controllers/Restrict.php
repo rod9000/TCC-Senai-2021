@@ -542,5 +542,40 @@ class Restrict extends CI_Controller
 		echo json_encode($json);
 	}
 
+	public function ajax_list_relatorio() //Função  para Data table e botões Exclui e editar
+	{
+
+		if (!$this->input->is_ajax_request()) {
+			exit("Nenhum acesso de script direto permitido!");
+		}
+
+		$this->load->model("relatorio_model");
+		$relatorios = $this->relatorio_model->get_datatable();
+
+		$data = array();
+		foreach ($relatorios as $relatorio) {
+
+			$row = array();
+			$row[] = $relatorio->id_despesas;
+			$row[] = $relatorio->dp_servico;
+			$row[] = $relatorio->dp_valor;
+			$row[] = $relatorio->dp_local;
+			$row[] = $relatorio->dp_data;
+			$row[] = $relatorio->dp_viagem;
+			$row[] = $relatorio->dp_funcionario;
+			$row[] = $relatorio->dp_formDePgm;
+
+			$data[] = $row;
+		}
+
+		$json = array(
+			"draw" => $this->input->post("draw"),
+			"recordsTotal" => $this->relatorio_model->records_total(),
+			"recordsFiltered" => $this->relatorio_model->records_filtered(),
+			"data" => $data,
+		);
+
+		echo json_encode($json);
+	}
 
 }
