@@ -74,7 +74,7 @@
 							<a class="header-button" href="<?php echo base_url(); ?>restrict">Login</a>
 						</li>
 						<li>
-							<a class="header-button" href="<?php echo base_url(); ?>contato">Contato</a>
+							<a class="header-button" href="<?php echo base_url(); ?>restrict/contato">Contato</a>
 						</li>
 						<?php endif; ?>
 					</ul>

@@ -119,14 +119,13 @@ class Restrict extends CI_Controller
 			$row[] = $despesa->dp_formDePgm;
 
 			$row[] = '<div style="display: inline-block;">
-						<button class="btn btn-primary btn-edit-dps" 
-						id_despesas	="' . $despesa->id_despesas . '">
+						<a href="'.base_url("{$this->router->class}/cadastroDespesas/{$despesa->id_despesas}/") . '" class="btn btn-primary btn-edit-dps">
 							<i class="fa fa-edit"></i>
-						</button>
-						<button class="btn btn-danger btn-del-dps" 
+						</a>
+						<a class="btn btn-danger btn-del-dps" 
 						id_despesas ="' . $despesa->id_despesas . '">
 							<i class="fa fa-times"></i>
-						</button>
+						</a>
 					</div>';
 
 			$data[] = $row;
@@ -157,7 +156,7 @@ class Restrict extends CI_Controller
 
 		echo json_encode($json);
 	}
-	public function ajax_get_despesas_data() // Função  para obter dados para modificar os clientes
+	/* public function ajax_get_despesas_data() // Função  para obter dados para modificar os clientes
 	{
 
 		if (!$this->input->is_ajax_request()) {
@@ -182,7 +181,7 @@ class Restrict extends CI_Controller
 		$json["input"]["dp_formDePgm"] = $data["dp_formDePgm"];
 
 		echo json_encode($json);
-	}
+	} */
 	public function ajax_save_despesas() //Função para salvar os clientes no banco de dados
 	{
 
@@ -236,6 +235,45 @@ class Restrict extends CI_Controller
 
 		echo json_encode($json);
 	}
+	public function editarDespesas($id)
+	{
+		$data = array(
+			"styles" => array(
+				"bootstrap.css",
+				"style.css"
+
+			),
+			"scripts" => array(
+				"sweetalert2.all.min.js",
+				"util.js",	
+				"restrict.js",
+			)
+		);
+		$this->load->model("despesas_model");
+		$editar = $this->despesas_model->get_data($id);
+
+		$dados["editar"] = $editar;
+
+		$this->load->vars($dados);
+		$this->template->show("cadastro_despesas.php", $data);
+	}
+	public function cadastroDespesas()
+	{
+		$data = array(
+			"styles" => array(
+				"bootstrap.css",
+				"style.css"
+			),
+			"scripts" => array(
+				"sweetalert2.all.min.js",
+				"jquery-3.3.1.min.js",
+				"bootstrap-select.js",
+				"util.js",	
+				"restrict.js",
+			)
+		);
+		$this->template->show("cadastro_despesas.php", $data);
+	}
 
 	public function ajax_list_viagens() //Função  para Data table e botões Exclui e editar
 	{
@@ -263,10 +301,9 @@ class Restrict extends CI_Controller
 
 
 			$row[] = '<div style="display: inline-block;">
-						<button class="btn btn-primary btn-edit-viag" 
-						id_viagens="' . $viagens->id_viagens . '">
-							<i class="fa fa-edit"></i>
-						</button>
+						<a href="'.base_url("{$this->router->class}/cadastroViagens/{$viagens->id_viagens}/") . '" class="btn btn-primary btn-edit-dps">
+						<i class="fa fa-edit"></i>
+						</a>
 						<button class="btn btn-danger btn-del-viag" 
 						id_viagens="' . $viagens->id_viagens . '">
 							<i class="fa fa-times"></i>
@@ -301,7 +338,7 @@ class Restrict extends CI_Controller
 
 		echo json_encode($json);
 	}
-	public function ajax_get_viagens_data() // Função  para obter dados para modificar os viagens
+	/* public function ajax_get_viagens_data() // Função  para obter dados para modificar os viagens
 	{
 
 		if (!$this->input->is_ajax_request()) {
@@ -327,7 +364,7 @@ class Restrict extends CI_Controller
 		$json["input"]["vg_motivo"] = $data["vg_motivo"];
 
 		echo json_encode($json);
-	}
+	} */
 	public function ajax_save_viagens() //Função para salvar os viagens no banco de dados
 	{
 
@@ -388,6 +425,46 @@ class Restrict extends CI_Controller
 
 		echo json_encode($json);
 	}
+	public function editarViagens($id)
+	{
+		$data = array(
+			"styles" => array(
+				"bootstrap.css",
+				"style.css"
+
+			),
+			"scripts" => array(
+				"sweetalert2.all.min.js",
+				"util.js",	
+				"restrict.js",
+			)
+
+		);
+		$this->load->model("viagens_model");
+		$editar = $this->viagens_model->get_data($id);
+		
+		$dados["editar"] = $editar;
+
+		$this->load->vars($dados);
+		$this->template->show("cadastro_viagens.php", $data);
+	}
+	public function cadastroViagens()
+	{
+		$data = array(
+			"styles" => array(
+				"bootstrap.css",
+				"style.css"
+
+			),
+			"scripts" => array(
+				"sweetalert2.all.min.js",
+				//"bootstrap-select.js",
+				"util.js",	
+				"restrict.js",
+			)
+		);
+		$this->template->show("cadastro_viagens.php", $data);
+	}
 
 	public function ajax_list_user() //Função  para Data table e botões Exclui e editar
 	{
@@ -408,10 +485,9 @@ class Restrict extends CI_Controller
 			$row[] = $user->user_email;
 
 			$row[] = '<div style="display: inline-block;">
-						<button class="btn btn-primary btn-edit-user" 
-							user_id="' . $user->user_id . '">
-							<i class="fa fa-edit"></i>
-						</button>
+						<a href="'.base_url("{$this->router->class}/cadastroUsuario/{$user->id_user}/") . '" class="btn btn-primary btn-edit-dps">
+						<i class="fa fa-edit"></i>
+						</a>
 						<button class="btn btn-danger btn-del-user" 
 							user_id="' . $user->user_id . '">
 							<i class="fa fa-times"></i>
@@ -446,7 +522,7 @@ class Restrict extends CI_Controller
 
 		echo json_encode($json);
 	}
-	public function ajax_get_user_data() // Função  para obter dados para modificar os usuários
+/* 	public function ajax_get_user_data() // Função  para obter dados para modificar os usuários
 	{
 
 		if (!$this->input->is_ajax_request()) {
@@ -470,7 +546,7 @@ class Restrict extends CI_Controller
 		$json["input"]["user_password_confirm"] = $data["password_hash"];
 
 		echo json_encode($json);
-	}
+	} */
 	public function ajax_save_user() //Função para salvar os usuários no banco de dados
 	{
 
@@ -541,6 +617,47 @@ class Restrict extends CI_Controller
 
 		echo json_encode($json);
 	}
+	public function cadastroUsuario()
+	{
+		$data = array(
+			"styles" => array(
+				"bootstrap.css",
+				"style.css"
+
+			),
+			"scripts" => array(
+				"sweetalert2.all.min.js",
+				"jquery-3.3.1.min.js",
+				"bootstrap-select.js",
+				"util.js",	
+				"restrict.js",
+			)
+		);
+		$this->template->show("cadastro_usuario.php", $data);
+	}
+	public function editarUsuario($id)
+	{
+		$data = array(
+			"styles" => array(
+				"bootstrap.css",
+				"style.css"
+
+			),
+			"scripts" => array(
+				"sweetalert2.all.min.js",
+				"util.js",	
+				"restrict.js",
+			)
+		);
+
+		$this->load->model("users_model");
+		$editar = $this->users_model->get_data($id);
+
+		$dados["editar"] = $editar;
+
+		$this->load->vars($dados);
+		$this->template->show("cadastro_usuario.php", $data);
+	}
 
 	public function ajax_list_relatorio() //Função  para Data table e botões Exclui e editar
 	{
@@ -576,6 +693,23 @@ class Restrict extends CI_Controller
 		);
 
 		echo json_encode($json);
+	}
+
+	public function Contato()
+	{
+		$data = array(
+			"scripts" => array(
+				"styles.css",
+				"dataTables.bootstrap.min.css",
+				"datatables.min.css",
+			),
+			"scripts" => array(
+				"owl.carousel.min.js",
+				"theme-scripts.js",
+				"restrict.js" 
+			)
+		);
+		$this->template->show("contato.php", $data);
 	}
 
 }

@@ -31,7 +31,7 @@
       <div id="tab_viagens" class="tab-pane active">
         <div class="container-fluid">
           <h2 class="text-center"><strong>Gerenciar Viagens</strong></h2>
-          <a id="btn_add_viagens" class="btn btn-primary" href="<?php echo base_url(); ?>cadastro_viagens"><i class="fa fa-plus">&nbsp;&nbsp;Adicionar viagens</i></a>
+          <a id="btn_add_viagens" class="btn btn-primary" href="<?php echo base_url(); ?>restrict/cadastroViagens"><i class="fa fa-plus">&nbsp;&nbsp;Adicionar viagens</i></a>
           <table id="dt_viagens" class="table table-striped table-bordered">
             <thead>
               <tr class="tableheader">
@@ -56,7 +56,7 @@
       <div id="tab_despesas" class="tab-pane">
         <div class="container-fluid">
           <h2 class="text-center"><strong>Gerenciar despesas</strong></h2>
-          <a id="btn_add_despesas" class="btn btn-primary" href="<?php echo base_url(); ?>cadastro_despesas"><i class="fa fa-plus">&nbsp;&nbsp;Adicionar despesas</i></a>
+          <a id="btn_add_despesas" class="btn btn-primary" href="<?php echo base_url(); ?>restrict/cadastroDespesas"><i class="fa fa-plus">&nbsp;&nbsp;Adicionar despesas</i></a>
           <table id="dt_despesas" class="table table-striped table-bordered">
             <thead>
               <tr class="tableheader">
@@ -99,7 +99,7 @@
       <div id="tab_user" class="tab-pane">
         <div class="container-fluid">
           <h2 class="text-center"><strong>Gerenciar Usuários</strong></h2>
-          <a id="btn_add_user" class="btn btn-primary" href="<?php echo base_url(); ?>cadastro_usuario"><i class="fa fa-plus">&nbsp;&nbsp;Adicionar Usuário</i></a>
+          <a id="btn_add_user" class="btn btn-primary" href="<?php echo base_url(); ?>restrict/cadastroUsuario"><i class="fa fa-plus">&nbsp;&nbsp;Adicionar Usuário</i></a>
           <table id="dt_users" class="table table-striped table-bordered">
             <thead>
               <tr class="tableheader">

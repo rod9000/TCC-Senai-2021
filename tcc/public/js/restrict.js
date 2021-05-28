@@ -137,22 +137,22 @@ $(document).ready(function() {
 	});
 	function active_btn_despesas() { //Js do botão edita e exlui da data table
 		
-		$(".btn-edit-dps").click(function(){
-			$.ajax({
-				type: "POST",
-				url: BASE_URL + "restrict/ajax_get_despesas_data",
-				dataType: "json",
-				data: {"id_despesas": $(this).attr("id_despesas")},
-				success: function(response) {
-					clearErrors();
-					$("#form_despesas")[0].reset();
-					$.each(response["input"], function(id, value) {
-						$("#"+id).val(value);
-					});
-					$("#modal_despesas").modal();
-				}
-			})
-		});
+		// $(".btn-edit-dps").click(function(){
+		// 	$.ajax({
+		// 		type: "POST",
+		// 		url: BASE_URL + "restrict/ajax_get_despesas_data",
+		// 		dataType: "json",
+		// 		data: {"id_despesas": $(this).attr("id_despesas")},
+		// 		success: function(response) {
+		// 			clearErrors();
+		// 			$("#form_despesas")[0].reset();
+		// 			$.each(response["input"], function(id, value) {
+		// 				$("#"+id).val(value);
+		// 			});
+		// 			$("#modal_despesas").modal();
+		// 		}
+		// 	})
+		// });
 
 		$(".btn-del-dps").click(function(){
 			
@@ -205,22 +205,22 @@ $(document).ready(function() {
 	});
 	function active_btn_viag() { //Js do botão edita e exlui da data table
 		
-		$(".btn-edit-viag").click(function(){
-			$.ajax({
-				type: "POST",
-				url: BASE_URL + "restrict/ajax_get_viagens_data",
-				dataType: "json",
-				data: {"id_viagens": $(this).attr("id_viagens")},
-				success: function(response) {
-					clearErrors();
-					$("#form_viagens")[0].reset();
-					$.each(response["input"], function(id, value) {
-						$("#"+id).val(value);
-					});
-					$("#modal_viagens").modal();
-				}
-			})
-		});
+		// $(".btn-edit-viag").click(function(){
+		// 	$.ajax({
+		// 		type: "POST",
+		// 		url: BASE_URL + "restrict/ajax_get_viagens_data",
+		// 		dataType: "json",
+		// 		data: {"id_viagens": $(this).attr("id_viagens")},
+		// 		success: function(response) {
+		// 			clearErrors();
+		// 			$("#form_viagens")[0].reset();
+		// 			$.each(response["input"], function(id, value) {
+		// 				$("#"+id).val(value);
+		// 			});
+		// 			$("#modal_viagens").modal();
+		// 		}
+		// 	})
+		// });
 
 		$(".btn-del-viag").click(function(){
 			
@@ -301,22 +301,22 @@ $(document).ready(function() {
 	});
 	function active_btn_user() { //Js do botão edita e exlui da data table
 		
-		$(".btn-edit-user").click(function(){
-			$.ajax({
-				type: "POST",
-				url: BASE_URL + "restrict/ajax_get_user_data",
-				dataType: "json",
-				data: {"user_id": $(this).attr("user_id")},
-				success: function(response) {
-					clearErrors();
-					$("#form_user")[0].reset();
-					$.each(response["input"], function(id, value) {
-						$("#"+id).val(value);
-					});
-					$("#modal_user").modal();
-				}
-			})
-		});
+		// $(".btn-edit-user").click(function(){
+		// 	$.ajax({
+		// 		type: "POST",
+		// 		url: BASE_URL + "restrict/ajax_get_user_data",
+		// 		dataType: "json",
+		// 		data: {"user_id": $(this).attr("user_id")},
+		// 		success: function(response) {
+		// 			clearErrors();
+		// 			$("#form_user")[0].reset();
+		// 			$.each(response["input"], function(id, value) {
+		// 				$("#"+id).val(value);
+		// 			});
+		// 			$("#modal_user").modal();
+		// 		}
+		// 	})
+		// });
 
 		$(".btn-del-user").click(function(){
 			

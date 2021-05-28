@@ -13,7 +13,7 @@
           <div class="form-group">
             <label class="col-lg-2 control-label">Valor</label>
             <div class="col-lg-10">
-              <input id="dp_valor" name="dp_valor" class="form-control" maxlength="100">
+              <input id="dp_valor" name="dp_valor" class="form-control" maxlength="100" value="<?php if(isset($editar->valor)): echo $editar->valor; endif; ?>">
               <span class="help-block"></span>
             </div>
           </div>
