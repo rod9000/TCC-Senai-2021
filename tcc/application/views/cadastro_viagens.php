@@ -39,7 +39,12 @@
           <div class="form-group">
             <label class="col-lg-2 control-label">Serviço</label>
             <div class="col-lg-10">
-              <input type="text" step="0.1" id="vg_servico" name="vg_servico" class="form-control" value="<?php if (isset($editar[0]->vg_servico)) : echo $editar[0]->vg_servico; endif; ?>">
+              <select id="vg_servico" name="vg_servico" class="selectpicker show-tick form-control" data-live-search="true">
+                 <option value="">Selecione...</option>
+                    <?php foreach ($servicos as $key => $value) : ?>
+                    <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                    <?php endforeach; ?>
+               </select>
               <span class="help-block"></span>
             </div>
           </div>

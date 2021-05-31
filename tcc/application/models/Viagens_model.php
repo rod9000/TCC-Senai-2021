@@ -50,6 +50,18 @@ class Viagens_model extends CI_Model {
 		endforeach;
 		return $arr;
 	}
+	public function get_servicos(){
+		$this->db->select("*");
+		$this->db->from("servicos");
+		$this->db->order_by("id_servicos");
+		$qry_res = $this->db->get()->result();
+
+		$arr = array();
+		foreach($qry_res as $key => $value):
+			$arr[$value->id_servicos] = $value->sv_nome;
+		endforeach;
+		return $arr;
+	}
 
 	var $column_search = array("id_viagens ", "vg_destino", "vg_dsaida", "vg_dretorno", "vg_funcionario", );
 	var $column_order = array("id_viagens", "vg_destino", "vg_dsaida", "vg_dretorno", "vg_funcionario");

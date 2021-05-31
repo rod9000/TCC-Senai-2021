@@ -450,7 +450,18 @@ class Restrict extends CI_Controller
 		$dados["editar"] = $editar;
 
 		$this->load->vars($dados);
-		$this->template->show("cadastro_viagens.php", $data);
+		 if ($this->session->userdata("user_id")){
+			$this->template->show("cadastro_viagens.php", $data);
+	 	}
+	 	else{
+	 		$data = array(
+	 			"scripts" => array(
+	 				"util.js",
+	 				"login.js"
+	 			));
+
+	 		$this->template->show("login.php", $data);
+		}
 	}
 	public function cadastroViagens()
 	{
@@ -468,7 +479,9 @@ class Restrict extends CI_Controller
 		);
 		$this->load->model("viagens_model");
 		$fucionario = $this->viagens_model->get_funcionario();
+		$servicos = $this->viagens_model->get_servicos();
 
+		$dados["servicos"] = $servicos;
 		$dados["funcionario"] = $fucionario;
 		
 		$this->load->vars($dados);
@@ -757,7 +770,7 @@ class Restrict extends CI_Controller
 			$row[] = $servico->sv_diaria;
 
 			$row[] = '<div style="display: inline-block;">
-						<a href="'.base_url("{$this->router->class}/editarDespesas/{$servico->id_servicos}/") . '" class="btn btn-primary btn-edit-dps">
+						<a href="'.base_url("{$this->router->class}/editarServico/{$servico->id_servicos}/") . '" class="btn btn-primary btn-edit-dps">
 							<i class="fa fa-edit"></i>
 						</a>
 						<a class="btn btn-danger btn-del-dps" 
@@ -848,7 +861,7 @@ class Restrict extends CI_Controller
 		$dados["editar"] = $editar;
 
 		$this->load->vars($dados);
-		$this->template->show("cadastro_viagens.php", $data);
+		$this->template->show("cadastro_servicos.php", $data);
 	}
 
 }
