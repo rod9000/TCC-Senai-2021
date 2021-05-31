@@ -24,6 +24,7 @@
       <li class="active"><a href="#tab_viagens" role="tab" data-toggle="tab">Viagens</a></li>
       <li><a href="#tab_despesas" role="tab" data-toggle="tab">Despesas</a></li>
       <li><a href="#tab_relatorio" role="tab" data-toggle="tab">Relatório</a></li>
+      <li><a href="#tab_servicos" role="tab" data-toggle="tab">Serviços</a></li>
       <li><a href="#tab_user" role="tab" data-toggle="tab">Usuários</a></li>
     </ul>
     <!-- Tabelas de dados -->
@@ -96,6 +97,24 @@
           </table>
         </div>
       </div>
+      <div id="tab_servicos" class="tab-pane">
+        <div class="container-fluid">
+          <h2 class="text-center"><strong>Gerenciar Serviços</strong></h2>
+          <a id="btn_add_servicos" class="btn btn-primary" href="<?php echo base_url(); ?>restrict/cadastroServicos"><i class="fa fa-plus">&nbsp;&nbsp;Adicionar Serviços</i></a>
+          <table id="dt_servicos" class="table table-striped table-bordered">
+            <thead>
+              <tr class="tableheader">
+                <th class="dt-center">ID</th>
+                <th class="dt-center">Servico</th>
+                <th class="dt-center no-sort">Diaria</th>
+                <th class="dt-center no-sort">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div id="tab_user" class="tab-pane">
         <div class="container-fluid">
           <h2 class="text-center"><strong>Gerenciar Usuários</strong></h2>
@@ -105,7 +124,7 @@
               <tr class="tableheader">
                 <th>Login</th>
                 <th>Nome</th>
-                <th>Tipo</th>
+                <th >Tipo</th>
                 <th class="dt-center no-sort">Ações</th>
               </tr>
             </thead>

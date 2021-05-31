@@ -63,7 +63,7 @@
 						<li>
 							<a class="header-button" href="<?php echo base_url(); ?>home">Home</a>
 						</li>
-						<?php if($this->uri->segment(1) == 'cadastro_viagens' || $this->uri->segment(1) == 'cadastro_despesas' || $this->uri->segment(1) == 'cadastro_usuario'): ?>
+						<?php if($this->uri->segment(2) == 'cadastroViagens' || $this->uri->segment(2) == 'cadastroDespesas' || $this->uri->segment(2) == 'cadastroUsuario' || $this->uri->segment(2) == 'cadastroServicos' || $this->uri->segment(2) == 'editarViagens' || $this->uri->segment(2) == 'editarDespesas' || $this->uri->segment(2) == 'editarUsuarios' || $this->uri->segment(2) == 'editarServicos'): ?>
 						<li>
 							<a class="header-button" href="<?php echo base_url(); ?>restrict">Relatorios</a>
 						</li>

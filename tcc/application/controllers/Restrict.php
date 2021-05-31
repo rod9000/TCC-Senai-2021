@@ -27,16 +27,7 @@ class Restrict extends CI_Controller
 				),
 				"user_id" => $this->session->userdata("user_id")
 			);
-			$this->load->model("despesas_model");
-			$this->load->model("viagens_model");
 
-			$viagens = $this->despesas_model->get_viagens();
-			$fucionario = $this->viagens_model->get_funcionario();			
-			$dados["viagens"] = $viagens;
-			$dados["funcionario"] = $fucionario;
-			$dados["funcionario2"] = $fucionario;
-
-			$this->load->vars($dados);
 			$this->template->show("restrict.php", $data);
 		} else {
 			$data = array(
@@ -119,7 +110,7 @@ class Restrict extends CI_Controller
 			$row[] = $despesa->dp_formDePgm;
 
 			$row[] = '<div style="display: inline-block;">
-						<a href="'.base_url("{$this->router->class}/cadastroDespesas/{$despesa->id_despesas}/") . '" class="btn btn-primary btn-edit-dps">
+						<a href="'.base_url("{$this->router->class}/editarDespesas/{$despesa->id_despesas}/") . '" class="btn btn-primary btn-edit-dps">
 							<i class="fa fa-edit"></i>
 						</a>
 						<a class="btn btn-danger btn-del-dps" 
@@ -251,7 +242,11 @@ class Restrict extends CI_Controller
 		);
 		$this->load->model("despesas_model");
 		$editar = $this->despesas_model->get_data($id);
+		$viagens = $this->despesas_model->get_viagens();
+		$fucionario = $this->despesas_model->get_funcionario();
 
+		$dados["viagens"] = $viagens;
+		$dados["funcionario"] = $fucionario;
 		$dados["editar"] = $editar;
 
 		$this->load->vars($dados);
@@ -266,12 +261,18 @@ class Restrict extends CI_Controller
 			),
 			"scripts" => array(
 				"sweetalert2.all.min.js",
-				"jquery-3.3.1.min.js",
-				"bootstrap-select.js",
 				"util.js",	
 				"restrict.js",
 			)
 		);
+		$this->load->model("despesas_model");
+		$viagens = $this->despesas_model->get_viagens();
+		$fucionario = $this->despesas_model->get_funcionario();
+
+		$dados["viagens"] = $viagens;
+		$dados["funcionario"] = $fucionario;
+
+		$this->load->vars($dados);
 		$this->template->show("cadastro_despesas.php", $data);
 	}
 
@@ -301,7 +302,7 @@ class Restrict extends CI_Controller
 
 
 			$row[] = '<div style="display: inline-block;">
-						<a href="'.base_url("{$this->router->class}/cadastroViagens/{$viagens->id_viagens}/") . '" class="btn btn-primary btn-edit-dps">
+						<a href="'.base_url("{$this->router->class}/editarViagens/{$viagens->id_viagens}/") . '" class="btn btn-primary btn-edit-dps">
 						<i class="fa fa-edit"></i>
 						</a>
 						<button class="btn btn-danger btn-del-viag" 
@@ -442,6 +443,9 @@ class Restrict extends CI_Controller
 		);
 		$this->load->model("viagens_model");
 		$editar = $this->viagens_model->get_data($id);
+		$fucionario = $this->viagens_model->get_funcionario();
+
+		$dados["funcionario"] = $fucionario;
 		
 		$dados["editar"] = $editar;
 
@@ -458,11 +462,16 @@ class Restrict extends CI_Controller
 			),
 			"scripts" => array(
 				"sweetalert2.all.min.js",
-				//"bootstrap-select.js",
 				"util.js",	
 				"restrict.js",
 			)
 		);
+		$this->load->model("viagens_model");
+		$fucionario = $this->viagens_model->get_funcionario();
+
+		$dados["funcionario"] = $fucionario;
+		
+		$this->load->vars($dados);
 		$this->template->show("cadastro_viagens.php", $data);
 	}
 
@@ -485,7 +494,7 @@ class Restrict extends CI_Controller
 			$row[] = $user->user_email;
 
 			$row[] = '<div style="display: inline-block;">
-						<a href="'.base_url("{$this->router->class}/cadastroUsuario/{$user->id_user}/") . '" class="btn btn-primary btn-edit-dps">
+						<a href="'.base_url("{$this->router->class}/cadastroUsuario/{$user->user_id}/") . '" class="btn btn-primary btn-edit-dps">
 						<i class="fa fa-edit"></i>
 						</a>
 						<button class="btn btn-danger btn-del-user" 
@@ -710,6 +719,136 @@ class Restrict extends CI_Controller
 			)
 		);
 		$this->template->show("contato.php", $data);
+	}
+
+	public function cadastroServicos()
+	{
+		$data = array(
+			"styles" => array(
+				"bootstrap.css",
+				"style.css",
+
+			),
+			"scripts" => array(
+				"sweetalert2.all.min.js",
+				"bootstrap-select.js",
+				"util.js",	
+				"restrict.js",
+			)
+		);
+		$this->template->show("cadastro_servicos.php", $data);
+	}
+	public function ajax_list_servicos() //Função  para Data table e botões Exclui e editar
+	{
+
+		if (!$this->input->is_ajax_request()) {
+			exit("Nenhum acesso de script direto permitido!");
+		}
+
+		$this->load->model("servicos_model");
+		$servicos = $this->servicos_model->get_datatable();
+
+		$data = array();
+		foreach ($servicos as $servico) {
+
+			$row = array();
+			$row[] = $servico->id_servicos;
+			$row[] = $servico->sv_nome;
+			$row[] = $servico->sv_diaria;
+
+			$row[] = '<div style="display: inline-block;">
+						<a href="'.base_url("{$this->router->class}/editarDespesas/{$servico->id_servicos}/") . '" class="btn btn-primary btn-edit-dps">
+							<i class="fa fa-edit"></i>
+						</a>
+						<a class="btn btn-danger btn-del-dps" 
+						id_despesas ="' . $servico->id_servicos . '">
+							<i class="fa fa-times"></i>
+						</a>
+					</div>';
+
+			$data[] = $row;
+		}
+
+		$json = array(
+			"draw" => $this->input->post("draw"),
+			"recordsTotal" => $this->servicos_model->records_total(),
+			"recordsFiltered" => $this->servicos_model->records_filtered(),
+			"data" => $data,
+		);
+
+		echo json_encode($json);
+	}
+	public function ajax_save_servicoS() //Função para salvar os viagens no banco de dados
+	{
+
+		if (!$this->input->is_ajax_request()) {
+			exit("Nenhum acesso de script direto permitido!");
+		}
+
+		$json = array();
+		$json["status"] = 1;
+		$json["error_list"] = array();
+
+		$this->load->model("servicos_model");
+
+		$data = $this->input->post();
+
+		if (empty($data["sv_nome"])) {
+			$json["error_list"]["#sv_nome"] = "Nome do serviço é obrigatório!";
+		}
+
+		if (!empty($json["error_list"])) {
+			$json["status"] = 0;
+		} else {
+			if (empty($data["id_servicos"])) {
+				$this->servicos_model->insert($data);
+			} else {
+				$id_servicos = $data["id_servico"];
+				unset($data["id_servicos"]);
+				$this->servicos_model->update($id_servicos, $data);
+			}
+		}
+
+		echo json_encode($json);
+	}
+	public function ajax_delete_servicos_data() // Função  Para exclusão de viagens
+	{
+
+		if (!$this->input->is_ajax_request()) {
+			exit("Nenhum acesso de script direto permitido!");
+		}
+
+		$json = array();
+		$json["status"] = 1;
+
+		$this->load->model("servicos_model");
+		$id_servicos = $this->input->post("id_servicos");
+		$this->servicos_model->delete($id_servicos);
+
+		echo json_encode($json);
+	}
+	public function editarServicos($id)
+	{
+		$data = array(
+			"styles" => array(
+				"bootstrap.css",
+				"style.css"
+
+			),
+			"scripts" => array(
+				"sweetalert2.all.min.js",
+				"util.js",	
+				"restrict.js",
+			)
+
+		);
+		$this->load->model("servicos_model");
+		$editar = $this->servicos_model->get_data($id);
+		
+		$dados["editar"] = $editar;
+
+		$this->load->vars($dados);
+		$this->template->show("cadastro_viagens.php", $data);
 	}
 
 }

@@ -16,7 +16,7 @@ class Viagens_model extends CI_Model {
 		}
 		$this->db->from("viagens");
 		$this->db->where("id_viagens", $id);
-		return $this->db->get();
+		return $this->db->get()->result();
 	}
 	public function insert($data) {
 		$this->db->insert("viagens", $data);
@@ -46,7 +46,7 @@ class Viagens_model extends CI_Model {
 
 		$arr = array();
 		foreach($qry_res as $key => $value):
-			$arr[$value->user_id] = $value->user_login;
+			$arr[$value->user_id] = $value->user_full_name;
 		endforeach;
 		return $arr;
 	}

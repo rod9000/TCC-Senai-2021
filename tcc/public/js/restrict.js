@@ -17,8 +17,6 @@ $(document).ready(function() {
 		$("#form_user")[0].reset();
 		$("#modal_user").modal();
 	});	
-
-	
 	
 	$("#form_despesas").submit(function () //Js para salvar os dados do form da despesas
 	{
@@ -63,6 +61,32 @@ $(document).ready(function() {
 				if (response["status"]) {
 					$("#modal_viagens").modal("hide");
 					swal("Sucesso!", "Viagem salva com sucesso!", "success");
+					dt_viagens.ajax.reload();
+				} else {
+					showErrorsModal(response["error_list"])
+				}
+			}
+		})
+
+		return false;
+	});
+	$("#form_servicos").submit(function () //Js para salvar os dados do form da viagem
+	{
+
+		$.ajax({
+			type: "POST",
+			url: BASE_URL + "restrict/ajax_save_servicos",
+			dataType: "json",
+			data: $(this).serialize(),
+			beforeSend: function () {
+				clearErrors();
+				$("#btn_save_viagens").siblings(".help-block").html(loadingImg("Verificando..."));
+			},
+			success: function (response) {
+				clearErrors();
+				if (response["status"]) {
+					$("#modal_viagens").modal("hide");
+					swal("Sucesso!", "Serviço salva com sucesso!", "success");
 					dt_viagens.ajax.reload();
 				} else {
 					showErrorsModal(response["error_list"])
@@ -348,13 +372,79 @@ $(document).ready(function() {
 
 		});
 	}
+	var dt_servicos = $("#dt_servicos").DataTable({ //Js de organização do data table das despesas
+		"oLanguage": DATATABLE_PTBR,
+		"autoWidth": false,
+		"processing": true,
+		"serverSide": true,
+		"ajax": {
+			"url": BASE_URL + "restrict/ajax_list_servicos",
+			"type": "POST",
+		},
+		"columnDefs": [
+			{ targets: "no-sort", orderable: false },
+			{ targets: "dt-center", className: "dt-center" },
+		],
+		"drawCallback": function() {
+			active_btn_despesas();
+		}
+	});
+	function active_btn_despesas() { //Js do botão edita e exlui da data table
+		
+		// $(".btn-edit-dps").click(function(){
+		// 	$.ajax({
+		// 		type: "POST",
+		// 		url: BASE_URL + "restrict/ajax_get_despesas_data",
+		// 		dataType: "json",
+		// 		data: {"id_despesas": $(this).attr("id_despesas")},
+		// 		success: function(response) {
+		// 			clearErrors();
+		// 			$("#form_despesas")[0].reset();
+		// 			$.each(response["input"], function(id, value) {
+		// 				$("#"+id).val(value);
+		// 			});
+		// 			$("#modal_despesas").modal();
+		// 		}
+		// 	})
+		// });
+
+		$(".btn-del-sv").click(function(){
+			
+			id_despesas	 = $(this);
+			swal({
+				title: "Atenção!",
+				text: "Deseja deletar essa Serviço?",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#d9534f",
+				confirmButtonText: "Sim",
+				cancelButtontext: "Não",
+				closeOnConfirm: true,
+				closeOnCancel: true,
+			}).then((result) => {
+				if (result.value) {
+					$.ajax({
+						type: "POST",
+						url: BASE_URL + "restrict/ajax_delete_servicos_data",
+						dataType: "json",
+						data: {"id_servicos": id_servicos.attr("id_servicos")},
+						success: function(response) {
+							swal("Sucesso!", "Ação executada com sucesso", "success");
+							dt_servicos.ajax.reload();
+						}
+					})
+				}
+			})
+
+		});
+	}
 });
 
 var submitButton = document.getElementById("submit_form");
 var form = document.getElementById("email_form");
 form.addEventListener("submit", function(e) {
 	setTimeout(function() {
-		submitButton.value = "Sending...";
+		submitButton.value = "Enviando...";
 		submitButton.disabled = true;
 	}, 1);
 });

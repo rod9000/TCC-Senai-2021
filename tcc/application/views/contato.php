@@ -48,7 +48,7 @@
 							</br>
 							<div class="field is-grouped">
 								<div class="control">
-									<input id="submit_form" type="submit" value="Send" />
+									<input id="submit_form" type="submit" value="Enviar" />
 								</div>
 							</div>
 					</div>
