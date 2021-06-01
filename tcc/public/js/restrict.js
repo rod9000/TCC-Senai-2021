@@ -70,7 +70,7 @@ $(document).ready(function() {
 
 		return false;
 	});
-	$("#form_servicos").submit(function () //Js para salvar os dados do form da viagem
+	$("#form_servicos").submit(function () //Js para salvar os dados do form dos servicos
 	{
 
 		$.ajax({
@@ -80,14 +80,14 @@ $(document).ready(function() {
 			data: $(this).serialize(),
 			beforeSend: function () {
 				clearErrors();
-				$("#btn_save_viagens").siblings(".help-block").html(loadingImg("Verificando..."));
+				$("#btn_save_servico").siblings(".help-block").html(loadingImg("Verificando..."));
 			},
 			success: function (response) {
 				clearErrors();
 				if (response["status"]) {
 					// $("#modal_viagens").modal("hide");
 					swal("Sucesso!", "Serviço salva com sucesso!", "success");
-					dt_viagens.ajax.reload();
+					dt_servicos.ajax.reload();
 				} else {
 					showErrorsModal(response["error_list"])
 				}
@@ -389,7 +389,7 @@ $(document).ready(function() {
 			active_btn_despesas();
 		}
 	});
-	function active_btn_despesas() { //Js do botão edita e exlui da data table
+	function active_btn_servicos() { //Js do botão edita e exlui da data table
 		
 		// $(".btn-edit-dps").click(function(){
 		// 	$.ajax({

@@ -10,7 +10,8 @@
             <h1 class="center">Editar de despesas</h1>
           <?php endif;?>
           <div class="form-group">
-            <label class="col-lg-2 control-label">Serviço</label>
+
+            <label class="col-lg-2 control-label">Motivo</label>
             <div class="col-lg-10">
               <input id="dp_servico" name="dp_servico" class="form-control" maxlength="100" value="<?php if(isset($editar[0]->dp_servico)): echo $editar[0]->dp_servico; endif; ?>">
               <span class="help-block"></span>

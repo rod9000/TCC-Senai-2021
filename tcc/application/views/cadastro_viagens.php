@@ -76,8 +76,8 @@
         <div class="col-lg-10">
           <div class="row" style="padding-left: 2%;">
             <select id="vg_realizada" name="vg_realizada" class="selectpicker">
-              <option value="1">Sim</option>
               <option value="0">Não</option>
+              <option value="1">Sim</option>
             </select>
             <span class="help-block"></span>
           </div>
@@ -88,7 +88,7 @@
         <label class="col-lg-2 control-label">Motivo da Viagens</label>
         <div class="col-lg-10">
           <div class="row" style="padding-left: 2%; padding-right: 2%">
-            <input id="vg_motivo" name="vg_motivo" class="form-control" maxlength="100">
+            <input id="vg_motivo" name="vg_motivo" class="form-control" maxlength="100" value="<?php if (isset($editar[0]->vg_motivo)) : echo $editar[0]->vg_motivo; endif; ?>">
             <span class="help-block"></span>
           </div>
         </div>

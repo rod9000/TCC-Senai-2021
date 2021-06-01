@@ -249,8 +249,18 @@ class Restrict extends CI_Controller
 		$dados["funcionario"] = $fucionario;
 		$dados["editar"] = $editar;
 
+		if ($this->session->userdata("user_id")):
 		$this->load->vars($dados);
 		$this->template->show("cadastro_despesas.php", $data);
+		else:
+			$data = array(
+				"scripts" => array(
+					"util.js",
+					"login.js"
+				)
+			);
+			$this->template->show("login.php", $data);
+		endif;
 	}
 	public function cadastroDespesas()
 	{
@@ -272,8 +282,19 @@ class Restrict extends CI_Controller
 		$dados["viagens"] = $viagens;
 		$dados["funcionario"] = $fucionario;
 
-		$this->load->vars($dados);
-		$this->template->show("cadastro_despesas.php", $data);
+
+		if ($this->session->userdata("user_id")):
+			$this->load->vars($dados);
+			$this->template->show("cadastro_despesas.php", $data);
+			else:
+				$data = array(
+					"scripts" => array(
+						"util.js",
+						"login.js"
+					)
+				);
+				$this->template->show("login.php", $data);
+			endif;
 	}
 
 	public function ajax_list_viagens() //Função  para Data table e botões Exclui e editar
@@ -483,9 +504,18 @@ class Restrict extends CI_Controller
 
 		$dados["servicos"] = $servicos;
 		$dados["funcionario"] = $fucionario;
-		
-		$this->load->vars($dados);
-		$this->template->show("cadastro_viagens.php", $data);
+		if ($this->session->userdata("user_id")):
+			$this->load->vars($dados);
+			$this->template->show("cadastro_viagens.php", $data);
+			else:
+				$data = array(
+					"scripts" => array(
+						"util.js",
+						"login.js"
+					)
+				);
+				$this->template->show("login.php", $data);
+			endif;
 	}
 
 	public function ajax_list_user() //Função  para Data table e botões Exclui e editar
@@ -655,7 +685,17 @@ class Restrict extends CI_Controller
 				"restrict.js",
 			)
 		);
-		$this->template->show("cadastro_usuario.php", $data);
+		if ($this->session->userdata("user_id")):
+			$this->template->show("cadastro_usuario.php", $data);
+			else:
+				$data = array(
+					"scripts" => array(
+						"util.js",
+						"login.js"
+					)
+				);
+				$this->template->show("login.php", $data);
+			endif;
 	}
 	public function editarUsuario($id)
 	{
@@ -676,9 +716,19 @@ class Restrict extends CI_Controller
 		$editar = $this->users_model->get_data($id);
 
 		$dados["editar"] = $editar;
+		if ($this->session->userdata("user_id")):
+			$this->load->vars($dados);
+			$this->template->show("cadastro_usuario.php", $data);
+		else:
+				$data = array(
+					"scripts" => array(
+						"util.js",
+						"login.js"
+					)
+				);
+				$this->template->show("login.php", $data);
+			endif;
 
-		$this->load->vars($dados);
-		$this->template->show("cadastro_usuario.php", $data);
 	}
 
 	public function ajax_list_relatorio() //Função  para Data table e botões Exclui e editar
@@ -749,7 +799,17 @@ class Restrict extends CI_Controller
 				"restrict.js",
 			)
 		);
-		$this->template->show("cadastro_servicos.php", $data);
+		if ($this->session->userdata("user_id")):
+			$this->template->show("cadastro_servicos.php", $data);
+		else:
+				$data = array(
+					"scripts" => array(
+						"util.js",
+						"login.js"
+					)
+				);
+				$this->template->show("login.php", $data);
+			endif;
 	}
 	public function ajax_list_servicos() //Função  para Data table e botões Exclui e editar
 	{
@@ -770,7 +830,7 @@ class Restrict extends CI_Controller
 			$row[] = $servico->sv_diaria;
 
 			$row[] = '<div style="display: inline-block;">
-						<a href="'.base_url("{$this->router->class}/editarServico/{$servico->id_servicos}/") . '" class="btn btn-primary btn-edit-dps">
+						<a href="'.base_url("{$this->router->class}/editarServicos/{$servico->id_servicos}/") . '" class="btn btn-primary btn-edit-dps">
 							<i class="fa fa-edit"></i>
 						</a>
 						<a class="btn btn-danger btn-del-dps" 
@@ -816,7 +876,7 @@ class Restrict extends CI_Controller
 			if (empty($data["id_servicos"])) {
 				$this->servicos_model->insert($data);
 			} else {
-				$id_servicos = $data["id_servico"];
+				$id_servicos = $data["id_servicos"];
 				unset($data["id_servicos"]);
 				$this->servicos_model->update($id_servicos, $data);
 			}
@@ -859,9 +919,19 @@ class Restrict extends CI_Controller
 		$editar = $this->servicos_model->get_data($id);
 		
 		$dados["editar"] = $editar;
-
-		$this->load->vars($dados);
-		$this->template->show("cadastro_servicos.php", $data);
+		if ($this->session->userdata("user_id")):
+			$this->load->vars($dados);
+			$this->template->show("cadastro_servicos.php", $data);
+			else:
+				$data = array(
+					"scripts" => array(
+						"util.js",
+						"login.js"
+					)
+				);
+				$this->template->show("login.php", $data);
+			endif;
+	
 	}
 
 }
