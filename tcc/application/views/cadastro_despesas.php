@@ -44,12 +44,7 @@
           <div class="form-group">
             <label class="col-lg-2 control-label">Viagem</label>
             <div class="col-lg-10">
-              <select id="dp_viagem" name="dp_viagem" class="selectpicker show-tick form-control" data-live-search="true" value="<?php if(isset($editar[0]->dp_viagem)): echo $editar[0]->dp_viagem; endif; ?>">
-                <option value="">Selecione...</option>
-                <?php foreach ($viagens as $key => $value) : ?>
-                <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
-                <?php endforeach; ?>
-              </select>
+              <?php echo form_dropdown('dp_viagem',$viagens,(isset($editar[0]->dp_viagem)) ? explode(',',$editar[0]->dp_viagem) : null,  'id="dp_viagem" class="selectpicker" data-parsley-required data-live-search="true" title="Selecione..."') ?>
               <span class="help-block"></span>
             </div>
           </div>
@@ -57,12 +52,7 @@
           <div class="form-group">
           <label class="col-lg-2 control-label">Funcionário</label>
           <div class="col-lg-10">
-          <select id="dp_funcionario" name="dp_funcionario" class="selectpicker show-tick form-control" data-live-search="true" value="<?php if(isset($editar[0]->dp_funcionario)): echo $editar[0]->dp_funcionario; endif; ?>">
-                <option value="">Selecione...</option>
-                <?php foreach ($funcionario as $key => $value) : ?>
-                <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
-                <?php endforeach; ?>
-              </select>
+              <?php echo form_dropdown('dp_funcionario',$funcionario,(isset($editar[0]->dp_funcionario)) ? explode(',',$editar[0]->dp_funcionario) : null,  'id="dp_funcionario" class="selectpicker" data-parsley-required data-live-search="true" title="Selecione..."') ?>
             <span class="help-block"></span>
                 </div>
               </div>

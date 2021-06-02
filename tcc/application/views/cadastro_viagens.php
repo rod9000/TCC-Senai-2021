@@ -39,26 +39,14 @@
           <div class="form-group">
             <label class="col-lg-2 control-label">Serviço</label>
             <div class="col-lg-10">
-              <select id="vg_servico" name="vg_servico" class="selectpicker show-tick form-control" data-live-search="true">
-                 <option value="">Selecione...</option>
-                    <?php foreach ($servicos as $key => $value) : ?>
-                    <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
-                    <?php endforeach; ?>
-               </select>
+               <?php echo form_dropdown('vg_servico',$servicos,(isset($editar[0]->vg_servico)) ? explode(',',$editar[0]->vg_servico) : null,  'id="vg_servico" class="selectpicker" data-parsley-required data-live-search="true" title="Selecione..."') ?>
               <span class="help-block"></span>
             </div>
           </div>
-
-      </div>
       <div class="form-group">
         <label class="col-lg-2 control-label">Funcionário</label>
         <div class="col-lg-10">
-          <select id="vg_funcionario" name="vg_funcionario" class="selectpicker show-tick form-control" data-live-search="true">
-            <option value="">Selecione...</option>
-            <?php foreach ($funcionario as $key => $value) : ?>
-              <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
-            <?php endforeach; ?>
-          </select>
+          <?php echo form_dropdown('vg_funcionario',$funcionario,(isset($editar[0]->vg_funcionario)) ? explode(',',$editar[0]->vg_funcionario) : null,  'id="vg_funcionario" class="selectpicker" data-parsley-required data-live-search="true" title="Selecione..."') ?>
           <span class="help-block"></span>
         </div>
       </div>
@@ -66,7 +54,7 @@
       <div class="form-group">
         <label class="col-lg-2 control-label">Valor inicial</label>
         <div class="col-lg-10">
-          <input id="vg_valorIn" name="vg_valorIn" class="form-control" maxlength="100">
+          <input id="vg_valorIn" name="vg_valorIn" class="form-control" maxlength="100" value="<?php if (isset($editar[0]->vg_valorIn)) : echo $editar[0]->vg_valorIn; endif; ?>">
           <span class="help-block"></span>
         </div>
       </div>

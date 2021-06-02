@@ -465,9 +465,9 @@ class Restrict extends CI_Controller
 		$this->load->model("viagens_model");
 		$editar = $this->viagens_model->get_data($id);
 		$fucionario = $this->viagens_model->get_funcionario();
-
+		$servicos = $this->viagens_model->get_servicos();
 		$dados["funcionario"] = $fucionario;
-		
+		$dados["servicos"] = $servicos;
 		$dados["editar"] = $editar;
 
 		$this->load->vars($dados);
