@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 19-Maio-2021 às 00:14
+-- Tempo de geração: 02-Jun-2021 às 22:48
 -- Versão do servidor: 10.4.18-MariaDB
 -- versão do PHP: 7.3.28
 
@@ -43,7 +43,28 @@ CREATE TABLE `despesas` (
 --
 
 INSERT INTO `despesas` (`id_despesas`, `dp_servico`, `dp_valor`, `dp_local`, `dp_data`, `dp_viagem`, `dp_funcionario`, `dp_formDePgm`) VALUES
-(1, 'test', '1222', 'teste', '2001-02-12', '2', 1, 'teste');
+(1, 'teste2', '1222', 'teste', '2021-02-12', '1', 3, 'teste'),
+(2, 'teste', '129', 'TESTE', '2021-05-12', '1', 1, 'TESTE');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `servicos`
+--
+
+CREATE TABLE `servicos` (
+  `id_servicos` int(11) NOT NULL,
+  `sv_nome` varchar(50) NOT NULL,
+  `sv_diaria` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `servicos`
+--
+
+INSERT INTO `servicos` (`id_servicos`, `sv_nome`, `sv_diaria`) VALUES
+(1, 'Instalação de banner', 150),
+(2, 'Manutenção', 150);
 
 -- --------------------------------------------------------
 
@@ -55,7 +76,7 @@ CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `user_login` varchar(30) NOT NULL,
   `password_hash` varchar(255) NOT NULL,
-  `user_full_name` varchar(100) NOT NULL,
+  `tipo` varchar(100) NOT NULL,
   `user_email` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -63,9 +84,9 @@ CREATE TABLE `users` (
 -- Extraindo dados da tabela `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_login`, `password_hash`, `user_full_name`, `user_email`) VALUES
+INSERT INTO `users` (`user_id`, `user_login`, `password_hash`, `tipo`, `user_email`) VALUES
 (1, 'admin', '$2y$10$0IaXa67wfzZKUMuea/PJhOI8GaKO6JbUkcYiGTGv3j6URTd9zBJZm', 'admin', 'admin@domain.com'),
-(3, 'admin1', '$2y$10$kPAGwPg049lGkP1ctLnUBuAjDA8oPDEsS6QkARMb20dauuaDRGN.K', 'admin1', 'admin1');
+(3, 'admin1', '$2y$10$kPAGwPg049lGkP1ctLnUBuAjDA8oPDEsS6QkARMb20dauuaDRGN.K', 'admin', 'admin1@admin.com');
 
 -- --------------------------------------------------------
 
@@ -90,8 +111,9 @@ CREATE TABLE `viagens` (
 --
 
 INSERT INTO `viagens` (`id_viagens`, `vg_destino`, `vg_dsaida`, `vg_dretorno`, `vg_servico`, `vg_funcionario`, `vg_valorIn`, `vg_realizada`, `vg_motivo`) VALUES
-(1, 'teste', '0000-00-00', '3111-12-12', 'teste', 'teste', '12', 'teste', 'teste'),
-(2, 'teste2', '2021-05-17', '2021-05-18', 'teste', 'teste', '123', 'teste', 'teste');
+(1, 'teste', '3111-12-09', '3111-12-12', '1', '3', '12', '1', 'teste'),
+(2, 'teste2', '2021-05-17', '2021-05-18', '1', '3', '123', '2', 'teste'),
+(3, 'teste2', '2222-02-12', '2222-03-12', '1', '1', '150', '1', 'teste');
 
 --
 -- Índices para tabelas despejadas
@@ -102,6 +124,12 @@ INSERT INTO `viagens` (`id_viagens`, `vg_destino`, `vg_dsaida`, `vg_dretorno`, `
 --
 ALTER TABLE `despesas`
   ADD PRIMARY KEY (`id_despesas`);
+
+--
+-- Índices para tabela `servicos`
+--
+ALTER TABLE `servicos`
+  ADD PRIMARY KEY (`id_servicos`);
 
 --
 -- Índices para tabela `users`
@@ -123,7 +151,13 @@ ALTER TABLE `viagens`
 -- AUTO_INCREMENT de tabela `despesas`
 --
 ALTER TABLE `despesas`
-  MODIFY `id_despesas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_despesas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de tabela `servicos`
+--
+ALTER TABLE `servicos`
+  MODIFY `id_servicos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `users`
@@ -135,7 +169,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de tabela `viagens`
 --
 ALTER TABLE `viagens`
-  MODIFY `id_viagens` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_viagens` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

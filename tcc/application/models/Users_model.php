@@ -10,7 +10,7 @@ class Users_model extends CI_Model {
 	public function get_user_data($user_login) {
 
 		$this->db
-			->select("user_id, password_hash, user_full_name, user_email")
+			->select("user_id, password_hash, tipo, user_email")
 			->from("users")
 			->where("user_login", $user_login);
 
@@ -55,8 +55,8 @@ class Users_model extends CI_Model {
 		return $this->db->get()->num_rows() > 0;
 	}
 
-	var $column_search = array("user_login", "user_full_name", "user_email");
-	var $column_order = array("user_login", "user_full_name", "user_email");
+	var $column_search = array("user_login", "tipo", "user_email");
+	var $column_order = array("user_login", "tipo", "user_email");
 
 	private function _get_datatable() {
 

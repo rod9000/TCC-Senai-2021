@@ -58,7 +58,7 @@ class Despesas_model extends CI_Model {
 
 		$arr = array();
 		foreach($qry_res as $key => $value):
-			$arr[$value->user_id] = $value->user_full_name;
+			$arr[$value->user_id] = $value->user_login;
 		endforeach;
 		return $arr;
 	}

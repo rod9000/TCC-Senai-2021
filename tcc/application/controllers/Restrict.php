@@ -532,8 +532,9 @@ class Restrict extends CI_Controller
 		foreach ($users as $user) {
 
 			$row = array();
+			$row[] = $user->user_id;
 			$row[] = $user->user_login;
-			$row[] = $user->user_full_name;
+			$row[] = $user->tipo;
 			$row[] = $user->user_email;
 
 			$row[] = '<div style="display: inline-block;">

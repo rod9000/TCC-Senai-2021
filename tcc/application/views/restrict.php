@@ -124,7 +124,8 @@
               <tr class="tableheader">
                 <th>Login</th>
                 <th>Nome</th>
-                <th >Tipo</th>
+                <th>Tipo</th>
+                <th class="dt-center no-sort">E-mail</th>
                 <th class="dt-center no-sort">Ações</th>
               </tr>
             </thead>

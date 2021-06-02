@@ -64,7 +64,8 @@
         <div class="col-lg-10">
           <div class="row" style="padding-left: 2%;">
             <select id="vg_realizada" name="vg_realizada" class="selectpicker">
-              <option value="0">Não</option>
+              <option >Selecione...</option>
+              <option value="2">Não</option>
               <option value="1">Sim</option>
             </select>
             <span class="help-block"></span>
