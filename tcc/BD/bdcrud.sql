@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 02-Jun-2021 às 22:48
+-- Tempo de geração: 03-Jun-2021 às 23:29
 -- Versão do servidor: 10.4.18-MariaDB
 -- versão do PHP: 7.3.28
 
@@ -75,8 +75,9 @@ INSERT INTO `servicos` (`id_servicos`, `sv_nome`, `sv_diaria`) VALUES
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `user_login` varchar(30) NOT NULL,
+  `user_full_name` varchar(100) NOT NULL,
   `password_hash` varchar(255) NOT NULL,
-  `tipo` varchar(100) NOT NULL,
+  `user_tipo` varchar(100) NOT NULL,
   `user_email` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -84,9 +85,11 @@ CREATE TABLE `users` (
 -- Extraindo dados da tabela `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_login`, `password_hash`, `tipo`, `user_email`) VALUES
-(1, 'admin', '$2y$10$0IaXa67wfzZKUMuea/PJhOI8GaKO6JbUkcYiGTGv3j6URTd9zBJZm', 'admin', 'admin@domain.com'),
-(3, 'admin1', '$2y$10$kPAGwPg049lGkP1ctLnUBuAjDA8oPDEsS6QkARMb20dauuaDRGN.K', 'admin', 'admin1@admin.com');
+INSERT INTO `users` (`user_id`, `user_login`, `user_full_name`, `password_hash`, `user_tipo`, `user_email`) VALUES
+(1, 'admin', 'admin', '$2y$10$0IaXa67wfzZKUMuea/PJhOI8GaKO6JbUkcYiGTGv3j6URTd9zBJZm', '1', 'admin@domain.com'),
+(3, 'admin1', 'admin Teste', '$2y$10$kPAGwPg049lGkP1ctLnUBuAjDA8oPDEsS6QkARMb20dauuaDRGN.K', '1', 'admin1@admin.com'),
+(4, 'teste1', 'teste2', '$2y$10$NDD3v20Aou/.qWMPrGUdgehOLrlUF4oVrgW89bKz6DwuaiVqgj.x6', '3', 'teste@teste.com'),
+(5, 'teste2', 'teste3', '$2y$10$oQ9VQb3wQbkreOwfflH33.2OZx3pNW5Hb12QKxVVcFFurszoRi43W', '2', 'teste2@teste.com');
 
 -- --------------------------------------------------------
 
@@ -163,7 +166,7 @@ ALTER TABLE `servicos`
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `viagens`

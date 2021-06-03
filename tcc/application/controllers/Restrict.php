@@ -98,6 +98,8 @@ class Restrict extends CI_Controller
 
 		$data = array();
 		foreach ($despesas as $despesa) {
+			$funcionario = $this->despesas_model->get_funcionario($despesa->dp_funcionario);
+			$viagem = $this->despesas_model->get_viagem($despesa->dp_viagem);
 
 			$row = array();
 			$row[] = $despesa->id_despesas;
@@ -105,8 +107,8 @@ class Restrict extends CI_Controller
 			$row[] = $despesa->dp_valor;
 			$row[] = $despesa->dp_local;
 			$row[] = $despesa->dp_data;
-			$row[] = $despesa->dp_viagem;
-			$row[] = $despesa->dp_funcionario;
+			$row[] = $viagem->vg_destino;
+			$row[] = $funcionario->user_full_name;
 			$row[] = $despesa->dp_formDePgm;
 
 			$row[] = '<div style="display: inline-block;">
@@ -243,7 +245,7 @@ class Restrict extends CI_Controller
 		$this->load->model("despesas_model");
 		$editar = $this->despesas_model->get_data($id);
 		$viagens = $this->despesas_model->get_viagens();
-		$fucionario = $this->despesas_model->get_funcionario();
+		$fucionario = $this->despesas_model->get_funcionarios();
 
 		$dados["viagens"] = $viagens;
 		$dados["funcionario"] = $fucionario;
@@ -277,7 +279,7 @@ class Restrict extends CI_Controller
 		);
 		$this->load->model("despesas_model");
 		$viagens = $this->despesas_model->get_viagens();
-		$fucionario = $this->despesas_model->get_funcionario();
+		$fucionario = $this->despesas_model->get_funcionarios();
 
 		$dados["viagens"] = $viagens;
 		$dados["funcionario"] = $fucionario;
@@ -298,9 +300,9 @@ class Restrict extends CI_Controller
 	}
 
 	public function ajax_list_viagens() //Função  para Data table e botões Exclui e editar
-	{
+		{
 
-		if (!$this->input->is_ajax_request()) {
+			if (!$this->input->is_ajax_request()) {
 			exit("Nenhum acesso de script direto permitido!");
 		}
 
@@ -309,16 +311,18 @@ class Restrict extends CI_Controller
 
 		$data = array();
 		foreach ($viagens as $viagens) {
-
+			$ralizada = $this->viagens_model->get_realizada($viagens->vg_realizada);
+			$servico = $this->viagens_model->get_servico($viagens->vg_servico);
+			$funcionario = $this->viagens_model->get_funcionario($viagens->vg_funcionario);
 			$row = array();
 			$row[] = $viagens->id_viagens;
 			$row[] = $viagens->vg_destino;
 			$row[] = $viagens->vg_dsaida;
 			$row[] = $viagens->vg_dretorno;
-			$row[] = $viagens->vg_servico;
-			$row[] = $viagens->vg_funcionario;
+			$row[] = $servico->sv_nome;
+			$row[] = $funcionario->user_full_name;
 			$row[] = $viagens->vg_valorIn;
-			$row[] = $viagens->vg_realizada;
+			$row[] = $ralizada;
 			$row[] = $viagens->vg_motivo;
 
 
@@ -464,7 +468,7 @@ class Restrict extends CI_Controller
 		);
 		$this->load->model("viagens_model");
 		$editar = $this->viagens_model->get_data($id);
-		$fucionario = $this->viagens_model->get_funcionario();
+		$fucionario = $this->viagens_model->get_funcionarios();
 		$servicos = $this->viagens_model->get_servicos();
 		$dados["funcionario"] = $fucionario;
 		$dados["servicos"] = $servicos;
@@ -499,7 +503,7 @@ class Restrict extends CI_Controller
 			)
 		);
 		$this->load->model("viagens_model");
-		$fucionario = $this->viagens_model->get_funcionario();
+		$fucionario = $this->viagens_model->get_funcionarios();
 		$servicos = $this->viagens_model->get_servicos();
 
 		$dados["servicos"] = $servicos;
@@ -527,14 +531,15 @@ class Restrict extends CI_Controller
 
 		$this->load->model("users_model");
 		$users = $this->users_model->get_datatable();
-
+		
 		$data = array();
 		foreach ($users as $user) {
-
+			$user_tipo = $this->users_model->get_tipo($user->user_tipo);
 			$row = array();
 			$row[] = $user->user_id;
 			$row[] = $user->user_login;
-			$row[] = $user->tipo;
+			$row[] = $user->user_full_name;
+			$row[] = $user_tipo;
 			$row[] = $user->user_email;
 
 			$row[] = '<div style="display: inline-block;">
@@ -622,24 +627,16 @@ class Restrict extends CI_Controller
 				$json["error_list"]["#user_login"] = "Login já existente!";
 			}
 		}
-
 		if (empty($data["user_full_name"])) {
-			$json["error_list"]["#user_full_name"] = "local Completo é obrigatório!";
+			$json["error_list"]["#user_full_name"] = "Nome completo é obrigatório!";
 		}
-
 		if (empty($data["user_email"])) {
 			$json["error_list"]["#user_email"] = "E-mail é obrigatório!";
 		} else {
 			if ($this->users_model->is_duplicated("user_email", $data["user_email"], $data["user_id"])) {
 				$json["error_list"]["#user_email"] = "E-mail já existente!";
-			} else {
-				if ($data["user_email"] != $data["user_email_confirm"]) {
-					$json["error_list"]["#user_email"] = "";
-					$json["error_list"]["#user_email_confirm"] = "E-mails não conferem!";
-				}
 			}
 		}
-
 		if (empty($data["user_password"])) {
 			$json["error_list"]["#user_password"] = "Senha é obrigatório!";
 		} else {
@@ -657,7 +654,6 @@ class Restrict extends CI_Controller
 
 			unset($data["user_password"]);
 			unset($data["user_password_confirm"]);
-			unset($data["user_email_confirm"]);
 
 			if (empty($data["user_id"])) {
 				$this->users_model->insert($data);
@@ -680,13 +676,16 @@ class Restrict extends CI_Controller
 			),
 			"scripts" => array(
 				"sweetalert2.all.min.js",
-				"jquery-3.3.1.min.js",
 				"bootstrap-select.js",
 				"util.js",	
 				"restrict.js",
 			)
 		);
+		$this->load->model("users_model");
+		$tipo = $this->users_model->tipo();
+		$dados["tipo"] = $tipo;
 		if ($this->session->userdata("user_id")):
+			$this->load->vars($dados);
 			$this->template->show("cadastro_usuario.php", $data);
 			else:
 				$data = array(

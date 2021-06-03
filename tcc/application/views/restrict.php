@@ -122,6 +122,7 @@
           <table id="dt_users" class="table table-striped table-bordered">
             <thead>
               <tr class="tableheader">
+                <th>ID</th>
                 <th>Login</th>
                 <th>Nome</th>
                 <th>Tipo</th>

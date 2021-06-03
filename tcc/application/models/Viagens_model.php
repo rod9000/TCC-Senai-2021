@@ -38,7 +38,15 @@ class Viagens_model extends CI_Model {
 		return $this->db->get()->num_rows() > 0;
 	}
 
-	public function get_funcionario(){
+	public function get_funcionario($id){
+		$this->db->select("user_full_name");
+		$this->db->from("users");
+		$this->db->where("user_id = {$id}");
+		$this->db->order_by("user_id");
+		$qry_res = $this->db->get()->row();
+		return $qry_res;
+	}
+	public function get_funcionarios(){
 		$this->db->select("*");
 		$this->db->from("users");
 		$this->db->order_by("user_id");
@@ -49,6 +57,25 @@ class Viagens_model extends CI_Model {
 			$arr[$value->user_id] = $value->user_login;
 		endforeach;
 		return $arr;
+	}
+	public function Realizada(){
+		$realizada = array(
+			'1' => "Sim",
+			'2' => "Não",
+		);
+		return $realizada;
+	}
+	public function get_realizada($realizada){
+		$realizada = array(
+			'1' => "Sim",
+			'2' => "Não",
+		);
+		if($realizada == 1):
+			return $realizada[1];
+		
+		else:
+			return $realizada[2];
+		endif;
 	}
 	public function get_servicos(){
 		$this->db->select("*");
@@ -61,6 +88,15 @@ class Viagens_model extends CI_Model {
 			$arr[$value->id_servicos] = $value->sv_nome;
 		endforeach;
 		return $arr;
+	}
+	public function get_servico($id){
+		$this->db->select("sv_nome");
+		$this->db->from("servicos");
+		$this->db->where("id_servicos = {$id}");
+		$this->db->order_by("id_servicos");
+		$qry_res = $this->db->get()->row();
+
+		return $qry_res;
 	}
 
 	var $column_search = array("id_viagens ", "vg_destino", "vg_dsaida", "vg_dretorno", "vg_funcionario", );

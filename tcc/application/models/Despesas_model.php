@@ -50,7 +50,17 @@ class Despesas_model extends CI_Model {
 		return $arr;
 	}
 
-	public function get_funcionario(){
+	public function get_viagem($id){
+		$this->db->select("vg_destino");
+		$this->db->from("viagens");
+		$this->db->where("id_viagens = {$id}");
+		$this->db->order_by("id_viagens");
+		$qry_res = $this->db->get()->row();
+
+	
+		return $qry_res;
+	}
+	public function get_funcionarios(){
 		$this->db->select("*");
 		$this->db->from("users");
 		$this->db->order_by("user_id");
@@ -62,7 +72,14 @@ class Despesas_model extends CI_Model {
 		endforeach;
 		return $arr;
 	}
-
+	public function get_funcionario($id){
+		$this->db->select("user_full_name");
+		$this->db->from("users");
+		$this->db->where("user_id = {$id}");
+		$this->db->order_by("user_id");
+		$qry_res = $this->db->get()->row();
+		return $qry_res;
+	}
 
 	var $column_search = array("id_despesas  ", "dp_servico", "dp_valor", "dp_local", "dp_data", "dp_viagem", "dp_formDePgm");
 	var $column_order = array("id_despesas", "dp_servico", "dp_valor", "dp_local", "dp_data", "dp_viagem");

@@ -111,7 +111,6 @@ $(document).ready(function() {
 			success: function (response) {
 				clearErrors();
 				if (response["status"]) {
-					$("#modal_user").modal("hide");
 					swal("Sucesso!", "Usuário salvo com sucesso!", "success");
 					dt_user.ajax.reload();
 				} else {
@@ -136,7 +135,6 @@ $(document).ready(function() {
 				$.each(response["input"], function(id, value) {
 					$("#"+id).val(value);
 				});
-				$("#modal_user").modal();
 			}
 		})
 

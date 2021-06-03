@@ -10,7 +10,7 @@ class Users_model extends CI_Model {
 	public function get_user_data($user_login) {
 
 		$this->db
-			->select("user_id, password_hash, tipo, user_email")
+			->select("user_id, password_hash, user_tipo, user_email")
 			->from("users")
 			->where("user_login", $user_login);
 
@@ -22,6 +22,29 @@ class Users_model extends CI_Model {
 			return NULL;
 		}
 	}
+	public function tipo(){
+		$tipo = array(
+			'1' => "Admin",
+			'2' => "Financeiro",
+			'3' => "Usuário",
+		);
+		return $tipo;
+	}
+	public function get_tipo($tipo2){
+		$tipo = array(
+			'1' => "Admin",
+			'2' => "Financeiro",
+			'3' => "Usuário",
+		);
+		if($tipo2 == 1):
+			return $tipo[1];
+		elseif($tipo2 == 2):
+			return $tipo[2];
+		else:
+			return $tipo[3];
+		endif;
+	}
+
 
 	public function get_data($id, $select = NULL) {
 		if (!empty($select)) {
@@ -55,8 +78,8 @@ class Users_model extends CI_Model {
 		return $this->db->get()->num_rows() > 0;
 	}
 
-	var $column_search = array("user_login", "tipo", "user_email");
-	var $column_order = array("user_login", "tipo", "user_email");
+	var $column_search = array("user_login", "user_tipo", "user_email");
+	var $column_order = array("user_login", "user_tipo", "user_email");
 
 	private function _get_datatable() {
 
