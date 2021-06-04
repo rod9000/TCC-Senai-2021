@@ -21,6 +21,7 @@
             <label class="col-lg-2 control-label">Valor</label>
             <div class="col-lg-10">
               <input id="dp_valor" name="dp_valor" class="form-control" maxlength="100" value="<?php if(isset($editar[0]->dp_valor)): echo $editar[0]->dp_valor; endif; ?>">
+              <!-- <input id="dp_valor" type="number" min="0.00" max="10000.00" step="0.01" name="dp_valor" class="form-control" maxlength="100" value="<?php if(isset($editar[0]->dp_valor)): echo $editar[0]->dp_valor; endif; ?>"> -->
               <span class="help-block"></span>
             </div>
           </div>
@@ -34,7 +35,7 @@
           </div>
 
           <div class="form-group">
-            <label class="col-lg-2 control-label">Data da Viagem</label>
+            <label class="col-lg-2 control-label">Data da Despesa</label>
             <div class="col-lg-10">
               <input type="date" id="dp_data" name="dp_data" class="form-control" maxlength="100" value="<?php if(isset($editar[0]->dp_data)): echo $editar[0]->dp_data; endif; ?>">
               <span class="help-block"></span>
@@ -60,7 +61,8 @@
               <div class="form-group">
             <label class="col-lg-2 control-label">Forma de Pagamento</label>
             <div class="col-lg-10">
-              <input id="dp_formDePgm" name="dp_formDePgm" class="form-control" maxlength="100" value="<?php if(isset($editar[0]->dp_formDePgm)): echo $editar[0]->dp_formDePgm; endif; ?>">
+              <!-- <input id="dp_formDePgm" name="dp_formDePgm" class="form-control" maxlength="100" value="<?php if(isset($editar[0]->dp_formDePgm)): echo $editar[0]->dp_formDePgm; endif; ?>"> -->
+              <?php echo form_dropdown('dp_formDePgm',$pagamento,(isset($editar[0]->dp_formDePgm)) ? explode(',',$editar[0]->dp_formDePgm) : null,  'id="dp_formDePgm" class="selectpicker" data-parsley-required data-live-search="true" title="Selecione..."') ?>
               <span class="help-block"></span>
             </div>
           </div>

@@ -106,7 +106,8 @@ class Restrict extends CI_Controller
 		foreach ($despesas as $despesa) {
 			$funcionario = $this->despesas_model->get_funcionario($despesa->dp_funcionario);
 			$viagem = $this->despesas_model->get_viagem($despesa->dp_viagem);
-
+			$pagamento = $this->despesas_model->get_tipo_pagamento($despesa->dp_formDePgm);
+			
 			$row = array();
 			$row[] = $despesa->id_despesas;
 			$row[] = $despesa->dp_servico;
@@ -115,7 +116,7 @@ class Restrict extends CI_Controller
 			$row[] = $despesa->dp_data;
 			$row[] = $viagem->vg_destino;
 			$row[] = $funcionario->user_full_name;
-			$row[] = $despesa->dp_formDePgm;
+			$row[] = $pagamento;
 
 			$row[] = '<div style="display: inline-block;">
 						<a href="'.base_url("{$this->router->class}/editarDespesas/{$despesa->id_despesas}/") . '" class="btn btn-primary btn-edit-dps">
@@ -252,7 +253,9 @@ class Restrict extends CI_Controller
 		$editar = $this->despesas_model->get_data($id);
 		$viagens = $this->despesas_model->get_viagens();
 		$fucionario = $this->despesas_model->get_funcionarios();
+		$pagamento = $this->despesas_model->tipo_pagamento();
 
+		$dados["pagamento"] = $pagamento;
 		$dados["viagens"] = $viagens;
 		$dados["funcionario"] = $fucionario;
 		$dados["editar"] = $editar;
@@ -286,7 +289,9 @@ class Restrict extends CI_Controller
 		$this->load->model("despesas_model");
 		$viagens = $this->despesas_model->get_viagens();
 		$fucionario = $this->despesas_model->get_funcionarios();
+		$pagamento = $this->despesas_model->tipo_pagamento();
 
+		$dados["pagamento"] = $pagamento;
 		$dados["viagens"] = $viagens;
 		$dados["funcionario"] = $fucionario;
 
@@ -459,6 +464,8 @@ class Restrict extends CI_Controller
 	}
 	public function editarViagens($id)
 	{
+		if ($this->session->userdata("user_id")){
+
 		$data = array(
 			"styles" => array(
 				"bootstrap.css",
@@ -476,12 +483,14 @@ class Restrict extends CI_Controller
 		$editar = $this->viagens_model->get_data($id);
 		$fucionario = $this->viagens_model->get_funcionarios();
 		$servicos = $this->viagens_model->get_servicos();
+		$realizada = $this->viagens_model->Realizada();
+
+		$dados["realizada"] = $realizada;
 		$dados["funcionario"] = $fucionario;
 		$dados["servicos"] = $servicos;
 		$dados["editar"] = $editar;
 
 		$this->load->vars($dados);
-		 if ($this->session->userdata("user_id")){
 			$this->template->show("cadastro_viagens.php", $data);
 	 	}
 	 	else{
@@ -511,7 +520,9 @@ class Restrict extends CI_Controller
 		$this->load->model("viagens_model");
 		$fucionario = $this->viagens_model->get_funcionarios();
 		$servicos = $this->viagens_model->get_servicos();
+		$realizada = $this->viagens_model->Realizada();
 
+		$dados["realizada"] = $realizada;
 		$dados["servicos"] = $servicos;
 		$dados["funcionario"] = $fucionario;
 		if ($this->session->userdata("user_id")):

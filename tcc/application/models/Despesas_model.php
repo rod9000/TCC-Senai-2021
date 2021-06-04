@@ -1,16 +1,20 @@
 <?php
 
-class Despesas_model extends CI_Model {
+class Despesas_model extends CI_Model
+{
 
-	public function __construct() {
+	public function __construct()
+	{
 		parent::__construct();
 		$this->load->database();
 	}
-	public function show_despesas() {
+	public function show_despesas()
+	{
 		$this->db->from("despesas");
 		return $this->db->get()->result_array();
 	}
-	public function get_data($id, $select = NULL) {
+	public function get_data($id, $select = NULL)
+	{
 		if (!empty($select)) {
 			$this->db->select($select);
 		}
@@ -18,18 +22,22 @@ class Despesas_model extends CI_Model {
 		$this->db->where("id_despesas", $id);
 		return $this->db->get()->result();
 	}
-	public function insert($data) {
+	public function insert($data)
+	{
 		$this->db->insert("despesas", $data);
 	}
-	public function update($id, $data) {
+	public function update($id, $data)
+	{
 		$this->db->where("id_despesas", $id);
 		$this->db->update("despesas", $data);
 	}
-	public function delete($id) {
+	public function delete($id)
+	{
 		$this->db->where("id_despesas", $id);
 		$this->db->delete("despesas");
 	}
-	public function is_duplicated($field, $value, $id = NULL) {
+	public function is_duplicated($field, $value, $id = NULL)
+	{
 		if (!empty($id)) {
 			$this->db->where("id_despesas <>", $id);
 		}
@@ -37,42 +45,82 @@ class Despesas_model extends CI_Model {
 		$this->db->where($field, $value);
 		return $this->db->get()->num_rows() > 0;
 	}
-	public function get_viagens(){
+	public function tipo_pagamento()
+	{
+		$pagamento = array(
+			'1' => 'Crédito',
+			'2' => 'Débito',
+			'3' => 'Dinheiro',
+			'4' => 'Pix',
+			'5' => 'Boleto',
+			'6' => 'Transferência',
+		);
+		return $pagamento;
+	}
+	public function get_tipo_pagamento($pgt)
+	{
+		$pagamento = array(
+			'1' => 'Crédito',
+			'2' => 'Débito',
+			'3' => 'Dinheiro',
+			'4' => 'Pix',
+			'5' => 'Boleto',
+			'6' => 'Transferência',
+		);
+
+		if ($pgt == 1) :
+			return $pagamento[1];
+		elseif ($pgt == 2) :
+			return $pagamento[2];
+		elseif ($pgt == 3) :
+			return $pagamento[3];
+		elseif ($pgt == 4) :
+			return $pagamento[4];
+		elseif ($pgt == 5) :
+			return $pagamento[5];
+		else :
+			return $pagamento[6];
+		endif;
+	}
+	public function get_viagens()
+	{
 		$this->db->select("*");
 		$this->db->from("viagens");
 		$this->db->order_by("id_viagens");
 		$qry_res = $this->db->get()->result();
 
 		$arr = array();
-		foreach($qry_res as $key => $value):
+		foreach ($qry_res as $key => $value) :
 			$arr[$value->id_viagens] = $value->vg_destino;
 		endforeach;
 		return $arr;
 	}
-
-	public function get_viagem($id){
+	public function get_viagem($id)
+	{
 		$this->db->select("vg_destino");
 		$this->db->from("viagens");
 		$this->db->where("id_viagens = {$id}");
 		$this->db->order_by("id_viagens");
 		$qry_res = $this->db->get()->row();
 
-	
+
 		return $qry_res;
 	}
-	public function get_funcionarios(){
+	public function get_funcionarios()
+	{
 		$this->db->select("*");
 		$this->db->from("users");
 		$this->db->order_by("user_id");
 		$qry_res = $this->db->get()->result();
 
 		$arr = array();
-		foreach($qry_res as $key => $value):
+		foreach ($qry_res as $key => $value) :
 			$arr[$value->user_id] = $value->user_login;
 		endforeach;
 		return $arr;
 	}
-	public function get_funcionario($id){
+	public function get_funcionario($id)
+	{
 		$this->db->select("user_full_name");
 		$this->db->from("users");
 		$this->db->where("user_id = {$id}");
@@ -84,7 +132,8 @@ class Despesas_model extends CI_Model {
 	var $column_search = array("id_despesas  ", "dp_servico", "dp_valor", "dp_local", "dp_data", "dp_viagem", "dp_formDePgm");
 	var $column_order = array("id_despesas", "dp_servico", "dp_valor", "dp_local", "dp_data", "dp_viagem");
 
-	private function _get_datatable() {
+	private function _get_datatable()
+	{
 
 		$search = NULL;
 		if ($this->input->post("search")) {
@@ -120,7 +169,8 @@ class Despesas_model extends CI_Model {
 		}
 	}
 
-	public function get_datatable() {
+	public function get_datatable()
+	{
 
 		$length = $this->input->post("length");
 		$start = $this->input->post("start");
@@ -131,13 +181,15 @@ class Despesas_model extends CI_Model {
 		return $this->db->get()->result();
 	}
 
-	public function records_filtered() {
+	public function records_filtered()
+	{
 
 		$this->_get_datatable();
 		return $this->db->get()->num_rows();
 	}
 
-	public function records_total() {
+	public function records_total()
+	{
 
 		$this->db->from("despesas");
 		return $this->db->count_all_results();

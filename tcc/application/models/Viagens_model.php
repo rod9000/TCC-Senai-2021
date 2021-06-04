@@ -60,8 +60,8 @@ class Viagens_model extends CI_Model {
 	}
 	public function Realizada(){
 		$realizada = array(
-			'1' => "Sim",
 			'2' => "Não",
+			'1' => "Sim",
 		);
 		return $realizada;
 	}
