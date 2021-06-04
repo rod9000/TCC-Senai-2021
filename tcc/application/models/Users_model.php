@@ -44,7 +44,15 @@ class Users_model extends CI_Model {
 			return $tipo[3];
 		endif;
 	}
-
+	public function get_users($id){
+		$this->db
+		->select("user_tipo")
+		->from("users")
+		->where("user_id", $id);
+		
+		$result = $this->db->get()->row();
+		return $result;
+	}
 
 	public function get_data($id, $select = NULL) {
 		if (!empty($select)) {

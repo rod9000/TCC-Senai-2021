@@ -23,9 +23,13 @@
     <ul class="nav nav-tabs">
       <li class="active"><a href="#tab_viagens" role="tab" data-toggle="tab">Viagens</a></li>
       <li><a href="#tab_despesas" role="tab" data-toggle="tab">Despesas</a></li>
+      <?php if($user_tipo == 1 || $user_tipo == 2): ?>
       <li><a href="#tab_relatorio" role="tab" data-toggle="tab">Relatório</a></li>
       <li><a href="#tab_servicos" role="tab" data-toggle="tab">Serviços</a></li>
+      <?php endif; ?>
+      <?php if($user_tipo == 1): ?>
       <li><a href="#tab_user" role="tab" data-toggle="tab">Usuários</a></li>
+      <?php endif; ?>
     </ul>
     <!-- Tabelas de dados -->
     <div class="tab-content">

@@ -15,6 +15,9 @@ class Restrict extends CI_Controller
 	{
 
 		if ($this->session->userdata("user_id")) {
+			$this->load->model("users_model");
+			$user_id = $this->session->userdata("user_id");
+			$user_tipo = (int)$this->users_model->get_users($user_id)->user_tipo;
 			$data = array(
 				"styles" => array(
 					"style.css",
@@ -25,9 +28,11 @@ class Restrict extends CI_Controller
 					"util.js",	
 					"restrict.js",
 				),
-				"user_id" => $this->session->userdata("user_id")
-			);
+				"user_id" => $this->session->userdata("user_id"),
 
+			);
+			$dados["user_tipo"] = $user_tipo;
+			$this->load->vars($dados);
 			$this->template->show("restrict.php", $data);
 		} else {
 			$data = array(
@@ -580,31 +585,6 @@ class Restrict extends CI_Controller
 
 		echo json_encode($json);
 	}
-/* 	public function ajax_get_user_data() // Função  para obter dados para modificar os usuários
-	{
-
-		if (!$this->input->is_ajax_request()) {
-			exit("Nenhum acesso de script direto permitido!");
-		}
-
-		$json = array();
-		$json["status"] = 1;
-		$json["input"] = array();
-
-		$this->load->model("users_model");
-
-		$user_id = $this->input->post("user_id");
-		$data = $this->users_model->get_data($user_id)->result_array()[0];
-		$json["input"]["user_id"] = $data["user_id"];
-		$json["input"]["user_login"] = $data["user_login"];
-		$json["input"]["user_full_name"] = $data["user_full_name"];
-		$json["input"]["user_email"] = $data["user_email"];
-		$json["input"]["user_email_confirm"] = $data["user_email"];
-		$json["input"]["user_password"] = $data["password_hash"];
-		$json["input"]["user_password_confirm"] = $data["password_hash"];
-
-		echo json_encode($json);
-	} */
 	public function ajax_save_user() //Função para salvar os usuários no banco de dados
 	{
 
