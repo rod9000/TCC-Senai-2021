@@ -5,7 +5,8 @@
       <div class="form-group">
         <form id="form_user">
 
-          <input id="user_id" name="user_id" hidden>
+          <input id="user_id" name="user_id" hidden value="<?php if (isset($editar[0]->user_id)) : echo $editar[0]->user_id; endif; ?>">
+
           <?php if ($this->uri->segment(2) == 'cadastroUsuario') : ?>
           <h1 class="center">Cadastro de usuários</h1>
           <?php else : ?>
@@ -15,7 +16,7 @@
           <div class="form-group">
             <label class="col-lg-2 control-label">Login</label>
             <div class="col-lg-10">
-              <input id="user_login" name="user_login" class="form-control" maxlength="30">
+              <input id="user_login" name="user_login" class="form-control" maxlength="30" value="<?php if (isset($editar[0]->user_login)) : echo $editar[0]->user_login; endif; ?>">
               <span class="help-block"></span>
             </div>
           </div>
@@ -23,7 +24,7 @@
           <div class="form-group">
             <label class="col-lg-2 control-label">Nome Completo</label>
             <div class="col-lg-10">
-              <input id="user_full_name" name="user_full_name" class="form-control" maxlength="100">
+              <input id="user_full_name" name="user_full_name" class="form-control" maxlength="100" value="<?php if (isset($editar[0]->user_full_name)) : echo $editar[0]->user_full_name; endif; ?>">
               <span class="help-block"></span>
             </div>
           </div>
@@ -31,7 +32,7 @@
           <div class="form-group">
             <label class="col-lg-2 control-label">E-mail</label>
             <div class="col-lg-10">
-              <input id="user_email" name="user_email" class="form-control" maxlength="100">
+              <input id="user_email" name="user_email" class="form-control" maxlength="100" value="<?php if (isset($editar[0]->user_email)) : echo $editar[0]->user_email; endif; ?>">
               <span class="help-block"></span>
             </div>
           </div>
@@ -39,7 +40,7 @@
           <div class="form-group">
             <label class="col-lg-2 control-label">Tipo</label>
             <div class="col-lg-10">
-              <?php echo form_dropdown('user_tipo',$tipo,(isset($tipo[0]->tipo)) ? explode(',',$tipo[0]->tipo) : null,  'id="user_tipo" class="selectpicker" data-parsley-required data-live-search="true" title="Selecione..."') ?>
+              <?php echo form_dropdown('user_tipo',$tipo,(isset($editar[0]->user_tipo)) ? explode(',',$editar[0]->user_tipo) : null,  'id="user_tipo" class="selectpicker" data-parsley-required data-live-search="true" title="Selecione..."') ?>
               <span class="help-block"></span>
             </div>
           </div>

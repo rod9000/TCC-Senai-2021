@@ -60,7 +60,7 @@ class Users_model extends CI_Model {
 		}
 		$this->db->from("users");
 		$this->db->where("user_id", $id);
-		return $this->db->get();
+		return $this->db->get()->result();
 	}
 
 	public function insert($data) {

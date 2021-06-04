@@ -18,6 +18,7 @@ class Restrict extends CI_Controller
 			$this->load->model("users_model");
 			$user_id = $this->session->userdata("user_id");
 			$user_tipo = (int)$this->users_model->get_users($user_id)->user_tipo;
+			
 			$data = array(
 				"styles" => array(
 					"style.css",
@@ -548,7 +549,7 @@ class Restrict extends CI_Controller
 			$row[] = $user->user_email;
 
 			$row[] = '<div style="display: inline-block;">
-						<a href="'.base_url("{$this->router->class}/cadastroUsuario/{$user->user_id}/") . '" class="btn btn-primary btn-edit-dps">
+						<a href="'.base_url("{$this->router->class}/editarUsuario/{$user->user_id}/") . '" class="btn btn-primary btn-edit-dps">
 						<i class="fa fa-edit"></i>
 						</a>
 						<button class="btn btn-danger btn-del-user" 
@@ -648,6 +649,10 @@ class Restrict extends CI_Controller
 	}
 	public function cadastroUsuario()
 	{
+		$this->load->model("users_model");
+		$user_id = $this->session->userdata("user_id");
+		$user_tipo = (int)$this->users_model->get_users($user_id)->user_tipo;
+		if($user_tipo == 1):
 		$data = array(
 			"styles" => array(
 				"bootstrap.css",
@@ -661,7 +666,6 @@ class Restrict extends CI_Controller
 				"restrict.js",
 			)
 		);
-		$this->load->model("users_model");
 		$tipo = $this->users_model->tipo();
 		$dados["tipo"] = $tipo;
 		if ($this->session->userdata("user_id")):
@@ -676,9 +680,23 @@ class Restrict extends CI_Controller
 				);
 				$this->template->show("login.php", $data);
 			endif;
+		else:
+			$data = array(
+				"scripts" => array(
+					"util.js",
+					"login.js"
+				)
+			);
+			$this->template->show("home.php", $data);
+		endif;
 	}
 	public function editarUsuario($id)
 	{
+		$this->load->model("users_model");
+		$user_id = $this->session->userdata("user_id");
+		$user_tipo = (int)$this->users_model->get_users($user_id)->user_tipo;
+		if($user_tipo == 1):
+		if ($this->session->userdata("user_id")):
 		$data = array(
 			"styles" => array(
 				"bootstrap.css",
@@ -692,11 +710,11 @@ class Restrict extends CI_Controller
 			)
 		);
 
-		$this->load->model("users_model");
 		$editar = $this->users_model->get_data($id);
-
+		$tipo = $this->users_model->tipo();
+		$dados["tipo"] = $tipo;
 		$dados["editar"] = $editar;
-		if ($this->session->userdata("user_id")):
+			
 			$this->load->vars($dados);
 			$this->template->show("cadastro_usuario.php", $data);
 		else:
@@ -708,6 +726,36 @@ class Restrict extends CI_Controller
 				);
 				$this->template->show("login.php", $data);
 			endif;
+		elseif($user_tipo != 1  && $id == $user_id):
+			$data = array(
+				"styles" => array(
+					"bootstrap.css",
+					"style.css"
+	
+				),
+				"scripts" => array(
+					"sweetalert2.all.min.js",
+					"util.js",	
+					"restrict.js",
+				)
+			);
+	
+			$editar = $this->users_model->get_data($id);
+			$tipo = $this->users_model->tipo();
+			$dados["tipo"] = $tipo;
+			$dados["editar"] = $editar;
+				
+				$this->load->vars($dados);
+				$this->template->show("cadastro_usuario.php", $data);
+		else:
+			$data = array(
+				"scripts" => array(
+					"util.js",
+					"login.js"
+				)
+			);
+			$this->template->show("home.php", $data);
+		endif;
 
 	}
 
@@ -766,6 +814,10 @@ class Restrict extends CI_Controller
 
 	public function cadastroServicos()
 	{
+		$this->load->model("users_model");
+		$user_id = $this->session->userdata("user_id");
+		$user_tipo = (int)$this->users_model->get_users($user_id)->user_tipo;
+		if($user_tipo == 1 || $user_tipo == 2):
 		$data = array(
 			"styles" => array(
 				"bootstrap.css",
@@ -790,6 +842,15 @@ class Restrict extends CI_Controller
 				);
 				$this->template->show("login.php", $data);
 			endif;
+		else:
+			$data = array(
+				"scripts" => array(
+					"util.js",
+					"login.js"
+				)
+			);
+			$this->template->show("home.php", $data);
+		endif;
 	}
 	public function ajax_list_servicos() //Função  para Data table e botões Exclui e editar
 	{
@@ -882,6 +943,10 @@ class Restrict extends CI_Controller
 	}
 	public function editarServicos($id)
 	{
+		$this->load->model("users_model");
+		$user_id = $this->session->userdata("user_id");
+		$user_tipo = (int)$this->users_model->get_users($user_id)->user_tipo;
+		if($user_tipo == 1 || $user_tipo == 2):
 		$data = array(
 			"styles" => array(
 				"bootstrap.css",
@@ -911,7 +976,15 @@ class Restrict extends CI_Controller
 				);
 				$this->template->show("login.php", $data);
 			endif;
-	
+		else:
+			$data = array(
+				"scripts" => array(
+					"util.js",
+					"login.js"
+				)
+			);
+			$this->template->show("home.php", $data);
+		endif;
 	}
 
 }

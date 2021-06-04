@@ -5,8 +5,7 @@
       <div class="form-group">
         <form id="form_viagens">
 
-          <input id="id_viagens" name="id_viagens" hidden value="<?php if (isset($editar[0]->id_viagens)) : echo $editar[0]->id_viagens;
-                                                                  endif; ?>">
+          <input id="id_viagens" name="id_viagens" hidden value="<?php if (isset($editar[0]->id_viagens)) : echo $editar[0]->id_viagens; endif; ?>">
           <?php if ($this->uri->segment(2) == 'cadastroViagens') : ?>
             <h1 class="center">Cadastro de Viagens</h1>
           <?php else : ?>
