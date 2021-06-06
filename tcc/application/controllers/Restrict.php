@@ -247,7 +247,8 @@ class Restrict extends CI_Controller
 				"sweetalert2.all.min.js",
 				"util.js",	
 				"restrict.js",
-			)
+			),
+			"user_id" => $this->session->userdata("user_id"),
 		);
 		$this->load->model("despesas_model");
 		$editar = $this->despesas_model->get_data($id);
@@ -284,7 +285,8 @@ class Restrict extends CI_Controller
 				"sweetalert2.all.min.js",
 				"util.js",	
 				"restrict.js",
-			)
+			),
+			"user_id" => $this->session->userdata("user_id"),
 		);
 		$this->load->model("despesas_model");
 		$viagens = $this->despesas_model->get_viagens();
@@ -476,8 +478,8 @@ class Restrict extends CI_Controller
 				"sweetalert2.all.min.js",
 				"util.js",	
 				"restrict.js",
-			)
-
+			),
+			"user_id" => $this->session->userdata("user_id"),
 		);
 		$this->load->model("viagens_model");
 		$editar = $this->viagens_model->get_data($id);
@@ -515,7 +517,8 @@ class Restrict extends CI_Controller
 				"sweetalert2.all.min.js",
 				"util.js",	
 				"restrict.js",
-			)
+			),
+			"user_id" => $this->session->userdata("user_id"),
 		);
 		$this->load->model("viagens_model");
 		$fucionario = $this->viagens_model->get_funcionarios();
@@ -675,7 +678,8 @@ class Restrict extends CI_Controller
 				"bootstrap-select.js",
 				"util.js",	
 				"restrict.js",
-			)
+			),
+			"user_id" => $this->session->userdata("user_id"),
 		);
 		$tipo = $this->users_model->tipo();
 		$dados["tipo"] = $tipo;
@@ -718,7 +722,8 @@ class Restrict extends CI_Controller
 				"sweetalert2.all.min.js",
 				"util.js",	
 				"restrict.js",
-			)
+			),
+			"user_id" => $this->session->userdata("user_id"),
 		);
 
 		$editar = $this->users_model->get_data($id);
@@ -840,7 +845,8 @@ class Restrict extends CI_Controller
 				"bootstrap-select.js",
 				"util.js",	
 				"restrict.js",
-			)
+			),
+			"user_id" => $this->session->userdata("user_id"),
 		);
 		if ($this->session->userdata("user_id")):
 			$this->template->show("cadastro_servicos.php", $data);
@@ -968,8 +974,8 @@ class Restrict extends CI_Controller
 				"sweetalert2.all.min.js",
 				"util.js",	
 				"restrict.js",
-			)
-
+			),
+			"user_id" => $this->session->userdata("user_id"),
 		);
 		$this->load->model("servicos_model");
 		$editar = $this->servicos_model->get_data($id);

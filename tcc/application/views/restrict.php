@@ -11,9 +11,7 @@
     <div class="row">
       <div class="col-lg-offset-5 col-lg-3 text-center">
         <div class="form-group">
-          <a id="btn_your_user" class="btn btn-link" user_id="<?= $user_id ?>"><i class="fa fa-user"> Usuário</i></a>
-          <a class="btn btn-link" href="restrict/logoff"><i class="fa fa-sign-out"> Sair</i></a>
-        </div>
+         </div>
       </div>
     </div>
   </div>
@@ -85,15 +83,15 @@
       <div id="tab_relatorio" class="tab-pane">
         <div class="container-fluid">
           <h2 class="text-center"><strong>Gerenciar relatório</strong></h2>
-<!--          <a id="btn_add_relatorio" stlye ="marring-bottom: 2px" class="btn btn-primary"><i class="fa fa-plus">&nbsp;&nbsp;Gerar relatório</i></a> -->
           <table id="dt_relatorio" class="table table-striped table-bordered">
             <thead>
               <tr class="tableheader">
-                <th class="dt-center">Nome do usuário</th>
-                <th class="dt-center no-sort">Viagem</th>
-                <th class="dt-center">Total de dias</th>
-                <th class="dt-center">Despesas</th>
-                <th class="dt-center no-sort">Ações</th>
+                <th class="dt-center">Funcionário</th>
+                <th class="dt-center">Viagem</th>
+                <th class="dt-center no-sort">Total de dias</th>
+                <th class="dt-center no-sort">Valor Inicial</th>
+                <th class="dt-center no-sort">Total de Despesas</th>
+                <th class="dt-center no-sort">Total</th>
               </tr>
             </thead>
             <tbody>

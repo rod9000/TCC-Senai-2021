@@ -61,22 +61,30 @@
 							<a href="#page-top"></a>
 						</li>
 						<li>
-							<a class="header-button" href="<?php echo base_url(); ?>home">Home</a>
+							<a class="header-button" href="<?php echo base_url(); ?>home"><i class="fa fa-home">Home</i></a>
 						</li>
 						<?php if($this->uri->segment(2) == 'cadastroViagens' || $this->uri->segment(2) == 'cadastroDespesas' || $this->uri->segment(2) == 'cadastroUsuario' || $this->uri->segment(2) == 'cadastroServicos' || $this->uri->segment(2) == 'editarViagens' || $this->uri->segment(2) == 'editarDespesas' || $this->uri->segment(2) == 'editarUsuario' || $this->uri->segment(2) == 'editarServicos'): ?>
 						<li>
-							<a class="header-button" href="<?php echo base_url(); ?>restrict">Relatorios</a>
+							<a class="header-button" href="<?php echo base_url(); ?>restrict"><i class="fa fa-list"> Relatorios</i></a>
 						</li>
 						<?php endif; ?>
 
 						<?php if($this->uri->segment(1) == 'home' || $this->uri->segment(1) == ''): ?>
 						<li>
-							<a class="header-button" href="<?php echo base_url(); ?>restrict">Login</a>
+							<a class="header-button" href="<?php echo base_url(); ?>restrict"><i class="fa fa-sign-in"> Login</i></a>
 						</li>
 						<li>
-							<a class="header-button" href="<?php echo base_url(); ?>restrict/contato">Contato</a>
+							<a class="header-button" href="<?php echo base_url(); ?>restrict/contato"><i class="fa fa-user"> Contato</i></a>
 						</li>
 						<?php endif; ?>
+						<?php if(isset($user_id)): ?>
+						<li>
+							<a class="header-button" href="<?php echo base_url("{$this->router->class}/editarUsuario/{$user_id}/"); ?>"> <i class="fa fa-user"> Usuário</i></a>
+						</li>
+						<li>
+							<a class="header-button" href="restrict/logoff"><i class="fa fa-sign-out"> Sair</i></a>
+						</li>
+						<?php endif;?>
 					</ul>
 				</div>
 				<!-- /.navbar-collapse -->
