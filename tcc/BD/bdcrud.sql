@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 08-Jun-2021 às 18:22
+-- Tempo de geração: 09-Jun-2021 às 01:15
 -- Versão do servidor: 10.4.18-MariaDB
 -- versão do PHP: 7.3.28
 
@@ -43,10 +43,7 @@ CREATE TABLE `despesas` (
 --
 
 INSERT INTO `despesas` (`id_despesas`, `dp_motivo`, `dp_valor`, `dp_local`, `dp_data`, `dp_viagem`, `dp_funcionario`, `dp_formDePgm`) VALUES
-(1, 'teste', '1222', 'teste', '2021-02-12', 1, 3, 3),
-(2, 'teste2', '129', 'TESTE', '2021-05-12', 1, 1, 2),
-(3, 'teste', '150', 'teste', '2022-02-15', 2, 1, 1),
-(4, 'teste', '12', 'teste', '2022-12-12', 2, 1, 2);
+(5, 'teste', '25', 'teste', '2021-05-15', 4, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -116,9 +113,7 @@ CREATE TABLE `viagens` (
 --
 
 INSERT INTO `viagens` (`id_viagens`, `vg_destino`, `vg_dsaida`, `vg_dretorno`, `vg_servico`, `vg_funcionario`, `vg_valorIn`, `vg_realizada`, `vg_motivo`) VALUES
-(1, 'teste', '3111-12-09', '3111-12-12', 2, 3, '12', 2, 'teste'),
-(2, 'teste2', '2021-05-17', '2021-05-18', 1, 3, '123', 2, 'teste'),
-(3, 'teste2', '2222-02-12', '2222-03-12', 1, 1, '150', 1, 'teste');
+(4, 'teste12', '2021-05-12', '2021-05-20', 1, 1, '150', 2, 'teste');
 
 --
 -- Índices para tabelas despejadas
@@ -156,7 +151,7 @@ ALTER TABLE `viagens`
 -- AUTO_INCREMENT de tabela `despesas`
 --
 ALTER TABLE `despesas`
-  MODIFY `id_despesas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_despesas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `servicos`
@@ -174,7 +169,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de tabela `viagens`
 --
 ALTER TABLE `viagens`
-  MODIFY `id_viagens` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_viagens` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
