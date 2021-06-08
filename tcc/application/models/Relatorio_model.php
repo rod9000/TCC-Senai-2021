@@ -8,9 +8,35 @@ class Relatorio_model extends CI_Model
         parent::__construct();
         $this->load->database();
     }
+    public function get_funcionario($id){
+		$this->db->select("*");
+		$this->db->from("users");
+		$this->db->where("user_id = {$id}");
+		$this->db->order_by("user_id");
+		$qry_res = $this->db->get()->row();
+		return $qry_res;
+    }
+    public function get_servico($id){
+		$this->db->select("*");
+		$this->db->from("servicos");
+		$this->db->where("id_servicos = {$id}");
+		$this->db->order_by("id_servicos");
+		$qry_res = $this->db->get()->row();
 
-    var $column_search = array("id_viagens", "user_full_name", "vg_destino");
-    var $column_order = array("id_viagens", "user_full_name", "vg_destino");
+		return $qry_res;
+	}
+
+    public function get_valor_despesas($viagem, $funcionario){
+        $this->db->select_sum("dp_valor");
+        $this->db->from("despesas");
+        $this->db->where("dp_viagem = {$viagem} AND dp_funcionario = {$funcionario}");
+        $qry_res = $this->db->get()->result();
+        
+        return $qry_res;
+    }   
+
+    var $column_search = array("id_viagens", "vg_destino");
+    var $column_order = array("id_viagens",  "vg_destino");
 
     private function _get_datatable()
     {
@@ -26,10 +52,9 @@ class Relatorio_model extends CI_Model
             $order_column = $order[0]["column"];
             $order_dir = $order[0]["dir"];
         }
-        $this->db->select("d.dp_valor, v.vg_destino as viagens, vg_dsaida as saida, vg_dretorno as retorno, vg_valorin as inicial, f.user_full_name as funcionario");
-        $this->db->from("viagens as v");
-        $this->db->join("despesas as d", "d.dp_viagem = v.id_viagens", "INNER");
-        $this->db->join("users as f", "f.user_id = dp_funcionario", "INNER");
+        $this->db->select("id_viagens as id, vg_servico as servico, vg_funcionario as funcionario, vg_destino as viagens, vg_dsaida as saida, vg_dretorno as retorno, vg_valorin as inicial");
+        $this->db->from("viagens");
+
 
         if (isset($search)) {
             $first = TRUE;

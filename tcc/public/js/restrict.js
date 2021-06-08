@@ -34,7 +34,7 @@ $(document).ready(function() {
 				clearErrors();
 				if (response["status"]) {
 					// $("#modal_despesas").modal("hide");
-					swal("Sucesso!", "Despesas salvoa com sucesso!", "success");
+					swal("Sucesso!", "Despesas salva com sucesso!", "success");
 					dt_clientes.ajax.reload();
 				} else {
 					showErrorsModal(response["error_list"])
@@ -86,7 +86,7 @@ $(document).ready(function() {
 				clearErrors();
 				if (response["status"]) {
 					// $("#modal_viagens").modal("hide");
-					swal("Sucesso!", "Serviço salva com sucesso!", "success");
+					swal("Sucesso!", "Serviço salvo com sucesso!", "success");
 					dt_servicos.ajax.reload();
 				} else {
 					showErrorsModal(response["error_list"])

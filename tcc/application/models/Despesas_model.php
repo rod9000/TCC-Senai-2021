@@ -56,6 +56,15 @@ class Despesas_model extends CI_Model
 			'6' => 'Transferência',
 		);
 		return $pagamento;
+	}	
+	public function get_users($id){
+		$this->db
+		->select("user_tipo")
+		->from("users")
+		->where("user_id", $id);
+		
+		$result = $this->db->get()->row();
+		return $result;
 	}
 	public function get_tipo_pagamento($pgt)
 	{

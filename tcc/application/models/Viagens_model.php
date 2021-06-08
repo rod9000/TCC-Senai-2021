@@ -98,7 +98,15 @@ class Viagens_model extends CI_Model {
 
 		return $qry_res;
 	}
-
+	public function get_users($id){
+		$this->db
+		->select("user_tipo")
+		->from("users")
+		->where("user_id", $id);
+		
+		$result = $this->db->get()->row();
+		return $result;
+	}
 	var $column_search = array("id_viagens ", "vg_destino", "vg_dsaida", "vg_dretorno", "vg_funcionario", );
 	var $column_order = array("id_viagens", "vg_destino", "vg_dsaida", "vg_dretorno", "vg_funcionario");
 

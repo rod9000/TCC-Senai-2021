@@ -94,6 +94,9 @@ class Restrict extends CI_Controller
 
 	public function ajax_list_despesas() //Função  para Data table e botões Exclui e editar
 	{
+		$this->load->model("despesas_model");
+		$user_id = $this->session->userdata("user_id");
+		$user_tipo = (int)$this->despesas_model->get_users($user_id)->user_tipo;
 
 		if (!$this->input->is_ajax_request()) {
 			exit("Nenhum acesso de script direto permitido!");
@@ -117,16 +120,12 @@ class Restrict extends CI_Controller
 			$row[] = $funcionario->user_full_name;
 			$row[] = $despesa->dp_data;
 			$row[] = $pagamento;
-
-			$row[] = '<div style="display: inline-block;">
-						<a href="'.base_url("{$this->router->class}/editarDespesas/{$despesa->id_despesas}/") . '" class="btn btn-primary btn-edit-dps">
-							<i class="fa fa-edit"></i>
-						</a>
-						<a class="btn btn-danger btn-del-dps" 
-						id_despesas ="' . $despesa->id_despesas . '">
-							<i class="fa fa-times"></i>
-						</a>
-					</div>';
+			
+			$acoes = '<a href="'.base_url("{$this->router->class}/editarDespesas/{$despesa->id_despesas}/") . '" class="btn btn-primary btn-edit-dps"><i class="fa fa-edit"></i></a>';
+			if($user_tipo != 3):
+				$acoes .= '&nbsp;<button class="btn btn-danger btn-del-viag" id_despesas ="' .$despesa->id_despesas . '"><i class="fa fa-times"></i>	</button>';
+			endif;
+			$row[] = $acoes;
 
 			$data[] = $row;
 		}
@@ -142,7 +141,10 @@ class Restrict extends CI_Controller
 	}
 	public function ajax_delete_despesas_data() // Função  Para exclusão de clientes
 	{
-
+		$this->load->model("despesas_model");
+		$user_id = $this->session->userdata("user_id");
+		$user_tipo = (int)$this->despesas_model->get_users($user_id)->user_tipo;
+		if($user_tipo != 3):
 		if (!$this->input->is_ajax_request()) {
 			exit("Nenhum acesso de script direto permitido!");
 		}
@@ -155,6 +157,7 @@ class Restrict extends CI_Controller
 		$this->despesas_model->delete($id_despesas);
 
 		echo json_encode($json);
+		endif;
 	}
 	public function ajax_save_despesas() //Função para salvar os clientes no banco de dados
 	{
@@ -288,12 +291,13 @@ class Restrict extends CI_Controller
 
 	public function ajax_list_viagens() //Função  para Data table e botões Exclui e editar
 		{
-
-			if (!$this->input->is_ajax_request()) {
+			$this->load->model("viagens_model");
+			$user_id = $this->session->userdata("user_id");
+			$user_tipo = (int)$this->viagens_model->get_users($user_id)->user_tipo;
+			if(!$this->input->is_ajax_request()) {
 			exit("Nenhum acesso de script direto permitido!");
 		}
 
-		$this->load->model("viagens_model");
 		$viagens = $this->viagens_model->get_datatable();
 
 		$data = array();
@@ -312,17 +316,12 @@ class Restrict extends CI_Controller
 			$row[] = $viagens->vg_dretorno;
 			$row[] = $ralizada;
 
-
-			$row[] = '<div style="display: inline-block;">
-						<a href="'.base_url("{$this->router->class}/editarViagens/{$viagens->id_viagens}/") . '" class="btn btn-primary btn-edit-dps">
-						<i class="fa fa-edit"></i>
-						</a>
-						<button class="btn btn-danger btn-del-viag" 
-						id_viagens="' . $viagens->id_viagens . '">
-							<i class="fa fa-times"></i>
-						</button>
-					</div>';
-
+			$acoes = '<a href="'.base_url("{$this->router->class}/editarViagens/{$viagens->id_viagens}/") . '" class="btn btn-primary btn-edit-dps"><i class="fa fa-edit"></i></a>';
+			if($user_tipo != 3):			
+			$acoes .= '&nbsp;<button class="btn btn-danger btn-del-viag" id_viagens="' . $viagens->id_viagens . '"><i class="fa fa-times"></i>	</button>';
+			endif;
+			$row[] = $acoes;
+			
 			$data[] = $row;
 		}
 
@@ -337,7 +336,10 @@ class Restrict extends CI_Controller
 	}
 	public function ajax_delete_viagens_data() // Função  Para exclusão de viagens
 	{
-
+		$this->load->model("viagens_model");
+		$user_id = $this->session->userdata("user_id");
+		$user_tipo = (int)$this->viagens_model->get_users($user_id)->user_tipo;
+		if($user_tipo != 3):
 		if (!$this->input->is_ajax_request()) {
 			exit("Nenhum acesso de script direto permitido!");
 		}
@@ -350,10 +352,11 @@ class Restrict extends CI_Controller
 		$this->viagens_model->delete($id_viagens);
 
 		echo json_encode($json);
+		endif;
 	}
 	public function ajax_save_viagens() //Função para salvar os viagens no banco de dados
 	{
-
+		
 		if (!$this->input->is_ajax_request()) {
 			exit("Nenhum acesso de script direto permitido!");
 		}
@@ -734,20 +737,23 @@ class Restrict extends CI_Controller
 
 		$data = array();
 		foreach ($relatorios as $relatorio) {
-			
-			
+
+			$servico = $this->relatorio_model->get_servico($relatorio->servico);
+			$funcionario = $this->relatorio_model->get_funcionario($relatorio->funcionario);
+			$despesas = $this->relatorio_model->get_valor_despesas($relatorio->id,$relatorio->funcionario)[0]->dp_valor;
+
 			$saida = strtotime($relatorio->saida);
 			$retorno = strtotime($relatorio->retorno);
 			$totalDias = ($retorno - $saida) / 86400;
-			$totalDps = $totalDias * $relatorio->dp_valor;
-			$total = $relatorio->inicial + $totalDps;
+			$totalServico = $totalDias * $servico->sv_diaria;
+			$total = $relatorio->inicial + $totalServico + $despesas;
 
 			$row = array();
-			$row[] = $relatorio->funcionario;
 			$row[] = $relatorio->viagens;
+			$row[] = $funcionario->user_full_name;
 			$row[] = $totalDias;
 			$row[] = $relatorio->inicial;
-			$row[] = $totalDps;
+			$row[] = $despesas;
 			$row[] = $total;
 
 			$data[] = $row;
@@ -785,7 +791,7 @@ class Restrict extends CI_Controller
 		$this->load->model("users_model");
 		$user_id = $this->session->userdata("user_id");
 		$user_tipo = (int)$this->users_model->get_users($user_id)->user_tipo;
-		if($user_tipo == 1 || $user_tipo == 2):
+		if($user_tipo != 3):
 		$data = array(
 			"styles" => array(
 				"bootstrap.css",
@@ -863,7 +869,10 @@ class Restrict extends CI_Controller
 	}
 	public function ajax_save_servicoS() //Função para salvar os viagens no banco de dados
 	{
-
+		$this->load->model("users_model");
+		$user_id = $this->session->userdata("user_id");
+		$user_tipo = (int)$this->users_model->get_users($user_id)->user_tipo;
+		if($user_tipo != 3):
 		if (!$this->input->is_ajax_request()) {
 			exit("Nenhum acesso de script direto permitido!");
 		}
@@ -893,10 +902,14 @@ class Restrict extends CI_Controller
 		}
 
 		echo json_encode($json);
+		endif;
 	}
 	public function ajax_delete_servicos_data() // Função  Para exclusão de viagens
 	{
-
+		$this->load->model("users_model");
+		$user_id = $this->session->userdata("user_id");
+		$user_tipo = (int)$this->users_model->get_users($user_id)->user_tipo;
+		if($user_tipo != 3):
 		if (!$this->input->is_ajax_request()) {
 			exit("Nenhum acesso de script direto permitido!");
 		}
@@ -909,13 +922,14 @@ class Restrict extends CI_Controller
 		$this->servicos_model->delete($id_servicos);
 
 		echo json_encode($json);
+		endif;
 	}
 	public function editarServicos($id)
 	{
 		$this->load->model("users_model");
 		$user_id = $this->session->userdata("user_id");
 		$user_tipo = (int)$this->users_model->get_users($user_id)->user_tipo;
-		if($user_tipo == 1 || $user_tipo == 2):
+		if($user_tipo != 3):
 		$data = array(
 			"styles" => array(
 				"bootstrap.css",
