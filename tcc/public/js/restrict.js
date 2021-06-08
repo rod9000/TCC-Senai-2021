@@ -206,8 +206,8 @@ $(document).ready(function() {
 
 		});
 	}
+
 	var dt_viagens = $("#dt_viagens").DataTable({ //Js de organização do data table das viagens
-	
 		"oLanguage": DATATABLE_PTBR,
 		"autoWidth": false,
 		"processing": true,
@@ -226,24 +226,6 @@ $(document).ready(function() {
 
 	});
 	function active_btn_viag() { //Js do botão edita e exlui da data table
-		
-		// $(".btn-edit-viag").click(function(){
-		// 	$.ajax({
-		// 		type: "POST",
-		// 		url: BASE_URL + "restrict/ajax_get_viagens_data",
-		// 		dataType: "json",
-		// 		data: {"id_viagens": $(this).attr("id_viagens")},
-		// 		success: function(response) {
-		// 			clearErrors();
-		// 			$("#form_viagens")[0].reset();
-		// 			$.each(response["input"], function(id, value) {
-		// 				$("#"+id).val(value);
-		// 			});
-		// 			$("#modal_viagens").modal();
-		// 		}
-		// 	})
-		// });
-
 		$(".btn-del-viag").click(function(){
 			
 			id_viagens = $(this);
@@ -436,6 +418,7 @@ $(document).ready(function() {
 
 		});
 	}
+	
 });
 
 var submitButton = document.getElementById("submit_form");

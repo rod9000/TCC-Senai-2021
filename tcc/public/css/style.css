@@ -40,7 +40,15 @@ Import Google Fonts
     width: 55%;
     text-align: center;
     padding: 50px;
-  } 
+  }
+
+.sim{
+    background-color: #C8F7C9 !important;
+}
+
+.nao{
+    background-color: #FFB7B7 !important;
+}
   
 .dt-button  {
 color:white;

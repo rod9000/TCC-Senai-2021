@@ -110,12 +110,12 @@ class Restrict extends CI_Controller
 			
 			$row = array();
 			$row[] = $despesa->id_despesas;
-			$row[] = $despesa->dp_servico;
+			$row[] = $despesa->dp_motivo;
 			$row[] = $despesa->dp_valor;
 			$row[] = $despesa->dp_local;
-			$row[] = $despesa->dp_data;
 			$row[] = $viagem->vg_destino;
 			$row[] = $funcionario->user_full_name;
+			$row[] = $despesa->dp_data;
 			$row[] = $pagamento;
 
 			$row[] = '<div style="display: inline-block;">
@@ -156,32 +156,6 @@ class Restrict extends CI_Controller
 
 		echo json_encode($json);
 	}
-	/* public function ajax_get_despesas_data() // Função  para obter dados para modificar os clientes
-	{
-
-		if (!$this->input->is_ajax_request()) {
-			exit("Nenhum acesso de script direto permitido!");
-		}
-
-		$json = array();
-		$json["status"] = 1;
-		$json["input"] = array();
-
-		$this->load->model("despesas_model");
-
-		$id_despesas = $this->input->post("id_despesas");
-		$data = $this->despesas_model->get_data($id_despesas)->result_array()[0];
-		$json["input"]["id_despesas"] = $data["id_despesas"];
-		$json["input"]["dp_servico"] = $data["dp_servico"];
-		$json["input"]["dp_valor"] = $data["dp_valor"];
-		$json["input"]["dp_local"] = $data["dp_local"];
-		$json["input"]["dp_data"] = $data["dp_data"];
-		$json["input"]["dp_viagem"] = $data["dp_viagem"];
-		$json["input"]["dp_funcionario"] = $data["dp_funcionario"];
-		$json["input"]["dp_formDePgm"] = $data["dp_formDePgm"];
-
-		echo json_encode($json);
-	} */
 	public function ajax_save_despesas() //Função para salvar os clientes no banco de dados
 	{
 
@@ -197,28 +171,28 @@ class Restrict extends CI_Controller
 
 		$data = $this->input->post();
 
-		if (empty($data["dp_servico"])) {
-			$json["error_list"]["#dp_servico"] = "local é obrigatório!";
+		if (empty($data["dp_motivo"])) {
+			$json["error_list"]["#dp_motivo"] = "Movito é obrigatório!";
 		} 
 
 		if (empty($data["dp_funcionario"])) {
-			$json["error_list"]["#dp_funcionario"] = "CPF é obrigatório!";
+			$json["error_list"]["#dp_funcionario"] = "Funcionario é obrigatório!";
 		} 
 
 		if (empty($data["dp_local"])) {
-			$json["error_list"]["#dp_local"] = "Endereço é obrigatório!";
+			$json["error_list"]["#dp_local"] = "Local é obrigatório!";
 		}
 
 		if (empty($data["dp_data"])) {
-			$json["error_list"]["#dp_data"] = "E-mail é obrigatório!";
+			$json["error_list"]["#dp_data"] = "Data é obrigatório!";
 		} 
 
 		if (empty($data["dp_viagem"])) {
-			$json["error_list"]["#dp_viagem"] = "Data de nascimento é obrigatório!";
+			$json["error_list"]["#dp_viagem"] = "Viagem  é obrigatório!";
 		}
 
 		if (empty($data["dp_formDePgm"])) {
-			$json["error_list"]["#dp_formDePgm"] = "Data de nascimento é obrigatório!";
+			$json["error_list"]["#dp_formDePgm"] = "Forma de pagamento é obrigatório!";
 		}
 
 		if (!empty($json["error_list"])) {
@@ -330,13 +304,13 @@ class Restrict extends CI_Controller
 			$row = array();
 			$row[] = $viagens->id_viagens;
 			$row[] = $viagens->vg_destino;
-			$row[] = $viagens->vg_dsaida;
-			$row[] = $viagens->vg_dretorno;
 			$row[] = $servico->sv_nome;
 			$row[] = $funcionario->user_full_name;
 			$row[] = $viagens->vg_valorIn;
-			$row[] = $ralizada;
 			$row[] = $viagens->vg_motivo;
+			$row[] = $viagens->vg_dsaida;
+			$row[] = $viagens->vg_dretorno;
+			$row[] = $ralizada;
 
 
 			$row[] = '<div style="display: inline-block;">
@@ -377,33 +351,6 @@ class Restrict extends CI_Controller
 
 		echo json_encode($json);
 	}
-	/* public function ajax_get_viagens_data() // Função  para obter dados para modificar os viagens
-	{
-
-		if (!$this->input->is_ajax_request()) {
-			exit("Nenhum acesso de script direto permitido!");
-		}
-
-		$json = array();
-		$json["status"] = 1;
-		$json["input"] = array();
-
-		$this->load->model("viagens_model");
-
-		$id_viagens = $this->input->post("id_viagens");
-		$data = $this->viagens_model->get_data($id_viagens)->result_array()[0];
-		$json["input"]["id_viagens"] = $data["id_viagens"];
-		$json["input"]["vg_destino"] = $data["vg_destino"];
-		$json["input"]["vg_dsaida"] = $data["vg_dsaida"];
-		$json["input"]["vg_dretorno"] = $data["vg_dretorno"];
-		$json["input"]["vg_servico"] = $data["vg_servico"];
-		$json["input"]["vg_funcionario"] = $data["vg_funcionario"];
-		$json["input"]["vg_valorIn"] = $data["vg_valorIn"];
-		$json["input"]["vg_realizada"] = $data["vg_realizada"];
-		$json["input"]["vg_motivo"] = $data["vg_motivo"];
-
-		echo json_encode($json);
-	} */
 	public function ajax_save_viagens() //Função para salvar os viagens no banco de dados
 	{
 
@@ -787,16 +734,21 @@ class Restrict extends CI_Controller
 
 		$data = array();
 		foreach ($relatorios as $relatorio) {
+			
+			
+			$saida = strtotime($relatorio->saida);
+			$retorno = strtotime($relatorio->retorno);
+			$totalDias = ($retorno - $saida) / 86400;
+			$totalDps = $totalDias * $relatorio->dp_valor;
+			$total = $relatorio->inicial + $totalDps;
 
 			$row = array();
-			$row[] = $relatorio->id_despesas;
-			$row[] = $relatorio->dp_servico;
-			$row[] = $relatorio->dp_valor;
-			$row[] = $relatorio->dp_local;
-			$row[] = $relatorio->dp_data;
-			$row[] = $relatorio->dp_viagem;
-			$row[] = $relatorio->dp_funcionario;
-			$row[] = $relatorio->dp_formDePgm;
+			$row[] = $relatorio->funcionario;
+			$row[] = $relatorio->viagens;
+			$row[] = $totalDias;
+			$row[] = $relatorio->inicial;
+			$row[] = $totalDps;
+			$row[] = $total;
 
 			$data[] = $row;
 		}

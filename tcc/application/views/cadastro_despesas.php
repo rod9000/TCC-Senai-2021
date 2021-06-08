@@ -13,7 +13,7 @@
 
             <label class="col-lg-2 control-label">Motivo</label>
             <div class="col-lg-10">
-              <input id="dp_servico" name="dp_servico" class="form-control" maxlength="100" value="<?php if(isset($editar[0]->dp_servico)): echo $editar[0]->dp_servico; endif; ?>">
+              <input id="dp_motivo" name="dp_motivo" class="form-control" maxlength="100" value="<?php if(isset($editar[0]->dp_motivo)): echo $editar[0]->dp_motivo ; endif; ?>">
               <span class="help-block"></span>
             </div>
           </div>

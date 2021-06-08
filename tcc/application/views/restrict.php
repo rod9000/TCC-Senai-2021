@@ -40,13 +40,13 @@
               <tr class="tableheader">
                 <th class="dt-center">ID</th>
                 <th class="dt-center">Destino</th>
-                <th type="date" class="dt-center">Data Saida</th>
-                <th type="date" class="dt-center">Data Retorno</th>
                 <th class="dt-center no-sort">Serviço</th>
                 <th class="dt-center">Funcionário</th>
                 <th class="dt-center no-sort">Valor</th>
-                <th class="dt-center">Realizada</th>
                 <th class="dt-center no-sort">Motivo</th>
+                <th type="date" class="dt-center">Data Saida</th>
+                <th type="date" class="dt-center">Data Retorno</th>
+                <th class="dt-center">Realizada</th>
                 <th class="dt-center no-sort">Ações</th>
               </tr>
             </thead>
@@ -64,13 +64,13 @@
             <thead>
               <tr class="tableheader">
                 <th class="dt-center">ID</th>
-                <th class="dt-center">Serviço</th>
+                <th class="dt-center no-sort">Motivo</th>
                 <th class="dt-center no-sort">Valor</th>
                 <th class="dt-center">Local</th>
-                <th type="date" class="dt-center">Data</th> 
                 <th class="dt-center">Viagem</th>
                 <th class="dt-center">Funcionário</th>
-                <th class="dt-center no-sort">Forma de pagamento</th>
+                <th type="date" class="dt-center">Data</th> 
+                <th class="dt-center">Forma de pagamento</th>
                 <th class="dt-center no-sort">Ações</th>
               </tr>
             </thead>
@@ -86,8 +86,8 @@
           <table id="dt_relatorio" class="table table-striped table-bordered">
             <thead>
               <tr class="tableheader">
-                <th class="dt-center">Funcionário</th>
                 <th class="dt-center">Viagem</th>
+                <th class="dt-center">Funcionário</th>
                 <th class="dt-center no-sort">Total de dias</th>
                 <th class="dt-center no-sort">Valor Inicial</th>
                 <th class="dt-center no-sort">Total de Despesas</th>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 06-Jun-2021 às 23:04
+-- Tempo de geração: 08-Jun-2021 às 18:22
 -- Versão do servidor: 10.4.18-MariaDB
 -- versão do PHP: 7.3.28
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `despesas` (
   `id_despesas` int(11) NOT NULL,
-  `dp_servico` int(100) NOT NULL,
+  `dp_motivo` varchar(100) NOT NULL,
   `dp_valor` decimal(10,0) NOT NULL,
   `dp_local` varchar(100) NOT NULL,
   `dp_data` date NOT NULL,
@@ -42,9 +42,11 @@ CREATE TABLE `despesas` (
 -- Extraindo dados da tabela `despesas`
 --
 
-INSERT INTO `despesas` (`id_despesas`, `dp_servico`, `dp_valor`, `dp_local`, `dp_data`, `dp_viagem`, `dp_funcionario`, `dp_formDePgm`) VALUES
-(1, 0, '1222', 'teste', '2021-02-12', 1, 3, 3),
-(2, 0, '129', 'TESTE', '2021-05-12', 1, 1, 2);
+INSERT INTO `despesas` (`id_despesas`, `dp_motivo`, `dp_valor`, `dp_local`, `dp_data`, `dp_viagem`, `dp_funcionario`, `dp_formDePgm`) VALUES
+(1, 'teste', '1222', 'teste', '2021-02-12', 1, 3, 3),
+(2, 'teste2', '129', 'TESTE', '2021-05-12', 1, 1, 2),
+(3, 'teste', '150', 'teste', '2022-02-15', 2, 1, 1),
+(4, 'teste', '12', 'teste', '2022-12-12', 2, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -154,7 +156,7 @@ ALTER TABLE `viagens`
 -- AUTO_INCREMENT de tabela `despesas`
 --
 ALTER TABLE `despesas`
-  MODIFY `id_despesas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_despesas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `servicos`

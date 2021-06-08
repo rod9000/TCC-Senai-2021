@@ -9,8 +9,8 @@ class Relatorio_model extends CI_Model
         $this->load->database();
     }
 
-    var $column_search = array("id_despesas  ", "dp_servico", "dp_valor", "dp_local", "dp_data", "dp_viagem", "dp_formDePgm");
-    var $column_order = array("id_despesas", "dp_servico", "dp_valor", "dp_local", "dp_data", "dp_viagem",);
+    var $column_search = array("id_viagens", "user_full_name", "vg_destino");
+    var $column_order = array("id_viagens", "user_full_name", "vg_destino");
 
     private function _get_datatable()
     {
@@ -26,8 +26,11 @@ class Relatorio_model extends CI_Model
             $order_column = $order[0]["column"];
             $order_dir = $order[0]["dir"];
         }
+        $this->db->select("d.dp_valor, v.vg_destino as viagens, vg_dsaida as saida, vg_dretorno as retorno, vg_valorin as inicial, f.user_full_name as funcionario");
+        $this->db->from("viagens as v");
+        $this->db->join("despesas as d", "d.dp_viagem = v.id_viagens", "INNER");
+        $this->db->join("users as f", "f.user_id = dp_funcionario", "INNER");
 
-        $this->db->from("despesas");
         if (isset($search)) {
             $first = TRUE;
             foreach ($this->column_search as $field) {
