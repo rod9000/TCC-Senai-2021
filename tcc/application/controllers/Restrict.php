@@ -232,7 +232,10 @@ class Restrict extends CI_Controller
 		$viagens = $this->despesas_model->get_viagens();
 		$fucionario = $this->despesas_model->get_funcionarios();
 		$pagamento = $this->despesas_model->tipo_pagamento();
+		$user_id = $this->session->userdata("user_id");	
+		$user_tipo = $this->despesas_model->get_users($user_id);
 
+		$dados["user_tipo"] = $user_tipo;
 		$dados["pagamento"] = $pagamento;
 		$dados["viagens"] = $viagens;
 		$dados["funcionario"] = $fucionario;
@@ -266,14 +269,17 @@ class Restrict extends CI_Controller
 			"user_id" => $this->session->userdata("user_id"),
 		);
 		$this->load->model("despesas_model");
+		$user_id = $this->session->userdata("user_id");
+		$user_tipo = $this->despesas_model->get_users($user_id);
 		$viagens = $this->despesas_model->get_viagens();
 		$fucionario = $this->despesas_model->get_funcionarios();
 		$pagamento = $this->despesas_model->tipo_pagamento();
 
+		
 		$dados["pagamento"] = $pagamento;
 		$dados["viagens"] = $viagens;
 		$dados["funcionario"] = $fucionario;
-
+		$dados["user_tipo"] = $user_tipo;
 
 		if ($this->session->userdata("user_id")):
 			$this->load->vars($dados);
@@ -436,7 +442,10 @@ class Restrict extends CI_Controller
 		$fucionario = $this->viagens_model->get_funcionarios();
 		$servicos = $this->viagens_model->get_servicos();
 		$realizada = $this->viagens_model->Realizada();
-
+		$user_id = $this->session->userdata("user_id");
+		$user_tipo = $this->viagens_model->get_users($user_id);
+		
+		$dados["user_tipo"] = $user_tipo;
 		$dados["realizada"] = $realizada;
 		$dados["funcionario"] = $fucionario;
 		$dados["servicos"] = $servicos;
@@ -474,7 +483,10 @@ class Restrict extends CI_Controller
 		$fucionario = $this->viagens_model->get_funcionarios();
 		$servicos = $this->viagens_model->get_servicos();
 		$realizada = $this->viagens_model->Realizada();
+		$user_id = $this->session->userdata("user_id");
+		$user_tipo = $this->viagens_model->get_users($user_id);
 
+		$dados["user_tipo"] = $user_tipo;
 		$dados["realizada"] = $realizada;
 		$dados["servicos"] = $servicos;
 		$dados["funcionario"] = $fucionario;

@@ -82,7 +82,7 @@
 							<a class="header-button" href="<?php echo base_url("{$this->router->class}/editarUsuario/{$user_id}/"); ?>"> <i class="fa fa-user"> Usuário</i></a>
 						</li>
 						<li>
-							<a class="header-button" href="restrict/logoff"><i class="fa fa-sign-out"> Sair</i></a>
+							<a class="header-button" href="<?php echo base_url("{$this->router->class}/logoff/"); ?>"><i class="fa fa-sign-out"> Sair</i></a>
 						</li>
 						<?php endif;?>
 					</ul>
