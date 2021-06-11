@@ -18,7 +18,7 @@
   
   <div class="container">
     <!-- Abas de Navegação -->
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs ">
       <li class="active"><a href="#tab_viagens" role="tab" data-toggle="tab">Viagens</a></li>
       <li><a href="#tab_despesas" role="tab" data-toggle="tab">Despesas</a></li>
       <?php if($user_tipo == 1 || $user_tipo == 2): ?>

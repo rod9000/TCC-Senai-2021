@@ -120,11 +120,15 @@ class Restrict extends CI_Controller
 			$row[] = $funcionario->user_full_name;
 			$row[] = $despesa->dp_data;
 			$row[] = $pagamento;
-			
-			$acoes = '<a href="'.base_url("{$this->router->class}/editarDespesas/{$despesa->id_despesas}/") . '" class="btn btn-primary btn-edit-dps"><i class="fa fa-edit"></i></a>';
-			if($user_tipo != 3):
-				$acoes .= '&nbsp;<button class="btn btn-danger btn-del-viag" id_despesas ="' .$despesa->id_despesas . '"><i class="fa fa-times"></i>	</button>';
+
+			$acoes = '<a href="'.base_url("{$this->router->class}/visualizarDespesas/{$despesa->id_despesas}/") . '" class="btn btn-primary btn-edit-dps"><i class="fa fa-eye"></i></a>';
+			if($user_id == $despesa->dp_funcionario || $user_tipo != 3):
+			$acoes .= '&nbsp;<a href="'.base_url("{$this->router->class}/editarDespesas/{$despesa->id_despesas}/") . '" class="btn btn-primary btn-edit-dps"><i class="fa fa-edit"></i></a>';
 			endif;
+			if($user_tipo != 3):
+				$acoes .= '&nbsp;<button class="btn btn-danger btn-del-viag" id_despesas ="' .$despesa->id_despesas . '"><i class="fa fa-times"></i></button>';
+			endif;
+
 			$row[] = $acoes;
 
 			$data[] = $row;
@@ -254,6 +258,48 @@ class Restrict extends CI_Controller
 			$this->template->show("login.php", $data);
 		endif;
 	}
+	public function visualizarDespesas($id)
+	{
+		$data = array(
+			"styles" => array(
+				"bootstrap.css",
+				"style.css"
+
+			),
+			"scripts" => array(
+				"sweetalert2.all.min.js",
+				"util.js",	
+				"restrict.js",
+			),
+			"user_id" => $this->session->userdata("user_id"),
+		);
+		$this->load->model("despesas_model");
+		$editar = $this->despesas_model->get_data($id);
+		$viagens = $this->despesas_model->get_viagens();
+		$fucionario = $this->despesas_model->get_funcionarios();
+		$pagamento = $this->despesas_model->tipo_pagamento();
+		$user_id = $this->session->userdata("user_id");	
+		$user_tipo = $this->despesas_model->get_users($user_id);
+
+		$dados["user_tipo"] = $user_tipo;
+		$dados["pagamento"] = $pagamento;
+		$dados["viagens"] = $viagens;
+		$dados["funcionario"] = $fucionario;
+		$dados["editar"] = $editar;
+
+		if ($this->session->userdata("user_id")):
+		$this->load->vars($dados);
+		$this->template->show("cadastro_despesas.php", $data);
+		else:
+			$data = array(
+				"scripts" => array(
+					"util.js",
+					"login.js"
+				)
+			);
+			$this->template->show("login.php", $data);
+		endif;
+	}
 	public function cadastroDespesas()
 	{
 		$data = array(
@@ -322,7 +368,10 @@ class Restrict extends CI_Controller
 			$row[] = $viagens->vg_dretorno;
 			$row[] = $ralizada;
 
-			$acoes = '<a href="'.base_url("{$this->router->class}/editarViagens/{$viagens->id_viagens}/") . '" class="btn btn-primary btn-edit-dps"><i class="fa fa-edit"></i></a>';
+			$acoes = '<a href="'.base_url("{$this->router->class}/visualizarViagens/{$viagens->id_viagens}/") . '" class="btn btn-primary btn-edit-dps"><i class="fa fa-eye"></i></a>';
+			if($user_id == $viagens->vg_funcionario || $user_tipo != 3):
+			$acoes .= '&nbsp;<a href="'.base_url("{$this->router->class}/editarViagens/{$viagens->id_viagens}/") . '" class="btn btn-primary btn-edit-dps"><i class="fa fa-edit"></i></a>';
+			endif;
 			if($user_tipo != 3):			
 			$acoes .= '&nbsp;<button class="btn btn-danger btn-del-viag" id_viagens="' . $viagens->id_viagens . '"><i class="fa fa-times"></i>	</button>';
 			endif;
@@ -343,19 +392,24 @@ class Restrict extends CI_Controller
 	public function ajax_delete_viagens_data() // Função  Para exclusão de viagens
 	{
 		$this->load->model("viagens_model");
+		$this->load->model("viagens_model");
 		$user_id = $this->session->userdata("user_id");
 		$user_tipo = (int)$this->viagens_model->get_users($user_id)->user_tipo;
+		$id_viagens = $this->input->post("id_viagens");
+		$viagemcad = $this->viagens_model->get_despesas_cad($id_viagens);
+
 		if($user_tipo != 3):
 		if (!$this->input->is_ajax_request()) {
 			exit("Nenhum acesso de script direto permitido!");
 		}
-
 		$json = array();
-		$json["status"] = 1;
 
-		$this->load->model("viagens_model");
-		$id_viagens = $this->input->post("id_viagens");
+		if($viagemcad == null):
 		$this->viagens_model->delete($id_viagens);
+		$json["status"] = 1;
+		else:
+			$json["status"] = 2;
+		endif;
 
 		echo json_encode($json);
 		endif;
@@ -444,7 +498,51 @@ class Restrict extends CI_Controller
 		$realizada = $this->viagens_model->Realizada();
 		$user_id = $this->session->userdata("user_id");
 		$user_tipo = $this->viagens_model->get_users($user_id);
-		
+
+		$dados["user_tipo"] = $user_tipo;
+		$dados["realizada"] = $realizada;
+		$dados["funcionario"] = $fucionario;
+		$dados["servicos"] = $servicos;
+		$dados["editar"] = $editar;
+
+		$this->load->vars($dados);
+			$this->template->show("cadastro_viagens.php", $data);
+	 	}
+	 	else{
+	 		$data = array(
+	 			"scripts" => array(
+	 				"util.js",
+	 				"login.js"
+	 			));
+
+	 		$this->template->show("login.php", $data);
+		}
+	}
+	public function visualizarViagens($id)
+	{
+		if ($this->session->userdata("user_id")){
+
+		$data = array(
+			"styles" => array(
+				"bootstrap.css",
+				"style.css"
+
+			),
+			"scripts" => array(
+				"sweetalert2.all.min.js",
+				"util.js",	
+				"restrict.js",
+			),
+			"user_id" => $this->session->userdata("user_id"),
+		);
+		$this->load->model("viagens_model");
+		$editar = $this->viagens_model->get_data($id);
+		$fucionario = $this->viagens_model->get_funcionarios();
+		$servicos = $this->viagens_model->get_servicos();
+		$realizada = $this->viagens_model->Realizada();
+		$user_id = $this->session->userdata("user_id");
+		$user_tipo = $this->viagens_model->get_users($user_id);
+
 		$dados["user_tipo"] = $user_tipo;
 		$dados["realizada"] = $realizada;
 		$dados["funcionario"] = $fucionario;
@@ -715,7 +813,9 @@ class Restrict extends CI_Controller
 					"sweetalert2.all.min.js",
 					"util.js",	
 					"restrict.js",
-				)
+				),
+				"user_id" => $this->session->userdata("user_id"),
+
 			);
 	
 			$editar = $this->users_model->get_data($id);

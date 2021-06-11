@@ -143,10 +143,11 @@ section {
 	color: #fec503
 }
 .navbar-default .navbar-collapse {
-	border-color: rgb(255, 255, 255)
+	border-color: rgb(255, 255, 255);
+    background-color: #222;
 }
 .navbar-default .navbar-toggle {
-	background-color: #fed136;
+	background-color:   white;
 	border-color: #fed136
 }
 .navbar-default .navbar-toggle .icon-bar {
@@ -208,7 +209,9 @@ section {
 /*--------------------
 3. Header
 --------------------*/
-
+.navbar-header{
+    background-color: #222;
+}
 header {
     background-image: url(../images/background.jpg);
     background-repeat: none;

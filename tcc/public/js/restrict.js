@@ -411,7 +411,11 @@ $(document).ready(function() {
 						success: function(response) {
 							swal("Sucesso!", "Ação executada com sucesso", "success");
 							dt_servicos.ajax.reload();
-						}
+						},
+						// error: function(response) {
+						// 	swal("Erro!", "Ação executada com ERRO!", "success");
+						// 	dt_servicos.ajax.reload();
+						// }
 					})
 				}
 			})

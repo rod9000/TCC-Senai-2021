@@ -24,7 +24,6 @@
           <div class="col-lg-10">
             <input id="dp_valor" name="dp_valor" class="form-control" maxlength="100" value="<?php if (isset($editar[0]->dp_valor)) : echo $editar[0]->dp_valor;
                                                                                               endif; ?>">
-            endif; ?>"> -->
             <span class="help-block"></span>
           </div>
         </div>

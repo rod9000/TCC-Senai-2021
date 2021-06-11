@@ -37,7 +37,17 @@ class Viagens_model extends CI_Model {
 		$this->db->where($field, $value);
 		return $this->db->get()->num_rows() > 0;
 	}
-
+	public function get_despesas_cad($id_viagem){
+		$this->db->select("*");
+		$this->db->from("despesas");
+		$this->db->where("dp_viagem = {$id_viagem}");
+		$qry_res = $this->db->get()->row();
+		if($qry_res == null):
+		return null;
+		else:
+			return 1;
+		endif;
+	}
 	public function get_funcionario($id){
 		$this->db->select("user_full_name");
 		$this->db->from("users");
@@ -168,4 +178,5 @@ class Viagens_model extends CI_Model {
 		$this->db->from("viagens");
 		return $this->db->count_all_results();
 	}
+	
 }
