@@ -33,9 +33,11 @@ $(document).ready(function() {
 			success: function (response) {
 				clearErrors();
 				if (response["status"]) {
-					// $("#modal_despesas").modal("hide");
 					swal("Sucesso!", "Despesas salva com sucesso!", "success");
-					dt_clientes.ajax.reload();
+					$(".swal2-confirm").on('click', function(){
+						window.location.href = BASE_URL + "restrict";
+						dt_clientes.ajax.reload();
+					});
 				} else {
 					showErrorsModal(response["error_list"])
 				}
@@ -59,9 +61,11 @@ $(document).ready(function() {
 			success: function (response) {
 				clearErrors();
 				if (response["status"]) {
-					// $("#modal_viagens").modal("hide");
 					swal("Sucesso!", "Viagem salva com sucesso!", "success");
-					dt_viagens.ajax.reload();
+					$(".swal2-confirm").on('click', function(){
+						window.location.href = BASE_URL + "restrict";
+						dt_viagens.ajax.reload();
+					});					
 				} else {
 					showErrorsModal(response["error_list"])
 				}
@@ -85,9 +89,11 @@ $(document).ready(function() {
 			success: function (response) {
 				clearErrors();
 				if (response["status"]) {
-					// $("#modal_viagens").modal("hide");
 					swal("Sucesso!", "Serviço salvo com sucesso!", "success");
+					$(".swal2-confirm").on('click', function(){
+					window.location.href = BASE_URL + "restrict";
 					dt_servicos.ajax.reload();
+					});
 				} else {
 					showErrorsModal(response["error_list"])
 				}
@@ -112,29 +118,13 @@ $(document).ready(function() {
 				clearErrors();
 				if (response["status"]) {
 					swal("Sucesso!", "Usuário salvo com sucesso!", "success");
-					dt_user.ajax.reload();
+					$(".swal2-confirm").on('click', function(){
+						window.location.href = BASE_URL + "restrict";
+						dt_user.ajax.reload();
+					});
 				} else {
 					showErrorsModal(response["error_list"])
 				}
-			}
-		})
-
-		return false;
-	});
-	$("#btn_your_user").click(function() //Js para obter dados dos usuarios e colocar no form do usuário logado
-	{
-
-		$.ajax({
-			type: "POST",
-			url: BASE_URL + "restrict/ajax_get_user_data",
-			dataType: "json",
-			data: {"user_id": $(this).attr("user_id")},
-			success: function(response) {
-				clearErrors();
-				$("#form_user")[0].reset();
-				$.each(response["input"], function(id, value) {
-					$("#"+id).val(value);
-				});
 			}
 		})
 
@@ -158,23 +148,6 @@ $(document).ready(function() {
 		}
 	});
 	function active_btn_despesas() { //Js do botão edita e exlui da data table
-		
-		// $(".btn-edit-dps").click(function(){
-		// 	$.ajax({
-		// 		type: "POST",
-		// 		url: BASE_URL + "restrict/ajax_get_despesas_data",
-		// 		dataType: "json",
-		// 		data: {"id_despesas": $(this).attr("id_despesas")},
-		// 		success: function(response) {
-		// 			clearErrors();
-		// 			$("#form_despesas")[0].reset();
-		// 			$.each(response["input"], function(id, value) {
-		// 				$("#"+id).val(value);
-		// 			});
-		// 			$("#modal_despesas").modal();
-		// 		}
-		// 	})
-		// });
 
 		$(".btn-del-dps").click(function(){
 			
@@ -247,9 +220,18 @@ $(document).ready(function() {
 						dataType: "json",
 						data: {"id_viagens": id_viagens.attr("id_viagens")},
 						success: function(response) {
+							if(response.status === 1){
 							swal("Sucesso!", "Ação executada com sucesso", "success");
 							dt_viagens.ajax.reload();
-						}
+							window.location.href = BASE_URL + "restrict";
+							}
+							else{
+									swal("Erro!", "Ação executada com ERRO!", "error");
+									dt_servicos.ajax.reload();
+								}
+							}
+						
+
 					})
 				}
 			})
@@ -304,23 +286,6 @@ $(document).ready(function() {
 		}
 	});
 	function active_btn_user() { //Js do botão edita e exlui da data table
-		
-		// $(".btn-edit-user").click(function(){
-		// 	$.ajax({
-		// 		type: "POST",
-		// 		url: BASE_URL + "restrict/ajax_get_user_data",
-		// 		dataType: "json",
-		// 		data: {"user_id": $(this).attr("user_id")},
-		// 		success: function(response) {
-		// 			clearErrors();
-		// 			$("#form_user")[0].reset();
-		// 			$.each(response["input"], function(id, value) {
-		// 				$("#"+id).val(value);
-		// 			});
-		// 			$("#modal_user").modal();
-		// 		}
-		// 	})
-		// });
 
 		$(".btn-del-user").click(function(){
 			
@@ -366,27 +331,10 @@ $(document).ready(function() {
 			{ targets: "dt-center", className: "dt-center" },
 		],
 		"drawCallback": function() {
-			active_btn_despesas();
+			active_btn_servicos();
 		}
 	});
 	function active_btn_servicos() { //Js do botão edita e exlui da data table
-		
-		// $(".btn-edit-dps").click(function(){
-		// 	$.ajax({
-		// 		type: "POST",
-		// 		url: BASE_URL + "restrict/ajax_get_despesas_data",
-		// 		dataType: "json",
-		// 		data: {"id_despesas": $(this).attr("id_despesas")},
-		// 		success: function(response) {
-		// 			clearErrors();
-		// 			$("#form_despesas")[0].reset();
-		// 			$.each(response["input"], function(id, value) {
-		// 				$("#"+id).val(value);
-		// 			});
-		// 			$("#modal_despesas").modal();
-		// 		}
-		// 	})
-		// });
 
 		$(".btn-del-sv").click(function(){
 			
@@ -409,27 +357,51 @@ $(document).ready(function() {
 						dataType: "json",
 						data: {"id_servicos": id_servicos.attr("id_servicos")},
 						success: function(response) {
+							console.log(response);
 							swal("Sucesso!", "Ação executada com sucesso", "success");
 							dt_servicos.ajax.reload();
-						},
-						// error: function(response) {
-						// 	swal("Erro!", "Ação executada com ERRO!", "success");
-						// 	dt_servicos.ajax.reload();
-						// }
+						}
 					})
 				}
 			})
 
 		});
 	}
-	
+
+function getParametro(param) {
+    var url = window.location.href.slice(window.location.href.indexOf('/') + 1).split('/');
+    for (var i = 0; i < url.length; i++) {
+        if (url[i] == param) {
+            return url[i];
+        }
+    }
+}
+
+if(getParametro('visualizarViagens')){
+        
+    var inputs = document.getElementsByTagName("INPUT");
+    for (var i = 0; i < inputs.length; i++) {
+        inputs[i].disabled = true;
+    }
+    
+    var selects = document.getElementsByTagName("SELECT");
+    for (var i = 0; i < selects.length; i++) {
+        selects[i].disabled = true;
+    }
+    
+}
+if(getParametro('visualizarDespesas')){
+        
+    var inputs = document.getElementsByTagName("INPUT");
+    for (var i = 0; i < inputs.length; i++) {
+        inputs[i].disabled = true;
+    }
+    
+    var selects = document.getElementsByTagName("SELECT");
+    for (var i = 0; i < selects.length; i++) {
+        selects[i].disabled = true;
+    }
+    
+}
 });
 
-var submitButton = document.getElementById("submit_form");
-var form = document.getElementById("email_form");
-form.addEventListener("submit", function(e) {
-	setTimeout(function() {
-		submitButton.value = "Enviando...";
-		submitButton.disabled = true;
-	}, 1);
-});

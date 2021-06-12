@@ -75,14 +75,13 @@ class Viagens_model extends CI_Model {
 		);
 		return $realizada;
 	}
-	public function get_realizada($realizada){
+	public function get_realizada($valor){
 		$realizada = array(
 			'1' => "Sim",
 			'2' => "Não",
 		);
-		if($realizada == 1):
+		if($valor == 1):
 			return $realizada[1];
-		
 		else:
 			return $realizada[2];
 		endif;

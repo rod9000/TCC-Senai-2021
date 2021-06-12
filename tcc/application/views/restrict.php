@@ -90,6 +90,7 @@
                 <th class="dt-center">Funcionário</th>
                 <th class="dt-center no-sort">Total de dias</th>
                 <th class="dt-center no-sort">Valor Inicial</th>
+                <th class="dt-center no-sort">Valor Diária</th>
                 <th class="dt-center no-sort">Total de Despesas</th>
                 <th class="dt-center no-sort">Total</th>
               </tr>

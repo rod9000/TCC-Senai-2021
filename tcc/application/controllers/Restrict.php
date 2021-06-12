@@ -118,7 +118,7 @@ class Restrict extends CI_Controller
 			$row[] = $despesa->dp_local;
 			$row[] = $viagem->vg_destino;
 			$row[] = $funcionario->user_full_name;
-			$row[] = $despesa->dp_data;
+			$row[] = date('d/m/Y', strtotime($despesa->dp_data));
 			$row[] = $pagamento;
 
 			$acoes = '<a href="'.base_url("{$this->router->class}/visualizarDespesas/{$despesa->id_despesas}/") . '" class="btn btn-primary btn-edit-dps"><i class="fa fa-eye"></i></a>';
@@ -126,7 +126,7 @@ class Restrict extends CI_Controller
 			$acoes .= '&nbsp;<a href="'.base_url("{$this->router->class}/editarDespesas/{$despesa->id_despesas}/") . '" class="btn btn-primary btn-edit-dps"><i class="fa fa-edit"></i></a>';
 			endif;
 			if($user_tipo != 3):
-				$acoes .= '&nbsp;<button class="btn btn-danger btn-del-viag" id_despesas ="' .$despesa->id_despesas . '"><i class="fa fa-times"></i></button>';
+				$acoes .= '&nbsp;<button class="btn btn-danger btn-del-viag" id_despesas ="' .$despesa->id_despesas . '"><i class="fa fa-trash"></i></button>';
 			endif;
 
 			$row[] = $acoes;
@@ -354,9 +354,10 @@ class Restrict extends CI_Controller
 
 		$data = array();
 		foreach ($viagens as $viagens) {
-			$ralizada = $this->viagens_model->get_realizada($viagens->vg_realizada);
+			$realizada = $this->viagens_model->get_realizada($viagens->vg_realizada);
 			$servico = $this->viagens_model->get_servico($viagens->vg_servico);
 			$funcionario = $this->viagens_model->get_funcionario($viagens->vg_funcionario);
+			
 			$row = array();
 			$row[] = $viagens->id_viagens;
 			$row[] = $viagens->vg_destino;
@@ -364,16 +365,16 @@ class Restrict extends CI_Controller
 			$row[] = $funcionario->user_full_name;
 			$row[] = $viagens->vg_valorIn;
 			$row[] = $viagens->vg_motivo;
-			$row[] = $viagens->vg_dsaida;
-			$row[] = $viagens->vg_dretorno;
-			$row[] = $ralizada;
+			$row[] = date('d/m/Y', strtotime($viagens->vg_dsaida));
+			$row[] = date('d/m/Y', strtotime($viagens->vg_dretorno));
+			$row[] = $realizada;
 
-			$acoes = '<a href="'.base_url("{$this->router->class}/visualizarViagens/{$viagens->id_viagens}/") . '" class="btn btn-primary btn-edit-dps"><i class="fa fa-eye"></i></a>';
+			$acoes = '<a href="'.base_url("{$this->router->class}/visualizarViagens/{$viagens->id_viagens}/") . '" class="btn btn-primary btn-edit-viz"><i class="fa fa-eye"></i></a>';
 			if($user_id == $viagens->vg_funcionario || $user_tipo != 3):
 			$acoes .= '&nbsp;<a href="'.base_url("{$this->router->class}/editarViagens/{$viagens->id_viagens}/") . '" class="btn btn-primary btn-edit-dps"><i class="fa fa-edit"></i></a>';
 			endif;
 			if($user_tipo != 3):			
-			$acoes .= '&nbsp;<button class="btn btn-danger btn-del-viag" id_viagens="' . $viagens->id_viagens . '"><i class="fa fa-times"></i>	</button>';
+			$acoes .= '&nbsp;<button class="btn btn-danger btn-del-viag" id_viagens="' . $viagens->id_viagens . '"><i class="fa fa-trash"></i>	</button>';
 			endif;
 			$row[] = $acoes;
 			
@@ -406,7 +407,7 @@ class Restrict extends CI_Controller
 
 		if($viagemcad == null):
 		$this->viagens_model->delete($id_viagens);
-		$json["status"] = 1;
+			$json["status"] = 1;
 		else:
 			$json["status"] = 2;
 		endif;
@@ -625,10 +626,7 @@ class Restrict extends CI_Controller
 			$row[] = '<div style="display: inline-block;">
 						<a href="'.base_url("{$this->router->class}/editarUsuario/{$user->user_id}/") . '" class="btn btn-primary btn-edit-dps">
 						<i class="fa fa-edit"></i>
-						</a>
-						<button class="btn btn-danger btn-del-user" 
-							user_id="' . $user->user_id . '">
-							<i class="fa fa-times"></i>
+						</a><button class="btn btn-danger btn-del-user" user_id="' . $user->user_id . '"><i class="fa fa-trash"></i>
 						</button>
 					</div>';
 
@@ -865,6 +863,7 @@ class Restrict extends CI_Controller
 			$row[] = $funcionario->user_full_name;
 			$row[] = $totalDias;
 			$row[] = $relatorio->inicial;
+			$row[] = $servico->sv_diaria;
 			$row[] = $despesas;
 			$row[] = $total;
 
@@ -883,6 +882,7 @@ class Restrict extends CI_Controller
 
 	public function Contato()
 	{
+
 		$data = array(
 			"scripts" => array(
 				"styles.css",
@@ -890,10 +890,13 @@ class Restrict extends CI_Controller
 				"datatables.min.css",
 			),
 			"scripts" => array(
+				"sweetalert2.all.min.js",
 				"owl.carousel.min.js",
 				"theme-scripts.js",
-				"restrict.js" 
-			)
+				"restrict.js",
+				"contato.js" 
+			),
+
 		);
 		$this->template->show("contato.php", $data);
 	}
@@ -963,7 +966,7 @@ class Restrict extends CI_Controller
 						</a>
 						<a class="btn btn-danger btn-del-dps" 
 						id_despesas ="' . $servico->id_servicos . '">
-							<i class="fa fa-times"></i>
+							<i class="fa fa-trash"></i>
 						</a>
 					</div>';
 
