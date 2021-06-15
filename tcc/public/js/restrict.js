@@ -1,22 +1,5 @@
 
 $(document).ready(function() {
-
-	// EXIBIR MODAIS
-	$("#btn_add_viagens").on('click', function(){
-		clearErrors();
-		$("#form_viagens")[0].reset();
-		$("#modal_viagens").modal();
-	});
-	$("#btn_add_despesas").click(function(){
-		clearErrors();
-		$("#form_despesas")[0].reset();
-		$("#modal_despesas").modal();
-	});
-	$("#btn_add_user").click(function(){
-		clearErrors();
-		$("#form_user")[0].reset();
-		$("#modal_user").modal();
-	});	
 	
 	$("#form_despesas").submit(function () //Js para salvar os dados do form da despesas
 	{
@@ -268,6 +251,37 @@ $(document).ready(function() {
 			}
 		],
 	});
+	// var dt_detalhes = $("#dt_detalhes").DataTable({ //Js de organização do data table dos usuários
+	// 	"oLanguage": DATATABLE_PTBR,
+	// 	"autoWidth": false,
+	// 	"processing": true,
+	// 	"serverSide": true,
+	// 	"ajax": {
+	// 		"url": BASE_URL + "restrict/ajax_list_detalhes",
+	// 		"type": "POST",
+	// 	},
+	// 	"columnDefs": [
+	// 		{ targets: "no-sort", orderable: false },
+	// 		{ targets: "dt-center", className: "dt-center" },
+	// 	],
+	// 	"drawCallback": function() {
+	// 		active_btn_user();
+	// 	},
+	// 	"dom": 'Bfrtip',
+	// 	"buttons": [
+	// 		{
+	// 			extend: 'collection',
+	// 			text: 'Gerar Relatório',
+	// 			buttons: [
+	// 				'excel',
+	// 				'csv',
+	// 				'pdf',
+	// 				'print'
+	// 			]
+	// 		}
+	// 	],
+	// });
+
 	var dt_user = $("#dt_users").DataTable({ //Js de organização do data table dos usuários
 		"oLanguage": DATATABLE_PTBR,
 		"autoWidth": false,

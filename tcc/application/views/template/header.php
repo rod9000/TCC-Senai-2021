@@ -60,12 +60,9 @@
 						<li class="hidden">
 							<a href="#page-top"></a>
 						</li>
+						<?php if($this->uri->segment(2) == 'cadastroViagens' || $this->uri->segment(2) == 'cadastroDespesas' || $this->uri->segment(2) == 'cadastroUsuario' || $this->uri->segment(2) == 'cadastroServicos' || $this->uri->segment(2) == 'editarViagens' || $this->uri->segment(2) == 'editarDespesas' || $this->uri->segment(2) == 'editarUsuario' || $this->uri->segment(2) == 'editarServicos' || $this->uri->segment(2) == 'visualizarViagens' || $this->uri->segment(2) == 'visualizarDespesas' || $this->uri->segment(1) == 'restrict'): ?>
 						<li>
-							<a class="header-button" href="<?php echo base_url(); ?>home"><i class="fa fa-home">Home</i></a>
-						</li>
-						<?php if($this->uri->segment(1) == 'cadastroViagens' || $this->uri->segment(2) == 'cadastroDespesas' || $this->uri->segment(2) == 'cadastroUsuario' || $this->uri->segment(2) == 'cadastroServicos' || $this->uri->segment(2) == 'editarViagens' || $this->uri->segment(2) == 'editarDespesas' || $this->uri->segment(2) == 'editarUsuario' || $this->uri->segment(2) == 'editarServicos' || $this->uri->segment(2) == 'visualizarViagens' || $this->uri->segment(2) == 'visualizarDespesas'): ?>
-						<li>
-							<a class="header-button" href="<?php echo base_url(); ?>restrict"><i class="fa fa-list"> Relatorios</i></a>
+							<a class="header-button" href="<?php echo base_url(); ?>restrict"><i class="fa fa-home"> Home</i></a>
 						</li>
 						<?php endif; ?>
 
@@ -75,6 +72,9 @@
 						</li>
 						<li>
 							<a class="header-button" href="<?php echo base_url(); ?>restrict/contato"><i class="fa fa-user"> Contato</i></a>
+						</li>
+						<li>
+							<a class="header-button" href="<?php echo base_url(); ?>home"><i class="fa fa-home">Home</i></a>
 						</li>
 						<?php endif; ?>
 						<?php if(isset($user_id)): ?>
