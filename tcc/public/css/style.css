@@ -49,7 +49,11 @@ Import Google Fonts
 .nao{
     background-color: #FFB7B7 !important;
 }
-  
+
+.btn-primary{
+    margin-bottom: 5px !important;
+}
+
 .dt-button  {
 color:white;
 background-color: #337ab7;
