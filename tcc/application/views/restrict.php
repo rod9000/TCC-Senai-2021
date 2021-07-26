@@ -93,7 +93,6 @@
                 <th class="dt-center no-sort">Valor Diária</th>
                 <th class="dt-center no-sort">Total de Despesas</th>
                 <th class="dt-center no-sort">Total</th>
-                <th class="dt-center no-sort">Ações</th>
               </tr>
             </thead>
             <tbody>

@@ -866,10 +866,7 @@ class Restrict extends CI_Controller
 			$row[] = $servico->sv_diaria;
 			$row[] = $despesas;
 			$row[] = $total;
-			
-			$acoes = '<a href="'.base_url("{$this->router->class}/detalhesRelatorio/{$relatorio->id}/") . '" class="btn btn-primary btn-edit-viz"><i class="fa fa-list" title="Detalhes"></i></a>';
-			
-			$row[] = $acoes;
+						
 			$data[] = $row;
 		}	
 
