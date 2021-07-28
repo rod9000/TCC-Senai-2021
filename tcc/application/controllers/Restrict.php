@@ -982,7 +982,7 @@ class Restrict extends CI_Controller
 
 		echo json_encode($json);
 	}
-	public function ajax_save_servicoS() //Função para salvar os viagens no banco de dados
+	public function ajax_save_servicos() //Função para salvar os viagens no banco de dados
 	{
 		$this->load->model("users_model");
 		$user_id = $this->session->userdata("user_id");
