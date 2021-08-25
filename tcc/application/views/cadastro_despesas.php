@@ -77,6 +77,8 @@
         <div class="form-group text-center">
           <button type="submit" id="btn_save_despesas" class="btn btn-primary">
             <i class="fa fa-save"></i>&nbsp;&nbsp;Salvar </button>
+            <button onClick="window.history.back();" class="btn btn-danger">
+              <i class="fa fa-back"></i>&nbsp;&nbsp;Voltar</button>
           <span class="help-block"></span>
         </div>
 

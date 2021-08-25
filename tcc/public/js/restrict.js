@@ -1,6 +1,5 @@
 
 $(document).ready(function() {
-	
 	$("#form_despesas").submit(function () //Js para salvar os dados do form da despesas
 	{
 

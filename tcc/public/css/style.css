@@ -53,6 +53,9 @@ Import Google Fonts
 .btn-primary{
     margin-bottom: 5px !important;
 }
+.btn-danger{
+    margin-bottom: 30px !important;
+}
 
 .dt-button  {
 color:white;
